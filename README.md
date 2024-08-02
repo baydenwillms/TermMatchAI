@@ -12,6 +12,7 @@ To set up the conda environment:
 ```bash
 conda env create -f environment.yml
 conda activate term-matching-env
+```
 
 ### Installing AI Models
 
@@ -19,6 +20,7 @@ conda activate term-matching-env
 After setting up the conda environment, download the SpaCy model:
 ```bash
 python -m spacy download en_core_web_md
+```
 
 #### Word2Vec Model
 Download the pre-trained Word2Vec model:
