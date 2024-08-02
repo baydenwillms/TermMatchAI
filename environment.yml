@@ -1,5 +1,4 @@
 name: term-matching-env
-# You can name this environment whatever you want
 channels:
   - defaults
   - conda-forge
@@ -11,7 +10,8 @@ dependencies:
   - gensim
   - pip
   - pip:
-    - setuptools
-    - openpyxl
-    - gspread
-    - oauth2client
+      - setuptools
+      - openpyxl
+      - gspread
+      - oauth2client
+      - sentence-transformers
