@@ -1,0 +1,17 @@
+name: term-matching-env
+# You can name this environment whatever you want
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pandas
+  - fuzzywuzzy
+  - spacy
+  - gensim
+  - pip
+  - pip:
+    - setuptools
+    - openpyxl
+    - gspread
+    - oauth2client
