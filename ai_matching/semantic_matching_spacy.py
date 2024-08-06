@@ -12,7 +12,7 @@ Returns:
 import spacy
 
 # Load SpaCy model
-nlp = spacy.load('en_core_web_md')
+nlp = spacy.load('en_core_web_lg')
 
 def semantic_match_spacy(term, template_terms):
     term_doc = nlp(term)

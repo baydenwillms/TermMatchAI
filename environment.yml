@@ -15,4 +15,4 @@ dependencies:
       - oauth2client
       - sentence-transformers
       - fuzzywuzzy[speedup]
-  - spacy-model-en_core_web_md
+  - spacy-model-en_core_web_lg
