@@ -14,32 +14,43 @@ def main():
     normalized_template_terms = [normalize(term) for term in template_terms]
     normalized_user_terms = [normalize(term) for term in user_terms]
     
-    # Normalized and Exact matching
-    normalized_matches = normalized_match(normalized_template_terms, normalized_user_terms)
-    print(f"Normalized Matches: {normalized_matches}")
+    # Convert outputs to dictionaries if they are sets
+    def convert_to_dict(output, default_value=None):
+        if isinstance(output, set):
+            return {item: default_value for item in output}
+        return output
     
-    exact_matches = exact_match(template_terms, user_terms)
-    print(f"Exact Matches: {exact_matches}")
+    # Normalized and Exact matching against template terms
+    normalized_matches = convert_to_dict(normalized_match(normalized_template_terms, normalized_user_terms))
+    exact_matches = convert_to_dict(exact_match(template_terms, user_terms))
     
-    # Fuzzy matching
-    fuzzy_matches = fuzzy_match(normalized_template_terms, normalized_user_terms)
-    print(f"Fuzzy Matches: {fuzzy_matches}")
+    # Fuzzy matching against template terms
+    fuzzy_matches = convert_to_dict(fuzzy_match(normalized_template_terms, normalized_user_terms), default_value=(None, 100))
     
-    # Semantic matching using SpaCy
-    semantic_matches_spacy = find_semantic_matches_spacy(normalized_user_terms, normalized_template_terms)
-    print(f"SpaCy Semantic Matches: {semantic_matches_spacy}")
+    # Semantic matching using SpaCy against template terms
+    semantic_matches_spacy = convert_to_dict(find_semantic_matches_spacy(normalized_user_terms, normalized_template_terms), default_value=(None, 0.0))
     
-    # Semantic matching using SentenceBERT
-    semantic_matches_sentencebert = find_semantic_matches_sentencebert(normalized_user_terms, normalized_template_terms)
-    print(f"SentenceBERT Semantic Matches: {semantic_matches_sentencebert}")
+    # Semantic matching using SentenceBERT against template terms
+    semantic_matches_sentencebert = convert_to_dict(find_semantic_matches_sentencebert(normalized_user_terms, normalized_template_terms), default_value=(None, 0.0))
     
-    # Identify new terms
-    all_exact_matches = set(normalized_matches.values()).union(set(exact_matches.values()), set(match[0] for match in fuzzy_matches.values()))
-    new_terms = [term for term in normalized_user_terms if term not in all_exact_matches]
+    # Identify new terms by combining all match keys
+    all_matches = set()
+    for matches_dict in [normalized_matches, exact_matches, fuzzy_matches, semantic_matches_spacy, semantic_matches_sentencebert]:
+        all_matches.update(matches_dict.keys())
+
+    new_terms = [term for term in user_terms if term not in all_matches]
     print(f"New Terms: {new_terms}")
     
     # Generate report
-    generate_report(normalized_matches, exact_matches, fuzzy_matches, semantic_matches_spacy, semantic_matches_sentencebert, new_terms, 'term_matching_report.csv')
+    generate_report(
+        normalized_matches,
+        exact_matches,
+        fuzzy_matches,
+        semantic_matches_spacy,
+        semantic_matches_sentencebert,
+        new_terms,
+        'term_matching_report.csv'
+    )
 
 if __name__ == '__main__':
     main()
