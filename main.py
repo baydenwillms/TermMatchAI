@@ -1,4 +1,4 @@
-from core.data_loading import get_term_lists
+from core.data_loading import get_term_lists, get_terms_with_data
 from core.normalization import normalize
 from core.matching import normalized_match, exact_match
 from core.fuzzy_matching import fuzzy_match
@@ -9,6 +9,9 @@ from core.generate_report import generate_report
 def main():
     # Get the lists of term names
     template_terms, user_terms = get_term_lists()
+    
+    # Get the dictionaries of term names and a piece of sample data
+    template_terms_w_data, user_terms_w_data = get_terms_with_data()
     
     # Normalize terms
     normalized_template_terms = [normalize(term) for term in template_terms]
@@ -30,8 +33,8 @@ def main():
     # Semantic matching using SpaCy against template terms
     semantic_matches_spacy = convert_to_dict(find_semantic_matches_spacy(normalized_user_terms, normalized_template_terms), default_value=(None, 0.0))
     
-    # Semantic matching using SentenceBERT against template terms
-    semantic_matches_sentencebert = convert_to_dict(find_semantic_matches_sentencebert(normalized_user_terms, normalized_template_terms), default_value=(None, 0.0))
+    # Semantic matching using SentenceBERT against template terms with descriptions
+    semantic_matches_sentencebert = find_semantic_matches_sentencebert(user_terms_w_data, template_terms_w_data)
     
     # Identify new terms by combining all match keys
     all_matches = set()

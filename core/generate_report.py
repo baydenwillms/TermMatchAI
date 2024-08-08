@@ -14,17 +14,11 @@ def generate_report(normalized_matches, exact_matches, fuzzy_matches, semantic_m
     """
     with open(output_file, mode='w', newline='') as file:
         writer = csv.writer(file)
-        # Write headers, rearranging so matches and scores are last
+        # Write headers
         writer.writerow([
-            'User Term',
-            'Exact Match', 
-            'Normalized Match', 
-            'Fuzzy Match', 
-            'Fuzzy Score', 
-            'SpaCy Semantic Match', 
-            'SpaCy Score', 
-            'SentenceBERT Semantic Match', 
-            'SentenceBERT Score'
+            'User Term', 'Exact Match', 'Normalized Match', 'Fuzzy Match', 
+            'Fuzzy Score', 'SpaCy Semantic Match', 'SpaCy Score', 
+            'SentenceBERT Semantic Match', 'SentenceBERT Score'
         ])
 
         # Collect all terms from various match types
@@ -45,15 +39,8 @@ def generate_report(normalized_matches, exact_matches, fuzzy_matches, semantic_m
             
             # Write each term's information as a new row in the CSV
             writer.writerow([
-                term, 
-                exact_match, 
-                normalized_match, 
-                fuzzy_match, 
-                fuzzy_score, 
-                spacy_match, 
-                spacy_score, 
-                sentencebert_match, 
-                sentencebert_score
+                term, exact_match, normalized_match, fuzzy_match, fuzzy_score, 
+                spacy_match, spacy_score, sentencebert_match, sentencebert_score
             ])
 
         # Write a new section for new terms
@@ -62,3 +49,6 @@ def generate_report(normalized_matches, exact_matches, fuzzy_matches, semantic_m
         for term in new_terms:
             writer.writerow([term])
 
+        # Additional information for clarity
+        writer.writerow([])
+        writer.writerow(['Note: Scores indicate the similarity confidence. Higher scores imply better matches.'])
