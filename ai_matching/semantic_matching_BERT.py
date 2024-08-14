@@ -23,7 +23,8 @@ def semantic_match_sentencebert(term, term_data, template_terms_with_data, model
 
 def find_semantic_matches_sentencebert(user_terms_with_data, template_terms_with_data):
     matches = {}
-    for term, data in user_terms_with_data.items():
-        match, score = semantic_match_sentencebert(term, data, template_terms_with_data, model)
-        matches[term] = (match, score)
+    for term, user_data in user_terms_with_data.items():
+        match, score = semantic_match_sentencebert(term, user_data, template_terms_with_data, model)
+        matched_data = template_terms_with_data.get(match, '')  # Get the data example from the matched term
+        matches[term] = (match, score, user_data, matched_data)  # Return 4 elements
     return matches

@@ -45,15 +45,7 @@ def main():
     print(f"New Terms: {new_terms}")
     
     # Generate report
-    generate_report(
-        normalized_matches,
-        exact_matches,
-        fuzzy_matches,
-        semantic_matches_spacy,
-        semantic_matches_sentencebert,
-        new_terms,
-        'term_matching_report.csv'
-    )
+    generate_report(semantic_matches_spacy, semantic_matches_sentencebert, new_terms, 'term_matching_report.csv', bert_threshold=0.35)
 
 if __name__ == '__main__':
     main()
