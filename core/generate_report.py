@@ -1,14 +1,14 @@
 import csv
 
-def generate_report(semantic_matches_spacy, semantic_matches_sentencebert, new_terms, output_file, bert_threshold=0.35):
+def generate_report(semantic_matches_spacy, semantic_matches_scibert, new_terms, output_file, bert_threshold=0.35):
     """
     Generate a report summarizing the term matches and new terms.
     Args:
         semantic_matches_spacy (dict): Dictionary of semantic matches using SpaCy.
-        semantic_matches_sentencebert (dict): Dictionary of semantic matches using SentenceBERT.
+        semantic_matches_scibert (dict): Dictionary of semantic matches using SciBERT.
         new_terms (list): List of new terms.
         output_file (str): Path to the output CSV file.
-        bert_threshold (float): Minimum BERT score to consider a match as confident.
+        bert_threshold (float): Minimum SciBERT score to consider a match as confident.
     """
     with open(output_file, mode='w', newline='') as file:
         writer = csv.writer(file)
@@ -20,13 +20,13 @@ def generate_report(semantic_matches_spacy, semantic_matches_sentencebert, new_t
         # Exact matches (SpaCy score of 1.0)
         for term, (match, score) in semantic_matches_spacy.items():
             if score == 1.0:
-                bert_match = semantic_matches_sentencebert.get(term, (match, score, '', ''))
-                user_data = bert_match[2]
-                matched_data = bert_match[3]
+                scibert_match = semantic_matches_scibert.get(term, (match, score, '', ''))
+                user_data = scibert_match[2]
+                matched_data = scibert_match[3]
                 writer.writerow([term, user_data, match, matched_data, score])
         
-        # Confident BERT matches (above the threshold)
-        for term, (match, score, user_data, matched_data) in semantic_matches_sentencebert.items():
+        # Confident SciBERT matches (above the threshold)
+        for term, (match, score, user_data, matched_data) in semantic_matches_scibert.items():
             if score >= bert_threshold:
                 writer.writerow([term, user_data, match, matched_data, score])
 
@@ -35,7 +35,7 @@ def generate_report(semantic_matches_spacy, semantic_matches_sentencebert, new_t
         writer.writerow(['Low-Confidence Matches'])
         writer.writerow(['User Term', 'User Data Example', 'Matched Term', 'Matched Data Example', 'Score'])
         
-        for term, (match, score, user_data, matched_data) in semantic_matches_sentencebert.items():
+        for term, (match, score, user_data, matched_data) in semantic_matches_scibert.items():
             if score < bert_threshold:
                 writer.writerow([term, user_data, match, matched_data, score])
 

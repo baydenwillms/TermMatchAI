@@ -3,7 +3,8 @@ from core.normalization import normalize
 from core.matching import normalized_match, exact_match
 from core.fuzzy_matching import fuzzy_match
 from ai_matching.semantic_matching_spacy import find_semantic_matches_spacy
-from ai_matching.semantic_matching_BERT import find_semantic_matches_sentencebert
+# from ai_matching.semantic_matching_BERT import find_semantic_matches_sentencebert
+from ai_matching.semantic_matching_BERT import find_semantic_matches_scibert
 from core.generate_report import generate_report
 
 def main():
@@ -34,18 +35,19 @@ def main():
     semantic_matches_spacy = convert_to_dict(find_semantic_matches_spacy(normalized_user_terms, normalized_template_terms), default_value=(None, 0.0))
     
     # Semantic matching using SentenceBERT against template terms with descriptions
-    semantic_matches_sentencebert = find_semantic_matches_sentencebert(user_terms_w_data, template_terms_w_data)
-    
+    # semantic_matches_sentencebert = find_semantic_matches_sentencebert(user_terms_w_data, template_terms_w_data)
+    semantic_matches_scibert = find_semantic_matches_scibert(user_terms_w_data, template_terms_w_data)
+
     # Identify new terms by combining all match keys
     all_matches = set()
-    for matches_dict in [normalized_matches, exact_matches, fuzzy_matches, semantic_matches_spacy, semantic_matches_sentencebert]:
+    for matches_dict in [normalized_matches, exact_matches, fuzzy_matches, semantic_matches_spacy, semantic_matches_scibert]:
         all_matches.update(matches_dict.keys())
 
     new_terms = [term for term in user_terms if term not in all_matches]
     print(f"New Terms: {new_terms}")
     
     # Generate report
-    generate_report(semantic_matches_spacy, semantic_matches_sentencebert, new_terms, 'term_matching_report.csv', bert_threshold=0.35)
+    generate_report(semantic_matches_spacy, semantic_matches_scibert, new_terms, 'term_matching_report.csv', bert_threshold=0.35)
 
 if __name__ == '__main__':
     main()
