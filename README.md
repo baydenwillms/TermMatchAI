@@ -2,9 +2,12 @@
 
 TermMatchAI is a library designed to match terms between two datasets using exact syntactical matching, fuzzy search matching, and semantic matching with AI models.
 
-The project uses a custom trained version of SciBERT. SciBERT is a SentenceBERT AI model that is trained on scientific vocabulary and data. The model used in this repo, [eDNA_scibert_model](#Training-the-AI-Model), is SciBERT with custom training from eDNA repositories such as DarwinCore and MIMARKS MIXs.
+What is the use case?
+- Data is much less useful if you are unable to compare data between different datasets. My lab measures the general sampling environment with term name of 'habitat', with data like: 'oceanic mesopelagic zone biome', and another lab uses the term name 'env_local_scale' with data like: 'marine photic zone [ENVO:00000209]'. This code will tell you that they are the closest match to one another. 
 
-This repository is under active development. Please raise an issue or reach out to bayden.willms@noaa.gov for any questions.
+The project uses a custom trained version of [SciBERT](#citations). SciBERT is a SentenceBERT AI model that is trained on scientific vocabulary and data. The model used in this repo, [eDNA_scibert_model](#Training-the-AI-Model), is SciBERT with custom training from eDNA repositories such as DarwinCore and MIMARKS MIXs.
+
+This project is under active development. Please raise an issue or reach out to bayden.willms@noaa.gov for any questions.
 
 ## Setup
 
