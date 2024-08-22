@@ -7,7 +7,10 @@ import torch
 # model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # New SciBERT model. BERT model pre-trained with Scientific papers, vocabulary
-model_name = 'allenai/scibert_scivocab_uncased'
+# model_name = 'allenai/scibert_scivocab_uncased'
+
+# Use custom trained eDNA SciBERT model
+model_name = './ai_matching/eDNA_scibert_model'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModel.from_pretrained(model_name)
 

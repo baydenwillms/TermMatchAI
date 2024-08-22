@@ -3,7 +3,7 @@ from sentence_transformers import SentenceTransformer, InputExample, losses, mod
 from torch.utils.data import DataLoader
 import os
 
-# Function to create the dictionary from Darwin Core CSV
+# Create dictionary from Darwin Core CSV
 def build_darwincore_dict():
     SCRIPT_DEPENDENCIES_DIR = os.path.join(os.path.dirname(__file__), '..', 'script_dependencies')
     excel_file_path = os.path.join(SCRIPT_DEPENDENCIES_DIR, 'term_versions_dwc.csv')
@@ -22,7 +22,7 @@ def build_darwincore_dict():
         }
     return terms_dict
 
-# Function to train the SciBERT model with the desired dictionary
+# Generalized function to train the SciBERT model with the desired dictionary
 def train_scibert_with_data(terms_dict, output_dir='eDNA_scibert_model'):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -39,7 +39,7 @@ def train_scibert_with_data(terms_dict, output_dir='eDNA_scibert_model'):
         definition = data.get('definition', '').strip()
         
         if not examples and not definition:
-            continue  # Skip terms without examples and definitions
+            continue  # Skip terms with blank examples and definitions (not ideal, but the tensors must be non-empty)
         
         example_text = f"{term}: {definition}. Examples: {examples}"
         train_examples.append(InputExample(texts=[example_text, definition], label=0))
