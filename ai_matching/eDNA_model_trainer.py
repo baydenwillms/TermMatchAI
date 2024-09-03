@@ -3,6 +3,8 @@ from sentence_transformers import SentenceTransformer, InputExample, losses, mod
 from torch.utils.data import DataLoader
 import os
 
+# the AI Model will fail if tensors are left empty. only add non-empty data to your dictionary
+
 # Create dictionary from Darwin Core CSV
 def build_darwincore_dict():
     SCRIPT_DEPENDENCIES_DIR = os.path.join(os.path.dirname(__file__), '..', 'script_dependencies')
@@ -15,7 +17,7 @@ def build_darwincore_dict():
         term_name = row['term_localName']
         definition = row['definition'] if pd.notnull(row['definition']) else "No definition available"
         examples = row['examples'] if pd.notnull(row['examples']) else "No examples available"
-        
+        # Must check for not NULL so the tensors are not empty, otherwise there will be errors
         terms_dict[term_name] = {
             'definition': definition,
             'examples': examples

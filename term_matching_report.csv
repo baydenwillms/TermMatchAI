@@ -1,0 +1,55 @@
+Main Matches
+User Term,User Data Example,Matched Term,Matched Data Example,Score
+country,USA,country,US,1.0
+decimallatitude,,decimallatitude,,1.0
+decimallongitude,,decimallongitude,,1.0
+maximumdepthinmeters,,maximumdepthinmeters,,1.0
+minimumdepthinmeters,,minimumdepthinmeters,,1.0
+eventID,EX2107_D01_01,eventDate,2021-09-14T07:00,0.6333075761795044
+country,USA,country,US,0.8736029863357544
+decimalLatitude,31.21016,decimalLatitude,26.997,0.9420690536499023
+decimalLongitude,-77.85317,decimalLongitude,-79.618,0.9584968090057373
+eventEnteredBy,Allen Collins,eventDate,2021-09-14T07:00,0.47585734724998474
+locality,Blake Plateau: Reef Tracts,waterBody,"Mexico, Gulf of",0.49935653805732727
+yearCollected,2021,country,US,0.5315046310424805
+samplingProtocol,1.7 liters water by Niskin on D2,notes_sampling,Only enough water for 2 surface replicates. ,0.5984042882919312
+collectorList,NOAA Ocean Exploration,station,Sta1,0.48101305961608887
+continentOcean,Atlantic Ocean,waterBody,"Mexico, Gulf of",0.5882131457328796
+county,,country,US,0.6228125095367432
+dayCollected,27,eventDate,2021-09-14T07:00,0.6282625198364258
+depthOfBottomInMeters,870,maximumDepthInMeters,49,0.8083205223083496
+habitat,oceanic mesopelagic zone biome,env_local_scale,marine photic zone [ENVO:00000209],0.5864793062210083
+horizontalDatum,,minimumDepthInMeters,49,0.4283686578273773
+island,Puerto Rico,country,US,0.5428805947303772
+islandGroup,Greater Antilles,waterBody,"Mexico, Gulf of",0.5208615064620972
+landowner,,country,US,0.5588555335998535
+maximumDepthInMeters,505.09,maximumDepthInMeters,49,0.9055129289627075
+maximumElevationInMeters,,maximumDepthInMeters,49,0.626435399055481
+coordinateUncertaintyInMeters,,minimumDepthInMeters,49,0.5188129544258118
+microHabitat,Deep Scattering Layer,env_local_scale,marine photic zone [ENVO:00000209],0.5314595103263855
+minimumDepthInMeters,505.09,minimumDepthInMeters,49,0.8937737345695496
+minimumElevationInMeters,,minimumDepthInMeters,49,0.6462319493293762
+monthCollected,10,eventDate,2021-09-14T07:00,0.5094724297523499
+permitInformation,,sterilise_method,,0.46010565757751465
+eventRemarks,Midwater,eventDate,2021-09-14T07:00,0.49390077590942383
+stateProvince,,country,US,0.404141366481781
+taxTeam,,samp_store_dur,,0.6158344149589539
+timeOfDay,20211027T131133,eventDate,2021-09-14T07:00,0.6202133893966675
+verbatimLatitude,,sterilise_method,,0.5218926072120667
+verbatimLongitude,,filter_onsite_dur,,0.5011082887649536
+environmentalMedium,sea water,env_medium,sea water [ENVO:00002149],0.670775294303894
+permitType,,filter_onsite_dur,,0.5883878469467163
+permitText,,sterilise_method,,0.49898481369018555
+permitURI,,samp_store_dur,,0.487374484539032
+permitStatus,,samp_store_dur,,0.4850461483001709
+recordedByID,,minimumDepthInMeters,49,0.3971155881881714
+bcid,https://n2t.net/ark:/21547/Fff2EX2107_D01_01,source_material_id,GOMECC4_27N_Sta1_DCM,0.5622979402542114
+expeditionCode,EX2107_eDNA,cruise_id,GOMECC-4 (2021),0.6834208369255066
+projectId,575,locationID,27N_Sta1,0.4425777196884155
+
+Low-Confidence Matches
+User Term,User Data Example,Matched Term,Matched Data Example,Score
+
+New Terms
+
+Note: Scores indicate the similarity confidence. Higher scores imply better matches.
