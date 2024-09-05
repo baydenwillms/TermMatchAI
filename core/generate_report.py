@@ -1,49 +1,66 @@
 import csv
+from .normalization import normalize
 
-def generate_report(semantic_matches_spacy, semantic_matches_scibert, new_terms, output_file, bert_threshold=0.35):
-    """
-    Generate a report summarizing the term matches and new terms.
-    Args:
-        semantic_matches_spacy (dict): Dictionary of semantic matches using SpaCy.
-        semantic_matches_scibert (dict): Dictionary of semantic matches using SciBERT.
-        new_terms (list): List of new terms.
-        output_file (str): Path to the output CSV file.
-        bert_threshold (float): Minimum SciBERT score to consider a match as confident.
-    """
+def generate_report(normalized_matches, exact_matches, semantic_matches_scibert, new_terms, output_file, user_terms_w_data, noaa_terms_w_data, bert_threshold=0.3, num_matches=5):
     with open(output_file, mode='w', newline='') as file:
         writer = csv.writer(file)
 
-        # Write header for the main matches section
-        writer.writerow(['Main Matches'])
-        writer.writerow(['User Term', 'User Data Example', 'Matched Term', 'Matched Data Example', 'Score'])
-
-        # Exact matches (SpaCy score of 1.0)
-        for term, (match, score) in semantic_matches_spacy.items():
-            if score == 1.0:
-                scibert_match = semantic_matches_scibert.get(term, (match, score, '', ''))
-                user_data = scibert_match[2]
-                matched_data = scibert_match[3]
-                writer.writerow([term, user_data, match, matched_data, score])
+        # Perfect Matches Section
+        writer.writerow(['Perfect Matches'])
+        writer.writerow(['User Term', 'User Data Example', 'Matched Term', 'Matched Data Example'])
         
-        # Confident SciBERT matches (above the threshold)
-        for term, (match, score, user_data, matched_data) in semantic_matches_scibert.items():
-            if score >= bert_threshold:
-                writer.writerow([term, user_data, match, matched_data, score])
-
-        # Low-confidence matches (below the threshold)
-        writer.writerow([])
-        writer.writerow(['Low-Confidence Matches'])
-        writer.writerow(['User Term', 'User Data Example', 'Matched Term', 'Matched Data Example', 'Score'])
+        # Process exact matches first
+        for user_term, template_term in exact_matches.items():
+            user_data = str(user_terms_w_data.get(user_term, ''))
+            template_data = str(noaa_terms_w_data.get(template_term, ''))
+            writer.writerow([user_term, user_data, template_term, template_data])
         
-        for term, (match, score, user_data, matched_data) in semantic_matches_scibert.items():
-            if score < bert_threshold:
-                writer.writerow([term, user_data, match, matched_data, score])
-
-        # New terms section
+        # Process normalized matches that aren't in exact matches
+        for norm_user_term, norm_template_term in normalized_matches.items():
+            if norm_user_term not in [normalize(term) for term in exact_matches]:
+                user_term = next((term for term in user_terms_w_data if normalize(term) == norm_user_term), norm_user_term)
+                template_term = next((term for term in noaa_terms_w_data if normalize(term) == norm_template_term), norm_template_term)
+                user_data = str(user_terms_w_data.get(user_term, ''))
+                template_data = str(noaa_terms_w_data.get(template_term, ''))
+                writer.writerow([user_term, user_data, template_term, template_data])
+        
         writer.writerow([])
-        writer.writerow(['New Terms'])
+
+        # AI Powered Matches Section
+        writer.writerow(['AI Powered Matches'])
+        writer.writerow(['User Term', 'User Data Example', 'Matched Term', 'Matched Data Example', 'Score'])
+        perfect_match_terms = set(exact_matches.keys()) | set(normalized_matches.keys())
+        for term, matches in semantic_matches_scibert.items():
+            if term not in perfect_match_terms:
+                first_row = True
+                for match, score, _, _ in matches[:num_matches]:
+                    if score >= bert_threshold:
+                        user_data = str(user_terms_w_data.get(term, ''))
+                        template_data = str(noaa_terms_w_data.get(match, ''))
+                        if first_row:
+                            writer.writerow([term, user_data, match, template_data, score])
+                            first_row = False
+                        else:
+                            writer.writerow(['', '', match, template_data, score])
+        writer.writerow([])
+
+        # Low-confidence Matches and New Terms Section
+        writer.writerow(['Low-confidence Matches and New Terms'])
+        writer.writerow(['User Term', 'User Data Example', 'Matched Term', 'Matched Data Example', 'Score'])
+        for term, matches in semantic_matches_scibert.items():
+            if matches[0][1] < bert_threshold and term not in perfect_match_terms:
+                first_row = True
+                for match, score, _, _ in matches[:num_matches]:
+                    user_data = str(user_terms_w_data.get(term, ''))
+                    template_data = str(noaa_terms_w_data.get(match, ''))
+                    if first_row:
+                        writer.writerow([term, user_data, match, template_data, score])
+                        first_row = False
+                    else:
+                        writer.writerow(['', '', match, template_data, score])
+        
         for term in new_terms:
-            writer.writerow([term])
+            writer.writerow([term, str(user_terms_w_data.get(term, '')), '', '', ''])
 
         # Additional information for clarity
         writer.writerow([])

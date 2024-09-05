@@ -49,7 +49,7 @@ def get_scibert_embedding(text, model, tokenizer):
         outputs = model(**inputs)
     return outputs.last_hidden_state.mean(dim=1)
 
-def semantic_match_scibert(term, term_data, template_terms_with_data, model, tokenizer):
+def semantic_match_scibert(term, term_data, template_terms_with_data, model, tokenizer, num_matches=5):
     combined_term = combine_term_and_data(term, term_data)
     term_embedding = get_scibert_embedding(combined_term, model, tokenizer)
     similarities = {}
@@ -58,13 +58,14 @@ def semantic_match_scibert(term, term_data, template_terms_with_data, model, tok
         template_embedding = get_scibert_embedding(combined_template, model, tokenizer)
         similarity = torch.nn.functional.cosine_similarity(term_embedding, template_embedding).item()
         similarities[template_term] = similarity
-    best_match = max(similarities, key=similarities.get)
-    return best_match, similarities[best_match]
+    
+    # Sort similarities and get top matches
+    top_matches = sorted(similarities.items(), key=lambda x: x[1], reverse=True)[:num_matches]
+    return top_matches
 
-def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data):
+def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data, num_matches=5):
     matches = {}
     for term, user_data in user_terms_with_data.items():
-        match, score = semantic_match_scibert(term, user_data, template_terms_with_data, model, tokenizer)
-        matched_data = template_terms_with_data.get(match, '')  # Get the data example from the matched term
-        matches[term] = (match, score, user_data, matched_data)
+        top_matches = semantic_match_scibert(term, user_data, template_terms_with_data, model, tokenizer, num_matches)
+        matches[term] = [(match, score, user_data, template_terms_with_data.get(match, '')) for match, score in top_matches]
     return matches

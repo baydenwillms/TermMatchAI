@@ -1,55 +1,87 @@
-Main Matches
+Perfect Matches
+User Term,User Data Example,Matched Term,Matched Data Example
+decimalLongitude,-77.85317,,
+decimalLatitude,31.21016,,
+minimumDepthInMeters,505.09,,
+maximumDepthInMeters,505.09,,
+country,USA,,
+
+AI Powered Matches
 User Term,User Data Example,Matched Term,Matched Data Example,Score
-country,USA,country,US,1.0
-decimallatitude,,decimallatitude,,1.0
-decimallongitude,,decimallongitude,,1.0
-maximumdepthinmeters,,maximumdepthinmeters,,1.0
-minimumdepthinmeters,,minimumdepthinmeters,,1.0
 eventID,EX2107_D01_01,eventDate,2021-09-14T07:00,0.6333075761795044
-country,USA,country,US,0.8736029863357544
-decimalLatitude,31.21016,decimalLatitude,26.997,0.9420690536499023
-decimalLongitude,-77.85317,decimalLongitude,-79.618,0.9584968090057373
+,,biosample_accession,SAMN37516094,0.5778728723526001
 eventEnteredBy,Allen Collins,eventDate,2021-09-14T07:00,0.47585734724998474
+,,metagenome_sequenced,planned for FY24,0.405171275138855
 locality,Blake Plateau: Reef Tracts,waterBody,"Mexico, Gulf of",0.49935653805732727
+,,env_local_scale,marine photic zone [ENVO:00000209],0.4714205265045166
 yearCollected,2021,country,US,0.5315046310424805
+,,locationID,27N_Sta1,0.5220499634742737
 samplingProtocol,1.7 liters water by Niskin on D2,notes_sampling,Only enough water for 2 surface replicates. ,0.5984042882919312
+,,samp_collect_device,Niskin bottle,0.5343995690345764
 collectorList,NOAA Ocean Exploration,station,Sta1,0.48101305961608887
+,,waterBody,"Mexico, Gulf of",0.47750556468963623
 continentOcean,Atlantic Ocean,waterBody,"Mexico, Gulf of",0.5882131457328796
-county,,country,US,0.6228125095367432
+,,geo_loc_name,"USA: Atlantic Ocean, east of Florida (27 N)",0.5870717763900757
+county,None,country,US,0.6228125095367432
+,,samp_store_dur,None,0.5799960494041443
 dayCollected,27,eventDate,2021-09-14T07:00,0.6282625198364258
+,,verbatimEventDate,2021-09-14T11:00-04:00,0.5911346077919006
 depthOfBottomInMeters,870,maximumDepthInMeters,49,0.8083205223083496
+,,minimumDepthInMeters,49,0.7971981167793274
 habitat,oceanic mesopelagic zone biome,env_local_scale,marine photic zone [ENVO:00000209],0.5864793062210083
-horizontalDatum,,minimumDepthInMeters,49,0.4283686578273773
+,,env_broad_scale,marine biome [ENVO:00000447],0.5417088270187378
+horizontalDatum,None,minimumDepthInMeters,49,0.4283686578273773
+,,maximumDepthInMeters,49,0.42616546154022217
 island,Puerto Rico,country,US,0.5428805947303772
+,,waterBody,"Mexico, Gulf of",0.5405652523040771
 islandGroup,Greater Antilles,waterBody,"Mexico, Gulf of",0.5208615064620972
-landowner,,country,US,0.5588555335998535
-maximumDepthInMeters,505.09,maximumDepthInMeters,49,0.9055129289627075
-maximumElevationInMeters,,maximumDepthInMeters,49,0.626435399055481
-coordinateUncertaintyInMeters,,minimumDepthInMeters,49,0.5188129544258118
+,,country,US,0.4850309491157532
+landowner,None,country,US,0.5588555335998535
+,,samp_store_loc,None,0.49567240476608276
+maximumElevationInMeters,None,maximumDepthInMeters,49,0.626435399055481
+,,minimumDepthInMeters,49,0.5864133834838867
+coordinateUncertaintyInMeters,None,minimumDepthInMeters,49,0.5188129544258118
+,,maximumDepthInMeters,49,0.48602357506752014
 microHabitat,Deep Scattering Layer,env_local_scale,marine photic zone [ENVO:00000209],0.5314595103263855
-minimumDepthInMeters,505.09,minimumDepthInMeters,49,0.8937737345695496
-minimumElevationInMeters,,minimumDepthInMeters,49,0.6462319493293762
+,,station,Sta1,0.5205313563346863
+minimumElevationInMeters,None,minimumDepthInMeters,49,0.6462319493293762
+,,maximumDepthInMeters,49,0.6409534215927124
 monthCollected,10,eventDate,2021-09-14T07:00,0.5094724297523499
-permitInformation,,sterilise_method,,0.46010565757751465
+,,verbatimEventDate,2021-09-14T11:00-04:00,0.5089459419250488
+permitInformation,None,sterilise_method,None,0.46010565757751465
+,,minimumDepthInMeters,49,0.4416186213493347
 eventRemarks,Midwater,eventDate,2021-09-14T07:00,0.49390077590942383
-stateProvince,,country,US,0.404141366481781
-taxTeam,,samp_store_dur,,0.6158344149589539
+,,metagenome_sequenced,planned for FY24,0.4609779119491577
+stateProvince,None,country,US,0.404141366481781
+,,filter_onsite_dur,None,0.3889932632446289
+taxTeam,None,samp_store_dur,None,0.6158344149589539
+,,samp_store_sol,None,0.5876010060310364
 timeOfDay,20211027T131133,eventDate,2021-09-14T07:00,0.6202133893966675
-verbatimLatitude,,sterilise_method,,0.5218926072120667
-verbatimLongitude,,filter_onsite_dur,,0.5011082887649536
+,,verbatimEventDate,2021-09-14T11:00-04:00,0.5534488558769226
+verbatimLatitude,None,sterilise_method,None,0.5218926072120667
+,,filter_onsite_dur,None,0.4822229743003845
+verbatimLongitude,None,filter_onsite_dur,None,0.5011082887649536
+,,sterilise_method,None,0.49971553683280945
 environmentalMedium,sea water,env_medium,sea water [ENVO:00002149],0.670775294303894
-permitType,,filter_onsite_dur,,0.5883878469467163
-permitText,,sterilise_method,,0.49898481369018555
-permitURI,,samp_store_dur,,0.487374484539032
-permitStatus,,samp_store_dur,,0.4850461483001709
-recordedByID,,minimumDepthInMeters,49,0.3971155881881714
+,,organism,seawater metagenome,0.6075513958930969
+permitType,None,filter_onsite_dur,None,0.5883878469467163
+,,sterilise_method,None,0.5562065243721008
+permitText,None,sterilise_method,None,0.49898481369018555
+,,filter_onsite_dur,None,0.4806979298591614
+permitURI,None,samp_store_dur,None,0.487374484539032
+,,sterilise_method,None,0.4619372487068176
+permitStatus,None,samp_store_dur,None,0.4850461483001709
+,,samp_store_sol,None,0.47004351019859314
+recordedByID,None,minimumDepthInMeters,49,0.3971155881881714
+,,maximumDepthInMeters,49,0.3725251853466034
 bcid,https://n2t.net/ark:/21547/Fff2EX2107_D01_01,source_material_id,GOMECC4_27N_Sta1_DCM,0.5622979402542114
+,,ctd_bottle_no,14,0.55986487865448
 expeditionCode,EX2107_eDNA,cruise_id,GOMECC-4 (2021),0.6834208369255066
+,,biosample_accession,SAMN37516094,0.5817220211029053
 projectId,575,locationID,27N_Sta1,0.4425777196884155
+,,minimumDepthInMeters,49,0.4201340675354004
 
-Low-Confidence Matches
+Low-confidence Matches and New Terms
 User Term,User Data Example,Matched Term,Matched Data Example,Score
-
-New Terms
 
 Note: Scores indicate the similarity confidence. Higher scores imply better matches.
