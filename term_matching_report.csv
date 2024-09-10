@@ -1,17 +1,17 @@
-Perfect Matches
-User Term,User Data Example,Matched Term,Matched Data Example
-decimalLongitude,-77.85317,,
-decimalLatitude,31.21016,,
-minimumDepthInMeters,505.09,,
-maximumDepthInMeters,505.09,,
-country,USA,,
-
-AI Powered Matches
+Perfect Matches,,,,
+User Term,User Data Example,Matched Term,Matched Data Example,
+country,USA,country,US,
+decimalLatitude,31.21016,decimalLatitude,26.997,
+decimalLongitude,-77.85317,decimalLongitude,-79.618,
+maximumDepthInMeters,505.09,maximumDepthInMeters,49,
+minimumDepthInMeters,505.09,minimumDepthInMeters,49,
+,,,,
+AI Powered Matches,,,,
 User Term,User Data Example,Matched Term,Matched Data Example,Score
 eventID,EX2107_D01_01,eventDate,2021-09-14T07:00,0.6333075761795044
 ,,biosample_accession,SAMN37516094,0.5778728723526001
 eventEnteredBy,Allen Collins,eventDate,2021-09-14T07:00,0.47585734724998474
-,,metagenome_sequenced,planned for FY24,0.405171275138855
+,,metagenome_sequenced,planned for FY24,0.405171275
 locality,Blake Plateau: Reef Tracts,waterBody,"Mexico, Gulf of",0.49935653805732727
 ,,env_local_scale,marine photic zone [ENVO:00000209],0.4714205265045166
 yearCollected,2021,country,US,0.5315046310424805
@@ -38,7 +38,7 @@ islandGroup,Greater Antilles,waterBody,"Mexico, Gulf of",0.5208615064620972
 ,,country,US,0.4850309491157532
 landowner,None,country,US,0.5588555335998535
 ,,samp_store_loc,None,0.49567240476608276
-maximumElevationInMeters,None,maximumDepthInMeters,49,0.626435399055481
+maximumElevationInMeters,None,maximumDepthInMeters,49,0.626435399
 ,,minimumDepthInMeters,49,0.5864133834838867
 coordinateUncertaintyInMeters,None,minimumDepthInMeters,49,0.5188129544258118
 ,,maximumDepthInMeters,49,0.48602357506752014
@@ -52,7 +52,7 @@ permitInformation,None,sterilise_method,None,0.46010565757751465
 ,,minimumDepthInMeters,49,0.4416186213493347
 eventRemarks,Midwater,eventDate,2021-09-14T07:00,0.49390077590942383
 ,,metagenome_sequenced,planned for FY24,0.4609779119491577
-stateProvince,None,country,US,0.404141366481781
+stateProvince,None,country,US,0.404141366
 ,,filter_onsite_dur,None,0.3889932632446289
 taxTeam,None,samp_store_dur,None,0.6158344149589539
 ,,samp_store_sol,None,0.5876010060310364
@@ -62,26 +62,26 @@ verbatimLatitude,None,sterilise_method,None,0.5218926072120667
 ,,filter_onsite_dur,None,0.4822229743003845
 verbatimLongitude,None,filter_onsite_dur,None,0.5011082887649536
 ,,sterilise_method,None,0.49971553683280945
-environmentalMedium,sea water,env_medium,sea water [ENVO:00002149],0.670775294303894
+environmentalMedium,sea water,env_medium,sea water [ENVO:00002149],0.670775294
 ,,organism,seawater metagenome,0.6075513958930969
 permitType,None,filter_onsite_dur,None,0.5883878469467163
 ,,sterilise_method,None,0.5562065243721008
 permitText,None,sterilise_method,None,0.49898481369018555
 ,,filter_onsite_dur,None,0.4806979298591614
-permitURI,None,samp_store_dur,None,0.487374484539032
+permitURI,None,samp_store_dur,None,0.487374485
 ,,sterilise_method,None,0.4619372487068176
 permitStatus,None,samp_store_dur,None,0.4850461483001709
 ,,samp_store_sol,None,0.47004351019859314
 recordedByID,None,minimumDepthInMeters,49,0.3971155881881714
 ,,maximumDepthInMeters,49,0.3725251853466034
 bcid,https://n2t.net/ark:/21547/Fff2EX2107_D01_01,source_material_id,GOMECC4_27N_Sta1_DCM,0.5622979402542114
-,,ctd_bottle_no,14,0.55986487865448
+,,ctd_bottle_no,14,0.559864879
 expeditionCode,EX2107_eDNA,cruise_id,GOMECC-4 (2021),0.6834208369255066
 ,,biosample_accession,SAMN37516094,0.5817220211029053
 projectId,575,locationID,27N_Sta1,0.4425777196884155
 ,,minimumDepthInMeters,49,0.4201340675354004
-
-Low-confidence Matches and New Terms
+,,,,
+Low-confidence Matches and New Terms,,,,
 User Term,User Data Example,Matched Term,Matched Data Example,Score
-
-Note: Scores indicate the similarity confidence. Higher scores imply better matches.
+,,,,
+Note: Scores indicate the similarity confidence. Higher scores imply better matches.,,,,
