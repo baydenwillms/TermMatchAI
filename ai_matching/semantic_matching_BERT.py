@@ -1,16 +1,17 @@
 # from sentence_transformers import SentenceTransformer, util
 from transformers import AutoModel, AutoTokenizer
 import torch
+from core.id_checker import get_id_terms
 
 
 # Load SentenceBERT model
 # model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # New SciBERT model. BERT model pre-trained with Scientific papers, vocabulary
-# model_name = 'allenai/scibert_scivocab_uncased'
+model_name = 'allenai/scibert_scivocab_uncased'
 
 # Use custom trained eDNA SciBERT model
-model_name = './ai_matching/eDNA_scibert_model'
+# model_name = './ai_matching/eDNA_scibert_model'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModel.from_pretrained(model_name)
 
@@ -63,9 +64,18 @@ def semantic_match_scibert(term, term_data, template_terms_with_data, model, tok
     top_matches = sorted(similarities.items(), key=lambda x: x[1], reverse=True)[:num_matches]
     return top_matches
 
+# def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data, num_matches=5):
+#     matches = {}
+#     for term, user_data in user_terms_with_data.items():
+#         top_matches = semantic_match_scibert(term, user_data, template_terms_with_data, model, tokenizer, num_matches)
+#         matches[term] = [(match, score, user_data, template_terms_with_data.get(match, '')) for match, score in top_matches]
+#     return matches
+
 def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data, num_matches=5):
     matches = {}
+    id_terms = get_id_terms(user_terms_with_data)
     for term, user_data in user_terms_with_data.items():
-        top_matches = semantic_match_scibert(term, user_data, template_terms_with_data, model, tokenizer, num_matches)
-        matches[term] = [(match, score, user_data, template_terms_with_data.get(match, '')) for match, score in top_matches]
+        if term not in id_terms:
+            top_matches = semantic_match_scibert(term, user_data, template_terms_with_data, model, tokenizer, num_matches)
+            matches[term] = [(match, score, user_data, template_terms_with_data.get(match, '')) for match, score in top_matches]
     return matches

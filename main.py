@@ -5,6 +5,7 @@ from core.fuzzy_matching import fuzzy_match
 from ai_matching.semantic_matching_spacy import find_semantic_matches_spacy
 from ai_matching.semantic_matching_BERT import find_semantic_matches_scibert
 from core.generate_report import generate_report
+from core.id_checker import get_id_terms
 
 def main():
     # Get user input for number of matches
@@ -25,30 +26,44 @@ def main():
     template_terms = list(template_terms_w_data.keys())
     user_terms = list(user_terms_w_data.keys())
     
-    # Normalize terms
-    normalized_template_terms = [normalize(term) for term in template_terms]
-    normalized_user_terms = [normalize(term) for term in user_terms]
+    # Identify ID terms
+    user_id_terms, _ = get_id_terms(user_terms_w_data)
+    noaa_id_terms, _ = get_id_terms(template_terms_w_data)
     
-    # Normalized and Exact matching against template terms
+    # Remove ID terms from consideration for other matching methods
+    remaining_user_terms = {term: data for term, data in user_terms_w_data.items() if term not in user_id_terms}
+    remaining_template_terms = {term: data for term, data in template_terms_w_data.items() if term not in noaa_id_terms}
+    
+    # Exact matching against template terms
+    exact_matches = exact_match(list(remaining_template_terms.keys()), list(remaining_user_terms.keys()))
+    
+    # Remove exact matched terms from further consideration
+    remaining_user_terms = {term: data for term, data in remaining_user_terms.items() 
+                            if term not in exact_matches}
+    
+    # Normalize terms
+    normalized_template_terms = [normalize(term) for term in remaining_template_terms.keys()]
+    normalized_user_terms = [normalize(term) for term in remaining_user_terms.keys()]
+    
+    # Normalized matching against template terms
     normalized_matches = normalized_match(normalized_template_terms, normalized_user_terms)
-    exact_matches = exact_match(template_terms, user_terms)
+    
+    # Remove normalized matched terms from further consideration
+    remaining_user_terms = {term: data for term, data in remaining_user_terms.items() 
+                            if normalize(term) not in normalized_matches}
     
     # Fuzzy matching against template terms
-    fuzzy_matches = fuzzy_match(normalized_template_terms, normalized_user_terms)
+    fuzzy_matches = fuzzy_match(normalized_template_terms, [normalize(term) for term in remaining_user_terms])
     
-    # Semantic matching using SpaCy against template terms
-    semantic_matches_spacy = find_semantic_matches_spacy(normalized_user_terms, normalized_template_terms)
+    # Remove fuzzy matched terms from further consideration
+    remaining_user_terms = {term: data for term, data in remaining_user_terms.items() 
+                            if normalize(term) not in fuzzy_matches}
     
     # Semantic matching using SciBERT against template terms with descriptions
-    semantic_matches_scibert = find_semantic_matches_scibert(user_terms_w_data, template_terms_w_data)
+    semantic_matches_scibert = find_semantic_matches_scibert(remaining_user_terms, remaining_template_terms)
 
-    # Identify new terms by combining all match keys
-    all_matches = set()
-    for matches_dict in [normalized_matches, exact_matches, fuzzy_matches, semantic_matches_spacy, semantic_matches_scibert]:
-        all_matches.update(matches_dict.keys())
-
-    new_terms = [term for term in user_terms if term not in all_matches]
-    print(f"New Terms: {new_terms}")
+    # Identify new terms
+    new_terms = list(remaining_user_terms.keys())
     
     # Generate report
     generate_report(normalized_matches, exact_matches, semantic_matches_scibert, new_terms, 

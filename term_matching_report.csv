@@ -1,87 +1,114 @@
-Perfect Matches,,,,
-User Term,User Data Example,Matched Term,Matched Data Example,
-country,USA,country,US,
-decimalLatitude,31.21016,decimalLatitude,26.997,
-decimalLongitude,-77.85317,decimalLongitude,-79.618,
-maximumDepthInMeters,505.09,maximumDepthInMeters,49,
-minimumDepthInMeters,505.09,minimumDepthInMeters,49,
-,,,,
-AI Powered Matches,,,,
+Perfect Matches
+User Term,User Data Example,Matched Term,Matched Data Example
+country,USA,country,US
+decimalLatitude,31.21016,decimalLatitude,26.997
+decimalLongitude,-77.85317,decimalLongitude,-79.618
+maximumDepthInMeters,505.09,maximumDepthInMeters,49
+minimumDepthInMeters,505.09,minimumDepthInMeters,49
+
+ID Terms
+User Term,User Data Example,NOAA ID Term,NOAA Data Example
+expeditionCode,EX2107_eDNA,source_material_id,GOMECC4_27N_Sta1_DCM
+eventID,EX2107_D01_01,cruise_id,GOMECC-4 (2021)
+permitURI,None,line_id,27N
+recordedByID,None,locationID,27N_Sta1
+projectId,575,,
+bcid,https://n2t.net/ark:/21547/Fff2EX2107_D01_01,,
+
+AI Powered Matches
 User Term,User Data Example,Matched Term,Matched Data Example,Score
-eventID,EX2107_D01_01,eventDate,2021-09-14T07:00,0.6333075761795044
-,,biosample_accession,SAMN37516094,0.5778728723526001
-eventEnteredBy,Allen Collins,eventDate,2021-09-14T07:00,0.47585734724998474
-,,metagenome_sequenced,planned for FY24,0.405171275
-locality,Blake Plateau: Reef Tracts,waterBody,"Mexico, Gulf of",0.49935653805732727
-,,env_local_scale,marine photic zone [ENVO:00000209],0.4714205265045166
-yearCollected,2021,country,US,0.5315046310424805
-,,locationID,27N_Sta1,0.5220499634742737
-samplingProtocol,1.7 liters water by Niskin on D2,notes_sampling,Only enough water for 2 surface replicates. ,0.5984042882919312
-,,samp_collect_device,Niskin bottle,0.5343995690345764
-collectorList,NOAA Ocean Exploration,station,Sta1,0.48101305961608887
-,,waterBody,"Mexico, Gulf of",0.47750556468963623
-continentOcean,Atlantic Ocean,waterBody,"Mexico, Gulf of",0.5882131457328796
-,,geo_loc_name,"USA: Atlantic Ocean, east of Florida (27 N)",0.5870717763900757
-county,None,country,US,0.6228125095367432
-,,samp_store_dur,None,0.5799960494041443
-dayCollected,27,eventDate,2021-09-14T07:00,0.6282625198364258
-,,verbatimEventDate,2021-09-14T11:00-04:00,0.5911346077919006
-depthOfBottomInMeters,870,maximumDepthInMeters,49,0.8083205223083496
-,,minimumDepthInMeters,49,0.7971981167793274
-habitat,oceanic mesopelagic zone biome,env_local_scale,marine photic zone [ENVO:00000209],0.5864793062210083
-,,env_broad_scale,marine biome [ENVO:00000447],0.5417088270187378
-horizontalDatum,None,minimumDepthInMeters,49,0.4283686578273773
-,,maximumDepthInMeters,49,0.42616546154022217
-island,Puerto Rico,country,US,0.5428805947303772
-,,waterBody,"Mexico, Gulf of",0.5405652523040771
-islandGroup,Greater Antilles,waterBody,"Mexico, Gulf of",0.5208615064620972
-,,country,US,0.4850309491157532
-landowner,None,country,US,0.5588555335998535
-,,samp_store_loc,None,0.49567240476608276
-maximumElevationInMeters,None,maximumDepthInMeters,49,0.626435399
-,,minimumDepthInMeters,49,0.5864133834838867
-coordinateUncertaintyInMeters,None,minimumDepthInMeters,49,0.5188129544258118
-,,maximumDepthInMeters,49,0.48602357506752014
-microHabitat,Deep Scattering Layer,env_local_scale,marine photic zone [ENVO:00000209],0.5314595103263855
-,,station,Sta1,0.5205313563346863
-minimumElevationInMeters,None,minimumDepthInMeters,49,0.6462319493293762
-,,maximumDepthInMeters,49,0.6409534215927124
-monthCollected,10,eventDate,2021-09-14T07:00,0.5094724297523499
-,,verbatimEventDate,2021-09-14T11:00-04:00,0.5089459419250488
-permitInformation,None,sterilise_method,None,0.46010565757751465
-,,minimumDepthInMeters,49,0.4416186213493347
-eventRemarks,Midwater,eventDate,2021-09-14T07:00,0.49390077590942383
-,,metagenome_sequenced,planned for FY24,0.4609779119491577
-stateProvince,None,country,US,0.404141366
-,,filter_onsite_dur,None,0.3889932632446289
-taxTeam,None,samp_store_dur,None,0.6158344149589539
-,,samp_store_sol,None,0.5876010060310364
-timeOfDay,20211027T131133,eventDate,2021-09-14T07:00,0.6202133893966675
-,,verbatimEventDate,2021-09-14T11:00-04:00,0.5534488558769226
-verbatimLatitude,None,sterilise_method,None,0.5218926072120667
-,,filter_onsite_dur,None,0.4822229743003845
-verbatimLongitude,None,filter_onsite_dur,None,0.5011082887649536
-,,sterilise_method,None,0.49971553683280945
-environmentalMedium,sea water,env_medium,sea water [ENVO:00002149],0.670775294
-,,organism,seawater metagenome,0.6075513958930969
-permitType,None,filter_onsite_dur,None,0.5883878469467163
-,,sterilise_method,None,0.5562065243721008
-permitText,None,sterilise_method,None,0.49898481369018555
-,,filter_onsite_dur,None,0.4806979298591614
-permitURI,None,samp_store_dur,None,0.487374485
-,,sterilise_method,None,0.4619372487068176
-permitStatus,None,samp_store_dur,None,0.4850461483001709
-,,samp_store_sol,None,0.47004351019859314
-recordedByID,None,minimumDepthInMeters,49,0.3971155881881714
-,,maximumDepthInMeters,49,0.3725251853466034
-bcid,https://n2t.net/ark:/21547/Fff2EX2107_D01_01,source_material_id,GOMECC4_27N_Sta1_DCM,0.5622979402542114
-,,ctd_bottle_no,14,0.559864879
-expeditionCode,EX2107_eDNA,cruise_id,GOMECC-4 (2021),0.6834208369255066
-,,biosample_accession,SAMN37516094,0.5817220211029053
-projectId,575,locationID,27N_Sta1,0.4425777196884155
-,,minimumDepthInMeters,49,0.4201340675354004
-,,,,
-Low-confidence Matches and New Terms,,,,
-User Term,User Data Example,Matched Term,Matched Data Example,Score
-,,,,
-Note: Scores indicate the similarity confidence. Higher scores imply better matches.,,,,
+eventEnteredBy,Allen Collins,maximumDepthInMeters,49,0.6946990489959717
+,,samp_size,None,0.6903009414672852
+locality,Blake Plateau: Reef Tracts,geo_loc_name,"USA: Atlantic Ocean, east of Florida (27 N)",0.7511692047119141
+,,waterBody,"Mexico, Gulf of",0.7384053468704224
+yearCollected,2021,extract_number,Plate4_53,0.7966166138648987
+,,station,Sta1,0.7920407652854919
+samplingProtocol,1.7 liters water by Niskin on D2,notes_sampling,Only enough water for 2 surface replicates. ,0.8632232546806335
+,,samp_mat_process,Pumped through Sterivex filter (0.22-µm) using peristaltic pµmp,0.84330815076828
+collectorList,NOAA Ocean Exploration,sample_type,seawater,0.8040682077407837
+,,station,Sta1,0.7946737408638
+continentOcean,Atlantic Ocean,organism,seawater metagenome,0.7840613722801208
+,,waterBody,"Mexico, Gulf of",0.7736250162124634
+county,None,samp_size_unit,None,0.7232835292816162
+,,samp_size,None,0.7047901749610901
+dayCollected,27,eventDate,2021-09-14T07:00,0.7765243649482727
+,,station,Sta1,0.7655981183052063
+depthOfBottomInMeters,870,maximumDepthInMeters,49,0.9092578887939453
+,,minimumDepthInMeters,49,0.9010258316993713
+habitat,oceanic mesopelagic zone biome,organism,seawater metagenome,0.7832808494567871
+,,geo_loc_name,"USA: Atlantic Ocean, east of Florida (27 N)",0.7339502573013306
+horizontalDatum,None,samp_size_unit,None,0.7646092176437378
+,,samp_size,None,0.7452415823936462
+island,Puerto Rico,waterBody,"Mexico, Gulf of",0.7668910622596741
+,,country,US,0.7544000744819641
+islandGroup,Greater Antilles,station,Sta1,0.8068493008613586
+,,waterBody,"Mexico, Gulf of",0.8006717562675476
+landowner,None,country,US,0.7919794917106628
+,,samp_size_unit,None,0.7729178667068481
+maximumElevationInMeters,None,maximumDepthInMeters,49,0.8452791571617126
+,,minimumDepthInMeters,49,0.823710024356842
+coordinateUncertaintyInMeters,None,sterilise_method,None,0.6899910569190979
+,,samp_size_unit,None,0.6809342503547668
+microHabitat,Deep Scattering Layer,organism,seawater metagenome,0.8084093928337097
+,,station,Sta1,0.7795431613922119
+minimumElevationInMeters,None,maximumDepthInMeters,49,0.8461883664131165
+,,minimumDepthInMeters,49,0.8398468494415283
+monthCollected,10,station,Sta1,0.7694469690322876
+,,sample_replicate,A,0.744719922542572
+permitInformation,None,sterilise_method,None,0.7716174721717834
+,,samp_size_unit,None,0.7582059502601624
+eventRemarks,Midwater,station,Sta1,0.8060516119003296
+,,maximumDepthInMeters,49,0.7694003582000732
+stateProvince,None,samp_size_unit,None,0.7477730512619019
+,,sterilise_method,None,0.7411855459213257
+taxTeam,None,samp_store_dur,None,0.8049998879432678
+,,samp_store_loc,None,0.7893885970115662
+timeOfDay,20211027T131133,metagenome_sequenced,planned for FY24,0.7577030062675476
+,,biosample_accession,SAMN37516094,0.7453997135162354
+verbatimLatitude,None,sterilise_method,None,0.7540565729141235
+,,samp_size_unit,None,0.7177881598472595
+verbatimLongitude,None,sterilise_method,None,0.7569785118103027
+,,samp_size_unit,None,0.7383415102958679
+environmentalMedium,sea water,organism,seawater metagenome,0.8158022165298462
+,,sample_type,seawater,0.7757130861282349
+permitType,None,samp_size,None,0.8588095307350159
+,,filter_onsite_dur,None,0.8363201022148132
+permitText,None,samp_size_unit,None,0.8103672862052917
+,,sterilise_method,None,0.800137996673584
+permitStatus,None,samp_store_dur,None,0.7369836568832397
+,,samp_size_unit,None,0.7317798733711243
+
+New Terms
+User Term,User Data Example
+eventEnteredBy,Allen Collins
+locality,Blake Plateau: Reef Tracts
+yearCollected,2021
+samplingProtocol,1.7 liters water by Niskin on D2
+collectorList,NOAA Ocean Exploration
+continentOcean,Atlantic Ocean
+county,None
+dayCollected,27
+depthOfBottomInMeters,870
+habitat,oceanic mesopelagic zone biome
+horizontalDatum,None
+island,Puerto Rico
+islandGroup,Greater Antilles
+landowner,None
+maximumElevationInMeters,None
+coordinateUncertaintyInMeters,None
+microHabitat,Deep Scattering Layer
+minimumElevationInMeters,None
+monthCollected,10
+permitInformation,None
+eventRemarks,Midwater
+stateProvince,None
+taxTeam,None
+timeOfDay,20211027T131133
+verbatimLatitude,None
+verbatimLongitude,None
+environmentalMedium,sea water
+permitType,None
+permitText,None
+permitStatus,None
+
+Note: Scores indicate the similarity confidence. Higher scores imply better matches.

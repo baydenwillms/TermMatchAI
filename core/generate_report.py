@@ -1,5 +1,6 @@
+from core.id_checker import get_id_terms
 import csv
-from .normalization import normalize
+from core.normalization import normalize
 
 def generate_report(normalized_matches, exact_matches, semantic_matches_scibert, new_terms, output_file, user_terms_w_data, noaa_terms_w_data, bert_threshold=0.3, num_matches=5):
     with open(output_file, mode='w', newline='') as file:
@@ -26,12 +27,41 @@ def generate_report(normalized_matches, exact_matches, semantic_matches_scibert,
         
         writer.writerow([])
 
+        # ID Terms Section
+        writer.writerow(['ID Terms'])
+        writer.writerow(['User Term', 'User Data Example', 'NOAA ID Term', 'NOAA Data Example'])
+
+        user_id_terms, user_compound_key = get_id_terms(user_terms_w_data)
+        print(f'user compound key: {user_compound_key}')
+    
+        noaa_id_terms, noaa_compound_key = get_id_terms(noaa_terms_w_data)
+        print(f'NOAA compound key: {noaa_compound_key}')
+
+        # Prepare items, putting compound key first for NOAA terms
+        user_items = [(term, str(user_terms_w_data.get(term, ''))) for term in user_id_terms]
+        noaa_items = []
+        if noaa_compound_key:
+            noaa_items.append((noaa_compound_key, str(noaa_terms_w_data.get(noaa_compound_key, ''))))
+        noaa_items.extend([(term, str(noaa_terms_w_data.get(term, ''))) for term in noaa_id_terms if term != noaa_compound_key])
+
+        # Calculate the max length to ensure we don't miss terms
+        max_len = max(len(user_items), len(noaa_items))
+
+        # Iterate and write each term side by side
+        for i in range(max_len):
+            user_term, user_data = user_items[i] if i < len(user_items) else ('', '')
+            noaa_term, noaa_data = noaa_items[i] if i < len(noaa_items) else ('', '')
+            writer.writerow([user_term, user_data, noaa_term, noaa_data])
+
+        writer.writerow([])
+
         # AI Powered Matches Section
         writer.writerow(['AI Powered Matches'])
         writer.writerow(['User Term', 'User Data Example', 'Matched Term', 'Matched Data Example', 'Score'])
         perfect_match_terms = set(exact_matches.keys()) | set(normalized_matches.keys())
+        id_terms = set(user_id_terms) | set(noaa_id_terms)
         for term, matches in semantic_matches_scibert.items():
-            if term not in perfect_match_terms:
+            if term not in perfect_match_terms and term not in id_terms:
                 first_row = True
                 for match, score, _, _ in matches[:num_matches]:
                     if score >= bert_threshold:
@@ -44,24 +74,18 @@ def generate_report(normalized_matches, exact_matches, semantic_matches_scibert,
                             writer.writerow(['', '', match, template_data, score])
         writer.writerow([])
 
-        # Low-confidence Matches and New Terms Section
-        writer.writerow(['Low-confidence Matches and New Terms'])
-        writer.writerow(['User Term', 'User Data Example', 'Matched Term', 'Matched Data Example', 'Score'])
-        for term, matches in semantic_matches_scibert.items():
-            if matches[0][1] < bert_threshold and term not in perfect_match_terms:
-                first_row = True
-                for match, score, _, _ in matches[:num_matches]:
-                    user_data = str(user_terms_w_data.get(term, ''))
-                    template_data = str(noaa_terms_w_data.get(match, ''))
-                    if first_row:
-                        writer.writerow([term, user_data, match, template_data, score])
-                        first_row = False
-                    else:
-                        writer.writerow(['', '', match, template_data, score])
-        
+        # New Terms Section
+        writer.writerow(['New Terms'])
+        writer.writerow(['User Term', 'User Data Example'])
         for term in new_terms:
-            writer.writerow([term, str(user_terms_w_data.get(term, '')), '', '', ''])
+            if term not in id_terms:
+                writer.writerow([term, str(user_terms_w_data.get(term, ''))])
 
         # Additional information for clarity
         writer.writerow([])
         writer.writerow(['Note: Scores indicate the similarity confidence. Higher scores imply better matches.'])
+
+# Usage:
+# generate_report(normalized_matches, exact_matches, semantic_matches_scibert, new_terms, 
+#                 'term_matching_report.csv', user_terms_w_data, noaa_terms_w_data,
+#                 bert_threshold=0.3, num_matches=5)
