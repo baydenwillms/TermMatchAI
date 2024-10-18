@@ -1,8 +1,16 @@
 name: term-matching-env
 channels:
   - defaults
+  - conda-forge
 dependencies:
+  - python=3.8
   - gensim
   - pandas
   - pip
-  - python=3.8
+  - pip:
+    - torch
+    - transformers
+    - sentence-transformers
+    #- spacy
+    - scikit-learn
+    - git-lfs

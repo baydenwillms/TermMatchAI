@@ -15,9 +15,16 @@ model_name = 'allenai/scibert_scivocab_uncased'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModel.from_pretrained(model_name)
 
+# Old version of combine_term_and_data, accounts for when data example is 'None' to help avoid matching other terms with 'None'
+# def combine_term_and_data(term, data):
+#     return f"{term}: {data}"
 
+# Updated combine function to remove 'None' if column is empty (no data example)
 def combine_term_and_data(term, data):
+    if data is None or data == '':
+        return term
     return f"{term}: {data}"
+
 
 # Legacy code version: sentenceBERT AI model. We have since switched to SciBERT, which is trained in scientific vocabulary and journals
 

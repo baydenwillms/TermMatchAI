@@ -102,13 +102,13 @@ def generate_report(normalized_matches, exact_matches, semantic_matches_scibert,
                             writer.writerow(['', '', match, template_data, score])
         writer.writerow([])
 
-		# I will probably remove this very soon
+		# I will probably remove this very soon (removed 10/18 by bayden)
         # New Terms Section
-        writer.writerow(['New Terms'])
-        writer.writerow(['User Term', 'User Data Example'])
-        for term in new_terms:
-            if term not in id_terms:
-                writer.writerow([term, str(user_terms_w_data.get(term, ''))])
+        # writer.writerow(['New Terms'])
+        # writer.writerow(['User Term', 'User Data Example'])
+        # for term in new_terms:
+        #     if term not in id_terms:
+        #         writer.writerow([term, str(user_terms_w_data.get(term, ''))])
 
         # Additional information for clarity
         writer.writerow([])
