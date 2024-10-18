@@ -11,6 +11,6 @@ dependencies:
     - torch
     - transformers
     - sentence-transformers
-    #- spacy
+    #- spacy We dont use this model anymore
     - scikit-learn
     - git-lfs
