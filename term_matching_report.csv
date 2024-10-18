@@ -15,14 +15,19 @@ recordedByID,None,locationID,27N_Sta1
 projectId,575,,
 bcid,https://n2t.net/ark:/21547/Fff2EX2107_D01_01,,
 
+Date and Time Terms
+User Term,User Data Example,NOAA Term,NOAA Data Example
+yearCollected,2021,verbatimEventDate,2021-09-14T11:00-04:00
+dayCollected,27,eventDate,2021-09-14T07:00
+monthCollected,10,6/24/2024,6/24/2024
+timeOfDay,20211027T131133,,
+
 AI Powered Matches
 User Term,User Data Example,Matched Term,Matched Data Example,Score
 eventEnteredBy,Allen Collins,maximumDepthInMeters,49,0.6946990489959717
 ,,samp_size,None,0.6903009414672852
 locality,Blake Plateau: Reef Tracts,geo_loc_name,"USA: Atlantic Ocean, east of Florida (27 N)",0.7511692047119141
 ,,waterBody,"Mexico, Gulf of",0.7384053468704224
-yearCollected,2021,extract_number,Plate4_53,0.7966166138648987
-,,station,Sta1,0.7920407652854919
 samplingProtocol,1.7 liters water by Niskin on D2,notes_sampling,Only enough water for 2 surface replicates. ,0.8632232546806335
 ,,samp_mat_process,Pumped through Sterivex filter (0.22-µm) using peristaltic pµmp,0.84330815076828
 collectorList,NOAA Ocean Exploration,sample_type,seawater,0.8040682077407837
@@ -31,8 +36,6 @@ continentOcean,Atlantic Ocean,organism,seawater metagenome,0.7840613722801208
 ,,waterBody,"Mexico, Gulf of",0.7736250162124634
 county,None,samp_size_unit,None,0.7232835292816162
 ,,samp_size,None,0.7047901749610901
-dayCollected,27,eventDate,2021-09-14T07:00,0.7765243649482727
-,,station,Sta1,0.7655981183052063
 depthOfBottomInMeters,870,maximumDepthInMeters,49,0.9092578887939453
 ,,minimumDepthInMeters,49,0.9010258316993713
 habitat,oceanic mesopelagic zone biome,organism,seawater metagenome,0.7832808494567871
@@ -53,8 +56,6 @@ microHabitat,Deep Scattering Layer,organism,seawater metagenome,0.80840939283370
 ,,station,Sta1,0.7795431613922119
 minimumElevationInMeters,None,maximumDepthInMeters,49,0.8461883664131165
 ,,minimumDepthInMeters,49,0.8398468494415283
-monthCollected,10,station,Sta1,0.7694469690322876
-,,sample_replicate,A,0.744719922542572
 permitInformation,None,sterilise_method,None,0.7716174721717834
 ,,samp_size_unit,None,0.7582059502601624
 eventRemarks,Midwater,station,Sta1,0.8060516119003296
@@ -63,8 +64,6 @@ stateProvince,None,samp_size_unit,None,0.7477730512619019
 ,,sterilise_method,None,0.7411855459213257
 taxTeam,None,samp_store_dur,None,0.8049998879432678
 ,,samp_store_loc,None,0.7893885970115662
-timeOfDay,20211027T131133,metagenome_sequenced,planned for FY24,0.7577030062675476
-,,biosample_accession,SAMN37516094,0.7453997135162354
 verbatimLatitude,None,sterilise_method,None,0.7540565729141235
 ,,samp_size_unit,None,0.7177881598472595
 verbatimLongitude,None,sterilise_method,None,0.7569785118103027
@@ -82,12 +81,10 @@ New Terms
 User Term,User Data Example
 eventEnteredBy,Allen Collins
 locality,Blake Plateau: Reef Tracts
-yearCollected,2021
 samplingProtocol,1.7 liters water by Niskin on D2
 collectorList,NOAA Ocean Exploration
 continentOcean,Atlantic Ocean
 county,None
-dayCollected,27
 depthOfBottomInMeters,870
 habitat,oceanic mesopelagic zone biome
 horizontalDatum,None
@@ -98,12 +95,10 @@ maximumElevationInMeters,None
 coordinateUncertaintyInMeters,None
 microHabitat,Deep Scattering Layer
 minimumElevationInMeters,None
-monthCollected,10
 permitInformation,None
 eventRemarks,Midwater
 stateProvince,None
 taxTeam,None
-timeOfDay,20211027T131133
 verbatimLatitude,None
 verbatimLongitude,None
 environmentalMedium,sea water

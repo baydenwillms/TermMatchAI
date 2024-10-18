@@ -1,4 +1,5 @@
 from core.id_checker import get_id_terms
+from core.date_checker import get_date_terms
 import csv
 from core.normalization import normalize
 
@@ -10,6 +11,7 @@ def generate_report(normalized_matches, exact_matches, semantic_matches_scibert,
         writer.writerow(['Perfect Matches'])
         writer.writerow(['User Term', 'User Data Example', 'Matched Term', 'Matched Data Example'])
         
+		# Also this section seems unnecessarily repetetive and complex. will change soon
         # Process exact matches first
         for user_term, template_term in exact_matches.items():
             user_data = str(user_terms_w_data.get(user_term, ''))
@@ -54,6 +56,32 @@ def generate_report(normalized_matches, exact_matches, semantic_matches_scibert,
             writer.writerow([user_term, user_data, noaa_term, noaa_data])
 
         writer.writerow([])
+        
+
+
+		# Date / Time Terms Section
+        writer.writerow(['Date and Time Terms'])
+        writer.writerow(['User Term', 'User Data Example', 'NOAA Term', 'NOAA Data Example'])
+		
+        user_date_terms = get_date_terms(user_terms_w_data)
+        noaa_date_terms = get_date_terms(noaa_terms_w_data)
+
+		# Prepare items
+        user_items = [(term, str(user_terms_w_data.get(term, ''))) for term in user_date_terms]
+        noaa_items = [(term, str(noaa_terms_w_data.get(term, ''))) for term in noaa_date_terms]
+
+		# Calculate the max length to ensure we don't miss terms
+        max_len = max(len(user_items), len(noaa_items))
+
+		# Iterate and write each term side by side
+        for i in range(max_len):
+            user_term, user_data = user_items[i] if i < len(user_items) else ('', '')
+            noaa_term, noaa_data = noaa_items[i] if i < len(noaa_items) else ('', '')
+            writer.writerow([user_term, user_data, noaa_term, noaa_data])
+
+        writer.writerow([])
+
+
 
         # AI Powered Matches Section
         writer.writerow(['AI Powered Matches'])
@@ -74,6 +102,7 @@ def generate_report(normalized_matches, exact_matches, semantic_matches_scibert,
                             writer.writerow(['', '', match, template_data, score])
         writer.writerow([])
 
+		# I will probably remove this very soon
         # New Terms Section
         writer.writerow(['New Terms'])
         writer.writerow(['User Term', 'User Data Example'])

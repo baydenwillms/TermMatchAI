@@ -2,10 +2,11 @@ from core.data_loading import get_term_lists, get_terms_with_data
 from core.normalization import normalize
 from core.matching import normalized_match, exact_match
 from core.fuzzy_matching import fuzzy_match
-from ai_matching.semantic_matching_spacy import find_semantic_matches_spacy
+# from ai_matching.semantic_matching_spacy import find_semantic_matches_spacy
 from ai_matching.semantic_matching_BERT import find_semantic_matches_scibert
 from core.generate_report import generate_report
 from core.id_checker import get_id_terms
+from core.date_checker import get_date_terms
 
 def main():
     # Get user input for number of matches
@@ -26,6 +27,7 @@ def main():
     template_terms = list(template_terms_w_data.keys())
     user_terms = list(user_terms_w_data.keys())
     
+	# ID TERMS SECTION 
     # Identify ID terms
     user_id_terms, _ = get_id_terms(user_terms_w_data)
     noaa_id_terms, _ = get_id_terms(template_terms_w_data)
@@ -33,6 +35,15 @@ def main():
     # Remove ID terms from consideration for other matching methods
     remaining_user_terms = {term: data for term, data in user_terms_w_data.items() if term not in user_id_terms}
     remaining_template_terms = {term: data for term, data in template_terms_w_data.items() if term not in noaa_id_terms}
+    
+	# DATE / TIME TERMS SECTION 
+    # Identify DATE terms
+    user_date_terms = get_date_terms(user_terms_w_data)
+    noaa_date_terms = get_date_terms(template_terms_w_data)
+    
+    # Remove DATE terms from consideration for other matching methods
+    remaining_user_terms = {term: data for term, data in user_terms_w_data.items() if term not in user_date_terms}
+    remaining_template_terms = {term: data for term, data in template_terms_w_data.items() if term not in noaa_date_terms}
     
     # Exact matching against template terms
     exact_matches = exact_match(list(remaining_template_terms.keys()), list(remaining_user_terms.keys()))
