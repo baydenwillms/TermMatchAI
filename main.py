@@ -1,4 +1,4 @@
-from core.data_loading import get_term_lists, get_terms_with_data
+from TermMatchAI.data_loading.data_loading import get_term_lists, get_terms_with_data
 from core.normalization import normalize
 from core.matching import normalized_match, exact_match
 from core.fuzzy_matching import fuzzy_match
