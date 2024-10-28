@@ -63,15 +63,17 @@ sudo dnf install git-lfs
 ## Usage
 
 ### 1. Term Matching
-To compare terms between two datasets, use the `main.py` script. Ensure your input is formatted correctly as dictionaries. __See `data_loading/data_loading.py` for more information on input format__
+To compare terms between two datasets, use the `main.py` script. The terminal will ask you if you'd like to use __default dictionaries__ or __your own data templates__ (currently only Excel is supported). 
 ```python
+# Examples of the default dictionaries in data_loading/data_loading.py:
+
 # Example dictionary for dataset 1, or the dataset which you'd like to match TO
 noaa_terms_w_data={'sample_name': 'GOMECC4_27N_Sta1_DCM_A', 'sample_type': 'seawater', ... }
 
 # Example dictionary for dataset 2, or the dataset which is INCOMING / needs to be matched
 user_terms_w_data={'eventID': 'EX2107_D01_01', 'country': 'USA', ... }
 ```
-You're ready to go! (hopefully):
+You're ready to go! To run TermMatchAI, enter this to your terminal:
 ```bash
 python main.py
 ```
