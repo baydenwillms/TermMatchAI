@@ -1,4 +1,5 @@
-from TermMatchAI.data_loading.data_loading import get_term_lists, get_terms_with_data
+from data_loading.data_loading import get_terms_with_data
+from data_loading.excel_loading import load_from_excel
 from core.normalization import normalize
 from core.matching import normalized_match, exact_match
 from core.fuzzy_matching import fuzzy_match
@@ -20,14 +21,30 @@ def main():
         except ValueError:
             print("Invalid input. Please enter a number.")
 
-    # Get the dictionaries of term names and a piece of sample data
-    template_terms_w_data, user_terms_w_data = get_terms_with_data()
+    # Ask for Excel paths or use defaults
+    template_path = input("Enter path to template Excel file (or press ENTER to use default dictionaries): ").strip()
+    
+    if template_path:
+        # Excel file mode
+        data_path = input("Enter path to your data Excel file: ").strip()
+        row_num = int(input("Which row contains the term names? "))
+        include_data = input("Include data examples for each term? This is HIGHLY RECOMMENDED (y/n): ").lower()
+        
+        if include_data == 'y' or 'yes':
+            template_terms_w_data, user_terms_w_data = load_from_excel(template_path, data_path, row_num, include_examples=True)
+        else:
+            print("Warning: Matching accuracy will be reduced without data examples!")
+            template_terms_w_data, user_terms_w_data = load_from_excel(template_path, data_path, row_num, include_examples=False)
+    else:
+        # Default dictionary mode
+        print("Using default dictionaries from data_loading.py")
+        template_terms_w_data, user_terms_w_data = get_terms_with_data()
     
     # Get the lists of term names
     template_terms = list(template_terms_w_data.keys())
     user_terms = list(user_terms_w_data.keys())
     
-	# ID TERMS SECTION 
+    # ID TERMS SECTION 
     # Identify ID terms
     user_id_terms, _ = get_id_terms(user_terms_w_data)
     noaa_id_terms, _ = get_id_terms(template_terms_w_data)
@@ -36,7 +53,7 @@ def main():
     remaining_user_terms = {term: data for term, data in user_terms_w_data.items() if term not in user_id_terms}
     remaining_template_terms = {term: data for term, data in template_terms_w_data.items() if term not in noaa_id_terms}
     
-	# DATE / TIME TERMS SECTION 
+    # DATE / TIME TERMS SECTION 
     # Identify DATE terms
     user_date_terms = get_date_terms(user_terms_w_data)
     noaa_date_terms = get_date_terms(template_terms_w_data)

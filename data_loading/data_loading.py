@@ -1,13 +1,11 @@
 '''
 This file contains example dictionary structures which TermMatchAI uses
-To create these dictionaries from datasets in Excel or Google Sheets, see other files in this folder, data_loading
-	- FYI: Setting up the Google Sheets API requires more effort than using Excel files, but instructions are available here: https://github.com/NOAA-Omics/noaa-omics-templates
-	- When setting it up, you can use the test_g_sheets_auth.py script to verify a successful connection to your Google Sheet
+To create these dictionaries from Excel templates, please follow the instructions in the terminal after running main.py
+
 '''
 
 # This is the dictionary structure to use when feeding your datasets into TermMatchAI
-# You can either paste your dictionaries here, or create the dictionaries elsewhere (/data_loading/create_dictionaries.py), as long as the dictionaries are collected in main.py: 
-# template_terms_w_data, user_terms_w_data = get_terms_with_data()
+# These are the dictionaries used if main.py is run with default data
 def get_terms_with_data():
 
 	# Water_sample_data from Version 2 data template (WITH A SAMPLE PIECE OF DATA)

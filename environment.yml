@@ -9,6 +9,7 @@ dependencies:
   - pip
   - pip:
     - torch
+    - openpyxl
     - transformers
     - sentence-transformers
     #- spacy We dont use this model anymore
