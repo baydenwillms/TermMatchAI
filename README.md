@@ -41,8 +41,7 @@ conda activate term-matching-env
 python -m spacy download en_core_web_lg
 ``` -->
 - AI model is managed using Git LFS, Large File Storage. __LFS only needs to be configured/installed once.__
-- Please note: your workplace's network may block Huggingface.io, which is how the SciBERT AI model is installed. 
-    - If you get an error regarding 'Huggingface', consider a VPN or using a different network. The AI model only needs to be downloaded once.
+- Please note: your workplace's network may block Huggingface.io, which is how the SciBERT AI model is installed. __It's worth noting that the AI model does not communicate with the internet once installed.__
 #### Windows
 ```bash
 git lfs install
