@@ -6,7 +6,7 @@ What is the use case?
 - Data is much less useful if you are unable to compare data between different datasets. __For example:__ my lab measures the general sampling environment with term name of 'habitat', with data like: 'oceanic mesopelagic zone biome', and another lab uses the term name 'env_local_scale' with data like: 'marine photic zone [ENVO:00000209]'. TermMatchAI will tell you that they are the closest match to one another.
 - This project also identifies lists of ID and Date/time related fields for each dataset and groups them together. It also identifies the compound key of the ID fields for each dataset.
 
-Please see `term_matching_report.csv` for an example output. To format it in nicely in Excel, Press:
+Please see `term_matching_report_ACTUAL.csv` for an __example output.__ There is also a nicely formatted output file (if you perform the commands below and Bold column names), see `term_matching_report_NICE_FORMAT.xslx`. To format it in nicely in Excel, Press:
 ```
 CTRL + A
 ALT + O + C + A
