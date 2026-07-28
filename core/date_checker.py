@@ -1,4 +1,5 @@
 import re
+from data_loading.data_loading import get_term_value
 
 date_related_words = {
     'date', 'time', 'day', 'month', 'year', 'hour', 'minute', 'second',
@@ -50,7 +51,7 @@ def get_date_terms(terms_with_data):
     date_terms = []
     
     for term, data in terms_with_data.items():
-        if is_likely_date_field(term, data):
+        if is_likely_date_field(term, get_term_value(data)):
             date_terms.append(term)
     
     return date_terms
