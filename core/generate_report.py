@@ -3,6 +3,8 @@ Build an HTML mapping report: each user field -> FAIRe candidate(s) with scores.
 """
 
 import html
+import os
+from pathlib import Path
 from core.normalization import normalize
 from data_loading.data_loading import get_term_value, get_term_description
 
@@ -182,295 +184,392 @@ def generate_report(
     if output_file.lower().endswith('.csv'):
         output_file = output_file[:-4] + '.html'
 
-    summary_rows_html = []
-    detail_blocks_html = []
+    repo_root = Path(__file__).resolve().parent.parent
+    out_dir = Path(output_file).resolve().parent
+    logo_href = Path(os.path.relpath(repo_root / 'script_dependencies' / 'faire_logo.png', out_dir)).as_posix()
+    icon_href = Path(os.path.relpath(repo_root / 'script_dependencies' / 'faire_icon.svg', out_dir)).as_posix()
+
+    field_rows_html = []
 
     for r in rows:
         esc_user = html.escape(r['user_term'])
         method = r['method']
         best = r['candidates'][0] if r['candidates'] else None
         best_term = html.escape(best['faire_term']) if best else '-'
-        best_score = f"{best['score_pct']:.1f}%" if best else '-'
-        bar_w = f"{min(best['score_pct'], 100):.1f}" if best else '0'
+        best_score = f"{best['score_pct']:.0f}%" if best else '-'
+        n_alts = max(0, len(r['candidates']) - 1)
 
-        summary_rows_html.append(f"""
-        <tr class="method-{html.escape(method)}">
-          <td><a href="#field-{esc_user}">{esc_user}</a></td>
-          <td>{best_term}</td>
-          <td><span class="badge badge-{html.escape(method)}">{html.escape(_method_label(method))}</span></td>
-          <td class="score-cell">
-            <div class="score-bar-wrap"><div class="score-bar" style="width:{bar_w}%"></div></div>
-            <span class="score-num">{best_score}</span>
-          </td>
-        </tr>""")
+        user_val = html.escape(r['user_value']) if r['user_value'] != '' else '-'
+        user_desc = html.escape(r['user_description']) if r['user_description'] else 'No description'
+        user_tip = html.escape(
+            (r['user_description'] or 'No description')
+            + ((' | Example: ' + str(r['user_value'])) if r['user_value'] not in (None, '') else '')
+        )
 
-        # Per-field detail
-        user_val = html.escape(r['user_value']) if r['user_value'] != '' else '<em>none</em>'
-        user_desc = html.escape(r['user_description']) if r['user_description'] else '<em>No description provided</em>'
+        best_desc = html.escape(best['faire_description']) if best and best['faire_description'] else 'No description'
+        best_val = html.escape(best['faire_value']) if best and best['faire_value'] != '' else '-'
+        best_tip = ''
+        if best:
+            best_tip = html.escape(
+                (best['faire_description'] or 'No description')
+                + ((' | Example: ' + str(best['faire_value'])) if best['faire_value'] not in (None, '') else '')
+            )
 
-        cand_rows = []
-        if not r['candidates']:
-            cand_rows.append('<tr><td colspan="4"><em>No FAIRe match found above the score threshold.</em></td></tr>')
+        alt_rows = []
+        for i, c in enumerate(r['candidates'][1:], start=2):
+            c_desc = html.escape(c['faire_description']) if c['faire_description'] else 'No description'
+            c_val = html.escape(c['faire_value']) if c['faire_value'] != '' else '-'
+            c_tip = html.escape(
+                (c['faire_description'] or 'No description')
+                + ((' | Example: ' + str(c['faire_value'])) if c['faire_value'] not in (None, '') else '')
+            )
+            alt_rows.append(f"""
+            <tr>
+              <td>{i}</td>
+              <td>
+                <button type="button" class="term-btn" title="{c_tip}"
+                  data-title="{html.escape(c['faire_term'])}"
+                  data-desc="{c_desc}"
+                  data-example="{c_val}">
+                  {html.escape(c['faire_term'])}
+                </button>
+              </td>
+              <td class="score">{c['score_pct']:.0f}%</td>
+            </tr>""")
+
+        if alt_rows:
+            alts_block = f"""
+            <div class="alts">
+              <div class="alts-label">Other candidates</div>
+              <table>
+                <thead><tr><th>#</th><th>FAIRe term</th><th>Score</th></tr></thead>
+                <tbody>{''.join(alt_rows)}</tbody>
+              </table>
+            </div>"""
+        elif best:
+            alts_block = '<p class="muted">No alternate candidates for this field.</p>'
         else:
-            for i, c in enumerate(r['candidates']):
-                rank = 'Best' if i == 0 else f'#{i + 1}'
-                cand_rows.append(f"""
-                <tr>
-                  <td>{rank}</td>
-                  <td><code>{html.escape(c['faire_term'])}</code></td>
-                  <td class="score-cell">
-                    <div class="score-bar-wrap"><div class="score-bar" style="width:{min(c['score_pct'], 100):.1f}%"></div></div>
-                    <span class="score-num">{c['score_pct']:.1f}%</span>
-                  </td>
-                  <td>
-                    <div class="meta"><strong>Example:</strong> {html.escape(c['faire_value']) if c['faire_value'] != '' else '<em>none</em>'}</div>
-                    <div class="meta muted">{html.escape(c['faire_description']) if c['faire_description'] else ''}</div>
-                  </td>
-                </tr>""")
+            alts_block = '<p class="muted">No match above the score threshold.</p>'
 
-        detail_blocks_html.append(f"""
-        <section class="field-card" id="field-{esc_user}">
-          <header>
-            <h3><code>{esc_user}</code></h3>
-            <span class="badge badge-{html.escape(method)}">{html.escape(_method_label(method))}</span>
-          </header>
-          <div class="field-body">
-            <p class="desc">{user_desc}</p>
-            <p class="example"><strong>Your example value:</strong> {user_val}</p>
-            <table class="candidates">
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>FAIRe term</th>
-                  <th>Score</th>
-                  <th>FAIRe example / description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {''.join(cand_rows)}
-              </tbody>
-            </table>
+        expand_hint = f'{n_alts} more' if n_alts else 'info'
+        disabled_attr = ' disabled' if not best else ''
+
+        field_rows_html.append(f"""
+        <details class="map-row">
+          <summary>
+            <span class="col-user">
+              <button type="button" class="term-btn" title="{user_tip}"
+                data-title="{esc_user}"
+                data-desc="{user_desc}"
+                data-example="{user_val}">
+                {esc_user}
+              </button>
+            </span>
+            <span class="col-match">
+              <button type="button" class="term-btn" title="{best_tip}"
+                data-title="{best_term}"
+                data-desc="{best_desc}"
+                data-example="{best_val}"{disabled_attr}>
+                {best_term}
+              </button>
+            </span>
+            <span class="col-method">{html.escape(_method_label(method))}</span>
+            <span class="col-score score">{best_score}</span>
+            <span class="col-more">{expand_hint}</span>
+          </summary>
+          <div class="expand">
+            <div class="pair">
+              <div>
+                <div class="label">Your field</div>
+                <div><strong>{esc_user}</strong></div>
+                <p>{user_desc}</p>
+                <p class="muted"><strong>Example:</strong> {user_val}</p>
+              </div>
+              <div>
+                <div class="label">Best FAIRe match</div>
+                <div><strong>{best_term}</strong></div>
+                <p>{best_desc if best else '-'}</p>
+                <p class="muted"><strong>Example:</strong> {best_val if best else '-'}</p>
+              </div>
+            </div>
+            {alts_block}
           </div>
-        </section>""")
+        </details>""")
 
     page = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TermMatchAI - User to FAIRe mapping</title>
+  <title>TermMatchAI | User to FAIRe</title>
   <style>
     :root {{
-      --bg: #f3f6f4;
-      --ink: #1a2421;
-      --muted: #5c6b66;
-      --card: #ffffff;
-      --line: #d5ddd9;
-      --accent: #0f6b5c;
-      --accent-soft: #d8efe9;
-      --exact: #1b7f4e;
-      --normalized: #2a6f97;
-      --fuzzy: #a65d1a;
-      --semantic: #0f6b5c;
-      --unmatched: #8a4b4b;
-      --bar: #0f6b5c;
-      --shadow: 0 1px 2px rgba(26, 36, 33, 0.06), 0 8px 24px rgba(26, 36, 33, 0.06);
+      --green: #92D050;
+      --green-dark: #6fad35;
+      --ink: #333333;
+      --muted: #666666;
+      --line: #e6e6e6;
+      --header: #f2f2f2;
+      --bg: #ffffff;
     }}
     * {{ box-sizing: border-box; }}
     body {{
       margin: 0;
-      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
       color: var(--ink);
-      background:
-        radial-gradient(1200px 500px at 10% -10%, #e4f2ee 0%, transparent 55%),
-        radial-gradient(900px 400px at 100% 0%, #e8ebe4 0%, transparent 50%),
-        var(--bg);
+      background: var(--bg);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
       line-height: 1.45;
     }}
-    h1, h2, h3 {{
-      font-family: "IBM Plex Serif", Georgia, serif;
-      font-weight: 600;
-      letter-spacing: -0.02em;
+    .topbar {{
+      background: var(--header);
+      border-bottom: 3px solid var(--green);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
     }}
-    .wrap {{ max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }}
-    header.hero {{
-      margin-bottom: 2rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px solid var(--line);
+    .topbar img.icon {{
+      height: 64px;
+      width: auto;
+      display: block;
     }}
-    header.hero h1 {{ margin: 0 0 0.35rem; font-size: 1.9rem; }}
-    header.hero p {{ margin: 0; color: var(--muted); max-width: 42rem; }}
-    .stats {{
-      display: flex; flex-wrap: wrap; gap: 0.6rem;
-      margin: 1.25rem 0 0;
+    .topbar .titles {{ display: flex; flex-direction: column; gap: 0.1rem; }}
+    .topbar .titles strong {{ font-size: 1.05rem; }}
+    .topbar .titles span {{ color: var(--muted); font-size: 0.88rem; }}
+    .wrap {{ max-width: 980px; margin: 0 auto; padding: 1.25rem 1.5rem 2.5rem; }}
+    .brand-logo {{ margin: 0 0 1.5rem; }}
+    .brand-logo img {{ height: 160px; width: auto; display: block; }}
+    h1 {{
+      margin: 0 0 0.3rem;
+      font-size: 1.35rem;
+      font-weight: 700;
     }}
-    .stat {{
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 0.35rem 0.85rem;
+    .sub {{ margin: 0 0 0.85rem; color: var(--muted); }}
+    .counts {{
+      margin: 0 0 1.25rem;
+      color: var(--muted);
       font-size: 0.9rem;
-      box-shadow: var(--shadow);
     }}
-    .stat strong {{ color: var(--accent); }}
-    section.block {{
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      padding: 1.25rem 1.35rem 1.5rem;
-      margin-bottom: 1.75rem;
+    .counts b {{ color: var(--ink); }}
+    .table-head {{
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.3fr) 7.5rem 4rem 4.5rem;
+      gap: 0.5rem;
+      padding: 0.45rem 0.35rem;
+      border-bottom: 2px solid var(--green);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      font-weight: 700;
     }}
-    section.block > h2 {{ margin: 0 0 0.35rem; font-size: 1.25rem; }}
-    section.block > .lede {{ margin: 0 0 1rem; color: var(--muted); font-size: 0.95rem; }}
-    table {{
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.92rem;
+    details.map-row {{ border-bottom: 1px solid var(--line); }}
+    details.map-row > summary {{
+      list-style: none;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.3fr) 7.5rem 4rem 4.5rem;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.65rem 0.35rem;
     }}
-    th, td {{
+    details.map-row > summary::-webkit-details-marker {{ display: none; }}
+    details.map-row[open] > summary {{ background: #fafafa; }}
+    .col-score, .score {{
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      color: var(--green-dark);
+    }}
+    .col-more {{
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-align: right;
+    }}
+    .col-method {{ color: var(--muted); font-size: 0.9rem; }}
+    button.term-btn {{
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      color: var(--green-dark);
+      cursor: pointer;
       text-align: left;
-      padding: 0.65rem 0.55rem;
+    }}
+    button.term-btn:hover {{ text-decoration: underline; }}
+    button.term-btn:disabled {{
+      color: var(--ink);
+      cursor: default;
+      text-decoration: none;
+    }}
+    .expand {{
+      padding: 0.25rem 0.35rem 1rem;
+      background: #fcfcfc;
+    }}
+    .pair {{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+    }}
+    .pair .label {{
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }}
+    .pair p {{ margin: 0.35rem 0; }}
+    .alts-label {{
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      font-weight: 700;
+      margin: 0.5rem 0 0.35rem;
+    }}
+    .alts table {{ width: 100%; border-collapse: collapse; }}
+    .alts th, .alts td {{
+      text-align: left;
+      padding: 0.4rem 0.3rem;
       border-bottom: 1px solid var(--line);
       vertical-align: top;
     }}
-    th {{
-      font-size: 0.75rem;
+    .alts th {{
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       color: var(--muted);
-      font-weight: 600;
     }}
-    tr:last-child td {{ border-bottom: none; }}
-    code {{
-      font-family: "IBM Plex Mono", Consolas, monospace;
-      font-size: 0.88em;
-      background: var(--accent-soft);
-      padding: 0.1rem 0.35rem;
-      border-radius: 4px;
+    .muted {{ color: var(--muted); font-size: 0.9rem; }}
+    footer {{
+      margin-top: 1.75rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.85rem;
     }}
-    a {{ color: var(--accent); text-decoration: none; }}
-    a:hover {{ text-decoration: underline; }}
-    .badge {{
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.2rem 0.55rem;
-      border-radius: 999px;
-      white-space: nowrap;
-    }}
-    .badge-exact {{ background: #d9f2e4; color: var(--exact); }}
-    .badge-normalized {{ background: #dcecf7; color: var(--normalized); }}
-    .badge-fuzzy {{ background: #fce8d4; color: var(--fuzzy); }}
-    .badge-semantic {{ background: var(--accent-soft); color: var(--semantic); }}
-    .badge-unmatched {{ background: #f5e0e0; color: var(--unmatched); }}
-    .score-cell {{
-      min-width: 7.5rem;
-      white-space: nowrap;
-    }}
-    .score-bar-wrap {{
-      display: inline-block;
-      width: 4.5rem;
-      height: 0.45rem;
-      background: #e4ebe8;
-      border-radius: 999px;
-      overflow: hidden;
-      vertical-align: middle;
-      margin-right: 0.4rem;
-    }}
-    .score-bar {{
-      height: 100%;
-      background: var(--bar);
-      border-radius: 999px;
-    }}
-    .score-num {{ font-variant-numeric: tabular-nums; font-weight: 600; font-size: 0.88rem; }}
-    .field-card {{
-      background: var(--card);
+    .popover {{
+      position: fixed;
+      z-index: 20;
+      max-width: 340px;
+      background: #fff;
       border: 1px solid var(--line);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      margin-bottom: 1rem;
-      overflow: hidden;
+      border-top: 3px solid var(--green);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      padding: 0.75rem 0.85rem;
+      display: none;
     }}
-    .field-card > header {{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.85rem 1.15rem;
-      background: #f7faf8;
-      border-bottom: 1px solid var(--line);
-    }}
-    .field-card > header h3 {{ margin: 0; font-size: 1.05rem; font-family: "IBM Plex Sans", sans-serif; }}
-    .field-body {{ padding: 1rem 1.15rem 1.15rem; }}
-    .field-body .desc {{ margin: 0 0 0.5rem; color: var(--muted); }}
-    .field-body .example {{ margin: 0 0 1rem; }}
-    .candidates .meta {{ margin: 0.15rem 0; }}
-    .muted {{ color: var(--muted); font-size: 0.88rem; }}
-    footer.note {{
-      margin-top: 2rem;
+    .popover.open {{ display: block; }}
+    .popover h3 {{ margin: 0 0 0.4rem; font-size: 0.95rem; }}
+    .popover p {{ margin: 0.3rem 0; font-size: 0.88rem; }}
+    .popover .close {{
+      float: right;
+      border: none;
+      background: none;
+      font-size: 1.1rem;
+      cursor: pointer;
       color: var(--muted);
-      font-size: 0.88rem;
+      line-height: 1;
     }}
     @media (max-width: 720px) {{
-      .score-bar-wrap {{ display: none; }}
-      th:nth-child(4), td:nth-child(4) {{ display: none; }}
-      .candidates th:nth-child(4), .candidates td:nth-child(4) {{ display: table-cell; }}
+      .table-head, details.map-row > summary {{
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 3.5rem;
+      }}
+      .col-method, .table-head span:nth-child(3),
+      .col-more, .table-head span:nth-child(5) {{ display: none; }}
+      .pair {{ grid-template-columns: 1fr; }}
+      .brand-logo img {{ height: 120px; }}
     }}
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@600&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <div class="topbar">
+    <img class="icon" src="{html.escape(icon_href)}" alt="" />
+    <div class="titles">
+      <strong>TermMatchAI</strong>
+      <span>User standard mapped to FAIRe</span>
+    </div>
+  </div>
+
   <div class="wrap">
-    <header class="hero">
-      <h1>Your fields to FAIRe</h1>
-      <p>
-        Each row is a field from your data standard, mapped to the closest FAIRe eDNA term(s).
-        Scores show how confident the match is. Click a field name to jump to its full candidate list.
-      </p>
-      <div class="stats">
-        <div class="stat"><strong>{len(rows)}</strong> user fields</div>
-        <div class="stat"><strong>{n_exact}</strong> exact</div>
-        <div class="stat"><strong>{n_norm}</strong> normalized</div>
-        <div class="stat"><strong>{n_fuzzy}</strong> fuzzy</div>
-        <div class="stat"><strong>{n_sem}</strong> semantic</div>
-        <div class="stat"><strong>{n_none}</strong> unmatched</div>
-      </div>
-    </header>
+    <div class="brand-logo">
+      <img src="{html.escape(logo_href)}" alt="Make eDNA FAIR" />
+    </div>
 
-    <section class="block" id="summary">
-      <h2>Summary</h2>
-      <p class="lede">Best match for every user field. Same scores as in the detail cards below.</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Your field</th>
-            <th>Best FAIRe match</th>
-            <th>How matched</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {''.join(summary_rows_html)}
-        </tbody>
-      </table>
-    </section>
+    <h1>Field mapping report</h1>
+    <p class="sub">
+      Click a row to see alternate FAIRe matches.
+      Hover a field name for a quick tip, or click the name for description + example.
+    </p>
+    <p class="counts">
+      <b>{len(rows)}</b> fields ·
+      <b>{n_exact}</b> exact ·
+      <b>{n_norm}</b> normalized ·
+      <b>{n_fuzzy}</b> fuzzy ·
+      <b>{n_sem}</b> semantic ·
+      <b>{n_none}</b> unmatched
+    </p>
 
-    <section class="block" id="details" style="background:transparent;border:none;box-shadow:none;padding:0;">
-      <h2 style="margin-bottom:0.35rem;">Field by field</h2>
-      <p class="lede" style="margin-bottom:1rem;">All suggested FAIRe matches for each of your fields (up to {num_matches} for semantic matches).</p>
-      {''.join(detail_blocks_html)}
-    </section>
+    <div class="table-head">
+      <span>Your field</span>
+      <span>FAIRe match</span>
+      <span>Method</span>
+      <span>Score</span>
+      <span></span>
+    </div>
+    {''.join(field_rows_html)}
 
-    <footer class="note">
-      Exact / normalized = name match (shown as 100%).
-      Fuzzy = string similarity (0-100).
-      Semantic = mostly description meaning (SciBERT) plus some field-name token overlap; example values are not used in the AI score.
-      Semantic threshold used: {bert_threshold:.2f} ({bert_threshold * 100:.0f}%).
+    <footer>
+      Exact/normalized = 100%. Fuzzy = name similarity. Semantic = description meaning + field-name tokens
+      (threshold {bert_threshold:.0%}).
     </footer>
   </div>
+
+  <div id="popover" class="popover" role="dialog" aria-live="polite">
+    <button type="button" class="close" aria-label="Close">&times;</button>
+    <h3 id="pop-title"></h3>
+    <p id="pop-desc"></p>
+    <p class="muted"><strong>Example:</strong> <span id="pop-example"></span></p>
+  </div>
+
+  <script>
+    (function () {{
+      var pop = document.getElementById('popover');
+      var title = document.getElementById('pop-title');
+      var desc = document.getElementById('pop-desc');
+      var example = document.getElementById('pop-example');
+
+      function hide() {{ pop.classList.remove('open'); }}
+
+      pop.querySelector('.close').addEventListener('click', function (e) {{
+        e.stopPropagation();
+        hide();
+      }});
+
+      document.addEventListener('click', function (e) {{
+        var btn = e.target.closest('button.term-btn');
+        if (!btn || btn.disabled) {{
+          if (!e.target.closest('#popover')) hide();
+          return;
+        }}
+        e.preventDefault();
+        e.stopPropagation();
+        title.textContent = btn.getAttribute('data-title') || '';
+        desc.textContent = btn.getAttribute('data-desc') || '';
+        example.textContent = btn.getAttribute('data-example') || '-';
+        pop.classList.add('open');
+        var rect = btn.getBoundingClientRect();
+        var left = Math.min(rect.left, window.innerWidth - 360);
+        var top = rect.bottom + 8;
+        if (top + 160 > window.innerHeight) top = Math.max(8, rect.top - 160);
+        pop.style.left = Math.max(8, left) + 'px';
+        pop.style.top = top + 'px';
+      }});
+    }})();
+  </script>
 </body>
 </html>
 """
