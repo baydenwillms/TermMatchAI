@@ -15,3 +15,5 @@ dependencies:
     #- spacy We dont use this model anymore
     - scikit-learn
     - git-lfs
+    - fuzzywuzzy
+    - python-Levenshtein
