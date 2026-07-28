@@ -1,0 +1,86 @@
+{
+  "sample_id": {
+    "value": "LAB-2024-001-A",
+    "description": "Unique identifier for this environmental sample in our lab."
+  },
+  "temp": {
+    "value": 18.5,
+    "description": "Temperature of the sample at the time of sampling in degree Celsius"
+  },
+  "salinity": {
+    "value": 35.2,
+    "description": "Practical salinity of the water sample in PSU."
+  },
+  "decimalLatitude": {
+    "value": 26.997,
+    "description": "Latitude of the sampling site in decimal degrees (WGS84)."
+  },
+  "site_longitude": {
+    "value": -79.618,
+    "description": "Longitude of where the sample was taken, in decimal degrees."
+  },
+  "collection_date": {
+    "value": "2024-06-12",
+    "description": "Calendar date when the environmental sample was collected."
+  },
+  "water_temperature_C": {
+    "value": 22.1,
+    "description": "In-situ water temperature measured at the sampling moment, Celsius."
+  },
+  "habitat": {
+    "value": "oceanic mesopelagic zone biome",
+    "description": "Local-scale environment or habitat where the sample was collected."
+  },
+  "sample_material": {
+    "value": "sea water",
+    "description": "What the sample physically is (water, soil, sediment, etc.)."
+  },
+  "broad_biome": {
+    "value": "marine biome",
+    "description": "Broad environmental context of the sampling site (biome-level)."
+  },
+  "location_name": {
+    "value": "USA: Atlantic Ocean, east of Florida",
+    "description": "Human-readable place name for the sampling location."
+  },
+  "collected_by": {
+    "value": "A. Rivera",
+    "description": "Name of the person who collected the sample."
+  },
+  "collection_gear": {
+    "value": "Niskin bottle",
+    "description": "Device or tool used to collect the environmental sample."
+  },
+  "volume_collected_L": {
+    "value": 2.0,
+    "description": "Volume of water collected from the environment, in liters."
+  },
+  "filter_pore_um": {
+    "value": 0.22,
+    "description": "Pore size of the filter used during sample filtration, micrometers."
+  },
+  "sample_depth_m": {
+    "value": 49,
+    "description": "Depth below the surface where the sample was taken, in meters."
+  },
+  "storage_freezer_C": {
+    "value": -80,
+    "description": "Temperature of the freezer where the sample was stored before extraction."
+  },
+  "ph": {
+    "value": 8.1,
+    "description": "pH of the water sample at collection."
+  },
+  "project_code": {
+    "value": "ATL-eDNA-24",
+    "description": "Short code for the research project this sample belongs to."
+  },
+  "notes_field": {
+    "value": "Slight chop; bottle rinsed twice before fill.",
+    "description": "Free-text notes written by the field team during sampling."
+  },
+  "lab_internal_batch": {
+    "value": "EXTRACT-Q2-17",
+    "description": "Our lab's internal batch label for DNA extraction runs. Not part of any public standard."
+  }
+}

@@ -1,0 +1,1350 @@
+{
+  "recordedBy": {
+    "value": "José E. Crespo",
+    "description": "A list (concatenated and separated) of names of people responsible for the submitted dataset"
+  },
+  "recordedByID": {
+    "value": "https://orcid.org/0000-0002-1825-0097  |  https://orcid.org/0000-0002-1825-0098",
+    "description": "A list (concatenated and separated) of the globally unique identifier for the people responsible for the submitted dataset"
+  },
+  "project_contact": {
+    "value": "xxxx@yyyy.com",
+    "description": "A contact person and their contact (i.e., email address) for data enquiry"
+  },
+  "institution": {
+    "value": "Curtin University",
+    "description": "An institution having custody of the object(s) or information referred to in the record."
+  },
+  "institutionID": {
+    "value": "https://ror.org/042r9xb17",
+    "description": "An identifier for the institution having custody of the object(s) or information referred to in the record. This identifier should point to a persistent, resolvable identifier, such as a Research Organization Registry (ROR) ID or ISNI (International Standard Name Identifier)."
+  },
+  "project_name": {
+    "value": "Forest soil metagenome",
+    "description": "Name of the project within which the sequencing was organized"
+  },
+  "project_id": {
+    "value": "noaa-aoml-gomecc4",
+    "description": "A brief, concise project identifier with no spaces or special characters, ensuring machine readability. This ID will be used in data file names as 'project_id'."
+  },
+  "parent_project_id": {
+    "value": "noaa-aoml-gomecc",
+    "description": "An identifier or name of the overarching (parent) project that encompasses and organizes multiple related sub-projects, each identified by a unique project_id"
+  },
+  "study_factor": {
+    "value": "benthic habitat types | diurnal time series | filter types",
+    "description": "The variable(s) examined in the study, including those of direct interests to address study aims and covariates."
+  },
+  "assay_type": {
+    "value": "targeted",
+    "description": "The method used in the eDNA study to detect taxon/taxa of interest in environmental sample. A targeted eDNA assay is designed to detect the presence of a specific species or a small subset of taxa (such as a genus or family) using techniques like quantitative PCR (qPCR). This contrasts with a metabarcoding eDNA assay which aims to characterize the composition of broader taxonomic communities, often encompassing multiple phyletic groups, by utilising high-throughput sequencing such as metabarcoding"
+  },
+  "sterilise_method": {
+    "value": "Sampling bottles were rinsed with 10% bleached and DI water. Single-use syringes and capsule filters were used for filtration. Single-use gloves were used to collect and filter each sample.",
+    "description": "the protocols to minimise contaminations in the field and/or laboratory"
+  },
+  "neg_cont_0_1": {
+    "value": "1",
+    "description": "Were negative controls applied during the project? Yes = 1, No = 0. For further details, record the types of negative controls under the term neg_cont_type in sampleMetadata"
+  },
+  "pos_cont_0_1": {
+    "value": "1",
+    "description": "Were positive controls applied during the project? Yes = 1, No = 0. For further details, record the types of positive controls under the term pos_cont_type in sampleMetadata"
+  },
+  "checkls_ver": {
+    "value": "1.2",
+    "description": "The version number of the FAIR eDNA (FAIRe) metadata checklist used to format the data"
+  },
+  "mod_date": {
+    "value": "2014-09-09",
+    "description": "The last date on which the database information was modified, following the ISO 8601 format of yyyy-mm-dd. In case no exact time or date is available, the date/time can be right truncated i.e. all of these are valid times: 2008-01-23T19:23:10+00:00; 2008-01-23T19:23:10Z; 2008-01-23; 2008-01; 2008; Except: 2008-01; 2008 all are ISO8601 compliant."
+  },
+  "license": {
+    "value": "http://creativecommons.org/licenses/by/4.0/legalcode",
+    "description": "A legal document giving official permission to do something with the resource."
+  },
+  "rightsHolder": {
+    "value": "The Regents of the University of California",
+    "description": "A person or organization owning or managing rights over the resource."
+  },
+  "accessRights": {
+    "value": "not-for-profit use only",
+    "description": "Information about who can access the resource or an indication of its security status."
+  },
+  "informationWithheld": {
+    "value": "location information not given for endangered species",
+    "description": "Additional information that exists, but that has not been shared in the given record."
+  },
+  "dataGeneralizations": {
+    "value": "Coordinates generalized from original GPS coordinates to the nearest half degree grid cell.",
+    "description": "Actions taken to make the shared data (i.e. location, date) less specific or complete than in its original form. Suggests that alternative data of higher quality may be available on request. Note this is not related to genetic generalisation within bioinformatic workflows (i.e., OTU clustering)."
+  },
+  "bibliographicCitation": {
+    "value": "DOI: 10.1111/mec.15382",
+    "description": "A bibliographic reference for the resource."
+  },
+  "associated_resource": {
+    "value": "http://www.earthmicrobiome.org/",
+    "description": "A related resource that is referenced, cited, or otherwise associated to the sequence. i.e., links to a project website, submitted raw sequence data and environmental metadata."
+  },
+  "code_repo": {
+    "value": "https://github.com/aomlomics/gomecc",
+    "description": "Link to public repository where analysis code is archived"
+  },
+  "samp_name": {
+    "value": "S01_1",
+    "description": "Sample Name is a name that you choose for the sample. It can have any format, but we suggest that you make it concise, unique and consistent within your lab, and as informative as possible. Every Sample Name from a single Submitter must be unique."
+  },
+  "samp_category": {
+    "value": "sample",
+    "description": "A type/category of a sample. 'Sample\" includes biological and technical replicates. If negative or positive control was selected, provide further information under the terms fill neg_cont_type and pos_cont_type."
+  },
+  "neg_cont_type": {
+    "value": "field negative | process negative | extraction negative | PCR negative",
+    "description": "A negative control type used in an investigation. See Table 2 in Klymus et al. 2024 (DOI: 10.3897/mbmg.8.128689) for the description of each control type, how and why it's created. For example, process negative is a sample added during processing that lacks target DNA, such as blank filter papers."
+  },
+  "pos_cont_type": {
+    "value": "PCR positive of synthetic DNA",
+    "description": "A positive control type used in an investigation. See Table 2 in Klymus et al. 2024 (DOI: 10.3897/mbmg.8.128689) for the description of each control type, how and why it's created. For example, PCR positive is a introduced target material to monitor for PCR success, including moch community samples. Provide further details (e.g., synthetic DNA) where applicable."
+  },
+  "materialSampleID": {
+    "value": "GOMECC4_27N_Sta1_Deep",
+    "description": "An identifier for the physical sample (as opposed to the extracted DNA sample defined by samp_name). In the absence of a persistent global unique identifier, construct one from a combination of identifiers in the record."
+  },
+  "sample_derived_from": {
+    "value": "S01",
+    "description": "This term refers to the samp_name of the original (or parent) sample from which the current sample was derived. For example, if sample \"S01\" (the parent sample) was collected at a sampling site and later subsampled into three child samples with samp_names \"S01_1\", \"S01_2\", \"S01_3\", then \"S01\" is the value for sample_derived_from in each of the child samples. This includes the case of pcr technical replicates."
+  },
+  "sample_composed_of": {
+    "value": "S01 | S02",
+    "description": "This term contains a list of samp_name values that represent the original samples combined to form the current sample. For example, if environmental samples \"S01\" and \"S02\" were pooled into a single sample \"S03\" at any stage (e.g., before or after DNA extraction), then the value for sample_composed_of in \"S03\" would be \"S01 | S02\"."
+  },
+  "rel_cont_id": {
+    "value": "field_blank1 | ext_blank2 | pcr_ntc_plate1 | pcr_posC_plate1",
+    "description": "(A list of) samp_id of the negative and positive controls related to each sample"
+  },
+  "biological_rep_relation": {
+    "value": "S01_1 | S01_2 | S01_3",
+    "description": "This term lists the samp_name of biological replicates associated with the current sample. For example, if three biological replicates (\"S01_1\", \"S01_2\", and \"S01_3\") were collected from the same sampling site, the value for biological_rep_relation in each of these replicates would be \"S01_1 | S01_2 | S01_3\"."
+  },
+  "decimalLongitude": {
+    "value": "-121.17611",
+    "description": "The geographic longitude in decimal degrees using WGS84 datum. Positive values are east of the Greenwich Meridian, negative values are west of it. Legal values lie between -180 and 180, inclusive. The desired minimum number of decimal places is the hundred-thousandth (0.00001) to achieve meter scale resolution."
+  },
+  "decimalLatitude": {
+    "value": "-41.09834",
+    "description": "The geographic latitude in decimal degrees using WGS84 datum. Positive values are north of the Equator, negative values are south of it. Legal values lie between -90 and 90, inclusive. The desired minimum number of decimal places is the hundred-thousandth (0.00001) to achieve meter scale resolution."
+  },
+  "verbatimLongitude": {
+    "value": "121d 10' 34\" W",
+    "description": "The original longitude in any format (i.e. deg/min/sec, UTM) before converting to decimal degrees and WGS84. verbatimCoordinateSystem and verbatimSRS should be stored as well."
+  },
+  "verbatimLatitude": {
+    "value": "41 05 54.03S",
+    "description": "The original latitude in any format (i.e. deg/min/sec, UTM) before converting to decimal degrees and WGS84. verbatimCoordinateSystem and verbatimSRS should be stored as well."
+  },
+  "verbatimCoordinateSystem": {
+    "value": "degrees minutes seconds",
+    "description": "The coordinate format of the verbatimLatitude and verbatimLongitude"
+  },
+  "verbatimSRS": {
+    "value": "NAD84",
+    "description": "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which coordinates given in verbatimLatitude and verbatimLongitude are based."
+  },
+  "geo_loc_name": {
+    "value": "USA: Maryland, Bethesda",
+    "description": "The geographical origin of the sample as defined by the country or sea name followed by regions and localities. Country or sea names should be chosen from the INSDC Geographic Location Name List INSDC country list (http://insdc.org/country.html). Fixed format following <country or sea names>:<region>,<locality>. E.g., \"USA: Maryland, Bethesda\" , \"Atlantic Ocean:Charlie Gibbs Fracture Zone\""
+  },
+  "eventDate": {
+    "value": "2008-01-23T19:23-06:00",
+    "description": "The date and time of sampling, either as an instance (single point in time) or interval. Must follow ISO 8601 format (yyyy-mm-ddThh:mm:ss). Time zone must be specified after the timestamp (e.g., \"2008-01-23T19:23-06:00\" in the time zone six hours earlier than UTC, \"2008-01-23T19:23Z\" at UTC time). In case no exact time is available, the date/time can be right truncated i.e. all of these are valid times: 2008-01-23T19:23:10+00:00; 2008-01-23T19:23:10Z; 2008-01-23; 2008-01; 2008; Except: 2008-01; 2008 all are ISO8601 compliant. A date and time range can be specified using a forward slash (/) to separate the start and end values (e.g., 2008-01-23T19:23-06:00/2008-01-23T19:53-06:00). A duration can also be provided using the eventDurationValue term."
+  },
+  "eventDurationValue": {
+    "value": "T1H25M",
+    "description": "The duration of the sampling event, written in ISO 8601 format (i.e., P1DT3H for 1 day and 3 hours period. P1Y6M for 1 year and 6 months period. T30M/45M for some time between 30 and 45 minutes)."
+  },
+  "verbatimEventDate": {
+    "value": "23-January-2008",
+    "description": "Sample collection date before formatting"
+  },
+  "verbatimEventTime": {
+    "value": "10:23",
+    "description": "Sample collection time before formatting to ISO 8601, or at the local time (if eventDate time samp has been converted to UTC time)"
+  },
+  "env_broad_scale": {
+    "value": "estuarine biome [ENVO:01000020]",
+    "description": "Major environmental system your sample came from. The systems identified should have a coarse spatial grain, to provide the general environmental context of where the sampling was done. Select from ENVO’s biome class: http://purl.obolibrary.org/obo/ENVO_00000428. Examples include; estuarine biome [ENVO:01000020], tropical moist broadleaf forest biome [ENVO:01000228],"
+  },
+  "env_local_scale": {
+    "value": "estuarine coastal surface layer [ENVO:01001302]",
+    "description": "The entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample. Select from ENVO's layer class: http://purl.obolibrary.org/obo/ENVO_01000281. Examples include;  marine pelagic zone [ENVO:00000208], estuarine coastal surface layer [ENVO:01001302], shrub layer [ENVO:01000336]"
+  },
+  "env_medium": {
+    "value": "soil [ENVO:00001998]",
+    "description": "Environmental material or materials (pipe separated) immediately surrounded your sample prior to sampling. Select from ENVO's environmental material class (entity/ continuant/ independent continuant/ material entity/ environmental material): http://purl.obolibrary.org/obo/ENVO_00010483. Examples include; soil [ENVO:00001998], marine sediment [ENVO:03000033], air [ENVO:00002005], sea water [ENVO:00002149], fresh water [ENVO:00002011], tap water [ENVO:00003096], fecal material [ENVO:00002003], digestive tract environment [ENVO:2100002], intestine environment [ENVO:2100002], planktonic material [ENVO:01000063]"
+  },
+  "habitat_natural_artificial_0_1": {
+    "value": "0",
+    "description": "Whether samples were taken from natural (0) or artificial (1) habitat. The examples of artificial habitat include mesocosm tank in lab, enclosure in zoo etc., including semi-natural systems. The definition of natural habitat is locations uncontrolled by researchers"
+  },
+  "samp_collect_method": {
+    "value": "https://research.csiro.au/ambsm/1-sample-collection-procedures/meth_1-2-soil-sampling-for-utas-urban-soil-and-aerial-microbiome-study/",
+    "description": "The method employed for collecting the sample. Provide a link to a paper/ handbook/ standard operation protocol if any."
+  },
+  "samp_collect_device": {
+    "value": "push core",
+    "description": "The device used to collect an environmental sample. This term accepts terms listed under environmental sampling device (https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/OBI_0000968) such as syringe [OBI_0000422] and container [OBI_0000967] as well as free-text entry (i.e. niskin bottle, push core, spoon, water bottle)."
+  },
+  "samp_size": {
+    "value": "5.0",
+    "description": "Amount or size of original sample (volume, mass or area) that was collected from the environment. Specify the unit under the term samp_size_unit. Note: the amount or size of (sub)sample processed for DNA extraction should be entered under the term samp_vol_we_dna_ext."
+  },
+  "samp_size_unit": {
+    "value": "L",
+    "description": "Unit for samp_size"
+  },
+  "biological_rep": {
+    "value": "5",
+    "description": "The number of biological replicates collected at each sampling point and/or for each experimental treatment in the study."
+  },
+  "samp_store_temp": {
+    "value": "-80.0",
+    "description": "Temperature at which the sample was stored. Enter either the fixed term \"ambient temperature\" or a numeric value. Note: If a sample was processed before DNA extraction (e.g., filtration, homogenisation, subsampling), enter the storage temperature before the process here, and the storage temperature of the processed sample (i.e., filter paper) under a term prepped_samp_store_temp. Unit = degree Celsius"
+  },
+  "samp_store_sol": {
+    "value": "none",
+    "description": "Solution within which the sample was stored. Note: If a sample was processed before DNA extraction (e.g., filtration, homogenisation, subsampling), enter the storage solution before the process here, and the storage solution of the processed sample under the term prepped_samp_store_sol."
+  },
+  "samp_store_dur": {
+    "value": "P1Y6M",
+    "description": "Duration for which the sample was stored prior to DNA extraction, written in ISO 8601 format (i.e., P14D for 14 days period. P1Y6M for 1 year and 6 months period. P1W/4W for some time between 1 and 4 weeks). Note: If a sample was processed before DNA extraction (e.g., filtration, homogenisation, subsampling), enter the storage duration before the process here, and the storage duration of the processed sample under the term prepped_samp_store_temp."
+  },
+  "samp_store_loc": {
+    "value": "UWA, IOMRC, Lv4 -80Freezer1",
+    "description": "Location at which sample was stored, usually name of a specific freezer/room"
+  },
+  "dna_store_loc": {
+    "value": "UWA, IOMRC, Lv4 -80Freezer2",
+    "description": "Location at which extracted DNA was stored, usually name of a specific freezer/room"
+  },
+  "samp_store_method_additional": {
+    "value": "The sample was thawed overnight at room temperature prior to DNA extraction",
+    "description": "Additional information on sample storage method, that has not been shared in the given record."
+  },
+  "samp_mat_process": {
+    "value": "Water samples were pre-filtered using a sieve (200 micrometers), then filtered using a peristaltic pump (pore size 0.45 micrometers).",
+    "description": "Any processing applied to the sample during or after retrieving the sample from environment (i.e. sieving, filtration, precipitation, homogenising, subsampling)."
+  },
+  "filter_passive_active_0_1": {
+    "value": "1",
+    "description": "Whether water/ air samples were collected using active (i.e. pump, fan) or passive (i.e. submerged materials in water/air) filtration approach. Active = 1, Passive = 0"
+  },
+  "stationed_sample_dur": {
+    "value": "T1H30M",
+    "description": "Duration of on-site, stationed sampling (i.e., the filter deployment period). This term is recommended to be recorded when filters are deployed directly in the environment, such as during airborne eDNA sampling or when filters are submerged in water for a certain period). The duration should be recorded using ISO 8601 duration format (P<date>T<time>). For example, P1Y1M1DT1H1M1.1S represents 1 year, 1 month, 1 day, 1 hour, 1 minute, 1 second, and 100 milliseconds"
+  },
+  "pump_flow_rate": {
+    "value": "0.2",
+    "description": "Pump flow rate of filtration if applicable"
+  },
+  "pump_flow_rate_unit": {
+    "value": "m3/s",
+    "description": "Unit for pump_flow_rate"
+  },
+  "prefilter_material": {
+    "value": "nylon",
+    "description": "Material used to pre-filter/pre-sort the sample"
+  },
+  "size_frac_low": {
+    "value": "20.0",
+    "description": "Refers to the mesh/pore size used to pre-filter/pre-sort the sample. Materials larger than the size threshold are excluded from the sample. Unit = µm"
+  },
+  "size_frac": {
+    "value": "0.22",
+    "description": "Filtering pore size used in sample filtration. Unit = µm"
+  },
+  "filter_diameter": {
+    "value": "47.0",
+    "description": "Diameter of a filter if circular. Unit = mm"
+  },
+  "filter_surface_area": {
+    "value": "1734.94",
+    "description": "Surface area of a filter. Unit = mm2"
+  },
+  "filter_material": {
+    "value": "cellulose ester",
+    "description": "Material of filter"
+  },
+  "filter_name": {
+    "value": "Merck Sterivex",
+    "description": "Commercial names and brand of filter"
+  },
+  "precip_chem_prep": {
+    "value": "ethanol | sodium chloride",
+    "description": "Chemicals used in precipitation at the sample preparation step prior to DNA extraction, if precipitation was performed"
+  },
+  "precip_force_prep": {
+    "value": "20000.0",
+    "description": "Centrifuge force used in precipitation at the sample preparation step prior to DNA extraction, if precipitation was performed. Unit = x g"
+  },
+  "precip_time_prep": {
+    "value": "45.0",
+    "description": "Duration of precipitation at the sample preparation step prior to DNA extraction, if precipitation was performed. Unit = minute"
+  },
+  "precip_temp_prep": {
+    "value": "10.0",
+    "description": "Temperature used in precipitation at the sample preparation step prior to DNA extraction, if precipitation was performed. Unit = degree Celsius"
+  },
+  "prepped_samp_store_temp": {
+    "value": "ambient temperature",
+    "description": "Temperature at which the prepared sample was stored prior to DNA extraction. Record either 'ambient' or a numeric value in degree Celsius. Note: The storage temperature of the original environmental sample (e.g., water, soil) should be recorded under samp_store_temp, while the current term is for the \"processed\" sample such as filter paper, homogenised and subsampled sediment, prepared for DNA extraction. Unit = degree Celsius"
+  },
+  "prepped_samp_store_sol": {
+    "value": "lysis buffer",
+    "description": "Solution within which the prepared sample was stored prior to DNA extraction. Note: The storage solution of the original environmental sample (e.g., water, soil) should be recorded under samp_store_sol, while the current term is for the \"processed\" sample such as filter paper, homogenised and subsampled sediment, prepared for DNA extraction."
+  },
+  "prepped_samp_store_dur": {
+    "value": "P1Y6M",
+    "description": "Duration for which the prepared sample was stored prior to DNA extraction, written in ISO 8601 format (i.e., P14D for 14 days period. P1Y6M for 1 year and 6 months period. P1W/4W for some time between 1 and 4 weeks). Note: The storage duration of the original environmental sample (e.g., water, soil) should be recorded under samp_store_dur, while the current term is for the \"processed\" sample such as filter paper, homogenised and subsampled sediment, prepared for DNA extraction."
+  },
+  "prep_method_additional": {
+    "value": "See Villacorta-Rath et al. (2020) (doi.org/10.1002/edn3.114) for the detailed precipitation protocols. ATL lysis buffer was used for prepped_samp_store_sol. Prepped_samp_store_temp was ambient, average of 22 degree Celsius",
+    "description": "Additional information on sample preparation, storage and preservation prior to DNA extraction, that has not been shared in the given record"
+  },
+  "date_ext": {
+    "value": "2008-01-23T19:23-06:00",
+    "description": "Date of nucleic acid extraction, written in ISO 8601 format"
+  },
+  "samp_vol_we_dna_ext": {
+    "value": "1500.0",
+    "description": "Volume or mass of sample or subsamples that was processed for DNA extraction. For example, if 1L of water was collected and filtered, and half of the filter paper was used for DNA extraction, the entries of samp_size and samp_vol_we_dna_ext should be 1L and 500mL respectively. Specify the unit under the term samp_vol_ext_unit."
+  },
+  "samp_vol_we_dna_ext_unit": {
+    "value": "mL",
+    "description": "Unit for samp_vol_we_dna_ext"
+  },
+  "nucl_acid_ext_lysis": {
+    "value": "enzymatic",
+    "description": "The approach used to lyse DNA-containing material. For example, physical methods may involve freeze-thaw cycles or the uses of bead mills, homogenizers and sonicators. Thermal methods apply high temperatures, often used in combination with other methods."
+  },
+  "nucl_acid_ext_sep": {
+    "value": "column-based",
+    "description": "The approach used to separate DNA from a mixture."
+  },
+  "nucl_acid_ext": {
+    "value": "https://www.qiagen.com/us/resources/resourcedetail?id=5a0517a7-711d-4085-8a28-2bb25fab828a&lang=en",
+    "description": "A link to a literature reference, electronic resource or a standard operating procedure (SOP), that describes the material separation to recover the nucleic acid fraction from a sample. If a custom extraction method has been developed and applied to the samples within this dataset, it is Highly recommended to make the SOP available and provide the link here."
+  },
+  "nucl_acid_ext_kit": {
+    "value": "Qiagen PowerSoil Kit",
+    "description": "The name of the extraction kit used to recover the nucleic acid fraction of an input material"
+  },
+  "nucl_acid_ext_modify": {
+    "value": "Sample was lysed in 540 µL of ATL buffer and 60 µL of Proteinase K, and eluted in 100 µL of buffer EB, instead of 180 µL, 20 µL and 200 µL respectively",
+    "description": "Description of modification made from a commercial or established protocol (nucl_acid_ext), if made."
+  },
+  "dna_cleanup_0_1": {
+    "value": "1",
+    "description": "Was the extracted DNA cleaned/purified? Yes = 1, No =0"
+  },
+  "dna_cleanup_method": {
+    "value": "Zymo DNA Clean & Concentrator Kits",
+    "description": "A description of DNA clean-up method. Provide the name of a commercial kit if used."
+  },
+  "concentration": {
+    "value": "67.5",
+    "description": "Concentration of total DNA after extraction"
+  },
+  "concentration_unit": {
+    "value": "ng/µl",
+    "description": "The unit of total DNA concentration after extraction"
+  },
+  "concentration_method": {
+    "value": "Qubit 4.0 Fluorometer (Invitrogen)",
+    "description": "Description of method/instrument used for concentration measurement"
+  },
+  "ratioOfAbsorbance260_280": {
+    "value": "2.1",
+    "description": "Ratio of absorbance at 260 nm and 230 nm assessing DNA purity (mostly secondary measure, indicates mainly EDTA, carbohydrates, phenol)."
+  },
+  "pool_dna_num": {
+    "value": "2",
+    "description": "The number of extracts that were pooled in to one sample before PCR"
+  },
+  "nucl_acid_ext_method_additional": {
+    "value": null,
+    "description": "Additional information on nucleic acid extraction method, that has not been shared in the given record."
+  },
+  "pcr_0_1": {
+    "value": "1",
+    "description": "Was PCR performed in the study? Yes = 1, No (pcr-free approaches including shotgun metagenomics, Nanopore) = 0"
+  },
+  "inhibition_check_0_1": {
+    "value": "1",
+    "description": "Was the inhibition checked? Yes = 1, No = 0"
+  },
+  "inhibition_check": {
+    "value": "The extracted DNA was tested using a serial dilution approach (undiluted, 1:10, 1:100). qPCR was performed on each dilution to evaluate amplification efficiency and inhibition. The dillution with optimal performance with reduced inhibition was selected for subsequent analysis in the workflow.",
+    "description": "Description of method applied to detect inhibition and any adjustments made to improve PCR performance, such as sample dilution or the use of inhibitor-tolerant reagents."
+  },
+  "thermocycler": {
+    "value": "Thermo Fisher Scientific, QuantStudio 6",
+    "description": "The manufacturer and model of a thermocycler used"
+  },
+  "technical_rep_id": {
+    "value": "1",
+    "description": "An integer uniquely identifying a specific PCR technical replicate within a sample."
+  },
+  "assay_name": {
+    "value": "MiFish (metabarcoding) / eSERU5 (qPCR)",
+    "description": "A brief, concise identifier for assay with no spaces or special characters, ensuring machine readability. This ID will be used in file names as 'assay_name'."
+  },
+  "assay_validation": {
+    "value": "The assay was validated through a multi-step process, including in-silico analysis, in-vitro testing, in-situ trials, and final confirmation with Sanger sequencing.",
+    "description": "How was the assay validated for specificity? e.g., in-silico, in-vitro, in-situ validations, sanger sequencing, repeat analysis with alternate assay, intra/inter species tests"
+  },
+  "targetTaxonomicAssay": {
+    "value": "verteberate",
+    "description": "Taxa or species name targeted by the primers, probes, and/or other approaches applied in the PCR."
+  },
+  "targetTaxonomicScope": {
+    "value": "teleost",
+    "description": "The taxonomic group(s) targeted in the study. This can differ from the targetTaxonomicAssay. For example, the targetTaxonomicAssay may be Chordata while the targetTaxonomicScope is Chondrichthyes (bony fish, sharks and rays)."
+  },
+  "target_gene": {
+    "value": "COI",
+    "description": "Targeted gene or locus name for marker gene studies"
+  },
+  "target_subfragment": {
+    "value": "V6",
+    "description": "Name of subfragment of a gene or locus. Important to e.g. identify special regions on marker genes like V6 on 16S rRNA."
+  },
+  "ampliconSize": {
+    "value": "83",
+    "description": "The length of the amplicon in basepairs EXCLUDING the primers, adapters and MIDs. A range can be entered separated by a hyphen\"-\" (i.e. 140-160). If using Excel, format the cell as text to prevent it from being auto-formatted as a date. Unit = basepairs"
+  },
+  "pcr_primer_forward": {
+    "value": "GGWACWGGWTGAACWGTWTAYCCYCC",
+    "description": "Forward PCR primer (5' - 3') that were used to amplify the sequence of the targeted gene. The primer sequence should NOT contain MIDs and adapter sequences, and should be reported in uppercase letters. If multiple forward primers are present in a single PCR reaction, either report them separately in separate submissions (with separate OTU tables for each primer set), or list the primers here separated by pipe ( | ) and provide one OTU table resulting from all the primers applied here. The latter is recommended only when the multiple primers target the same gene region and thus a single OTU table was generated from the multiplexed PCR. This term is required except for PCR free methods."
+  },
+  "pcr_primer_reverse": {
+    "value": "GGRGGRTASACSGTTCASCCSGTSCC",
+    "description": "Reverse PCR primer (5' - 3') that were used to amplify the sequence of the targeted gene. The primer sequence should NOT contain MIDs and adapter sequences, and should be reported in uppercase letters. If multiple reverse primers are present in a single PCR reaction, either report them separately in separate submissions (with separate OTU tables for each primer set), or list the primers here separated by pipe ( | ) and provide one OTU table resulting from all the primers applied here. The latter is recommended only when the multiple primers target the same gene region and thus a single OTU table was generated from the multiplexed PCR. This term is required except for PCR free methods."
+  },
+  "pcr_primer_name_forward": {
+    "value": "mlCOIintF",
+    "description": "Name of the pcr_primer_forward. If multiple primers are listed in pcr_primer_forward, list the names respectively, separated by pipe ( | )."
+  },
+  "pcr_primer_name_reverse": {
+    "value": "mlCOIintR",
+    "description": "Name of the pcr_primer_reverse. If multiple primers are listed in pcr_primer_reverse, list the names respectively, separated by pipe ( | )."
+  },
+  "pcr_primer_reference_forward": {
+    "value": "https://doi.org/10.1186/1742-9994-10-34",
+    "description": "Reference (i.e. DOI) of the pcr_primer_forward. If multiple primers are listed in pcr_primer_forward, list the references respectively, separated by pipe ( | )."
+  },
+  "pcr_primer_reference_reverse": {
+    "value": "https://doi.org/10.1186/1742-9994-10-34",
+    "description": "Reference (i.e. DOI) of the pcr_primer_reverse. If multiple primers are listed in pcr_primer_reverse, list the references respectively, separated by pipe ( | )."
+  },
+  "pcr_primer_vol_forward": {
+    "value": "2.0",
+    "description": "Volume of pcr_primer_forward per reaction. Unit = µL"
+  },
+  "pcr_primer_vol_reverse": {
+    "value": "2.0",
+    "description": "Volume of pcr_primer_reverse per reaction. Unit = µL"
+  },
+  "pcr_primer_conc_forward": {
+    "value": "5.0",
+    "description": "The stock concentration of the forward PCR primer (pcr_primer_forward). This refers specifically to the concentration of the primer stock solution, not the final concentration in the PCR reaction. For example, using 1 µL of a 5 µM (stock concentration) primer in a 25 µL reaction results in a final concentration of 0.2 µM. Hence the entry for this term would be 5. Unit = µM"
+  },
+  "pcr_primer_conc_reverse": {
+    "value": "5.0",
+    "description": "The stock concentration of the reverse PCR primer (pcr_primer_reverse). This refers specifically to the concentration of the primer stock solution, not the final concentration in the PCR reaction. For example, using 1 µL of a 5 µM (stock concentration) primer in a 25 µL reaction results in a final concentration of 0.2 µM. Hence the entry for this term would be 5. Unit = µM"
+  },
+  "probeReporter": {
+    "value": "FAM",
+    "description": "Type of fluorophore (reporter) used. Probe anneals within amplified target DNA. Polymerase activity degrades the probe that has annealed to the template, and the probe releases the fluorophore from it and breaks the proximity to the quencher, thus allowing fluorescence of the fluorophore."
+  },
+  "probeQuencher": {
+    "value": "MGB",
+    "description": "Type of quencher used. The quencher molecule quenches the fluorescence emitted by the fluorophore when excited by the cycler’s light source As long as fluorophore and the quencher are in proximity, quenching inhibits any fluorescence signals."
+  },
+  "probe_seq": {
+    "value": "CTTGTTTGTTTGATCAATTC",
+    "description": "If applicable, probe sequence in the 5' to 3' direction"
+  },
+  "probe_ref": {
+    "value": "10.1007/s00227-017-3141-x",
+    "description": "Reference (i.e. DOI) of the probe_seq"
+  },
+  "probe_conc": {
+    "value": "100.0",
+    "description": "The stock concentration of the probe if applicable. This refers specifically to the concentration of the probe stock solution, not the final concentration in the PCR reaction. For example, using 1 µL of a 5 µM (stock concentration) probe in a 25 µL reaction results in a final concentration of 0.2 µM. Hence the entry for this term would be 5. Unit = µM"
+  },
+  "commercial_mm": {
+    "value": "Luna® Universal qPCR Master Mix, New England Biolabs",
+    "description": "Name, brand, and manufacture of commercial, pre-made master mix (if commercial master mix was used)"
+  },
+  "custom_mm": {
+    "value": "Each PCR reaction comprised: 1 x Taq Gold buffer (Applied Biosystems [ABI], USA), 2 nM MgCl2 (ABI, USA), 0.4 mg/mL BSA (Fisher Biotec, Australia), 0.25 mM dNTPs (Astral Scientific, Australia), 0.4 μM each of forward and reverse primers (Integrated DNA Technologies, Australia), 0.6 μL of 1/10,000 SYBR Green dye (Life Technologies, USA), 1 U of Taq polymerase Gold (ABI, USA), 2 μL of DNA, and made up to 25 μL with PCR grade water",
+    "description": "composition of custom master mix, including the names, volumes and concentrations of additives (i.e., salts, buffers, enzyme and other components) (if custom master mix was used)"
+  },
+  "block_seq": {
+    "value": "AGCTTTAGACACCAAGGCAGACCAT/C3/",
+    "description": "Blocking primer sequence in the 5' to 3' direction"
+  },
+  "block_ref": {
+    "value": "https://doi.org/10.1038/s41598-020-60779-9",
+    "description": "Reference of a blocking primer. Enter \"custom\" if it was developed during the current project"
+  },
+  "block_taxa": {
+    "value": "Lutjanus malabaricus",
+    "description": "Taxonomic name(s) of the organism(s) targeted by a blocking primer to prevent their DNA amplification during PCR, enabling the preferential amplification of other taxa."
+  },
+  "amplificationReactionVolume": {
+    "value": "22.0",
+    "description": "The total PCR reaction volume. Unit = µL"
+  },
+  "pcr_dna_vol": {
+    "value": "2.0",
+    "description": "Volume of DNA added in each PCR reaction. Unit = µL"
+  },
+  "pcr_rep": {
+    "value": "3",
+    "description": "The number of PCR technical replicates. For metabarcoding, each replicate should employ an identical MID."
+  },
+  "nucl_acid_amp": {
+    "value": "https://phylogenomics.me/protocols/16s-pcr-protocol/",
+    "description": "A link to a literature reference, electronic resource or a standard operating procedure (SOP), that describes the nucleic acid amplification"
+  },
+  "pcr_cond": {
+    "value": "initial denaturation:94_3;annealing:50_1;elongation:72_1.5;final elongation:72_10;35",
+    "description": "Description of reaction conditions and components of PCR. The recommended format is ´initial denaturation:degrees_minutes;annealing:degrees_minutes;elongation:degrees_minutes;final elongation:degrees_minutes;total cycles´, where possible. If two-step PCR was applied for a metabarcoding approach, enter the second PCR protocol under the term pcr2_cond in the library preparation/sequencing section."
+  },
+  "annealingTemp": {
+    "value": "60.0",
+    "description": "The reaction temperature during the annealing phase of PCR. If two-step PCR was applied for a metabarcoding approach, enter the second PCR protocol under the term pcr2_* in the library preparation/sequencing section. Unit = degree Celsius"
+  },
+  "pcr_cycles": {
+    "value": "40",
+    "description": "Number of PCR cycles. If two-step PCR was applied for a metabarcoding approach, enter the second PCR protocol under the term pcr2_* in the library preparation/sequencing section. Unit = cycles"
+  },
+  "pcr_analysis_software": {
+    "value": "BIO-RAD QuantaSoft",
+    "description": "The program used to analyse the PCR runs. If two-step PCR was applied for a metabarcoding approach, enter the second PCR protocol under the term pcr2_* in the library preparation/sequencing section."
+  },
+  "pcr_plate_id": {
+    "value": "20240802_pcr1",
+    "description": "PCR plate ID. This identifier is particularly crucial when location-specific standard curves are employed for targeted assay detections, as it ensures a linkage between the standards and the corresponding eDNA samples. If two-step PCR was applied for a metabarcoding approach, enter the second PCR protocol under the term pcr2_* in the library preparation/sequencing section."
+  },
+  "pcr_method_additional": {
+    "value": "Blocking primer (TAGTATAGCTACGAAGCCGAGGAGG-c3) (Wilcox et al. 2014, DOI 10.1007/s12686-013-0113-4) was applied to prevent elongation of a closely related species",
+    "description": "Additional information on PCR or PCR-free method, that has not been shared in the given record (i.e. multiplexing, hybridisation, CRISPR-Cas). If two-step PCR was applied, enter the second PCR protocol under the term pcr2_* in the library preparation/sequencing section."
+  },
+  "amp_vis_method": {
+    "value": "qPCR",
+    "description": "Amplicon visualisation method (i.e., qPCR, dPCR, gel electrophoresis, PCR capillary electrophoresis (PCR-CE), Loop-mediated isothermal amplification (LAMP)) to determine the detection of a targeted taxon"
+  },
+  "detection_criteria": {
+    "value": "The minimum number of PCR replicates of 2 with positive amplification",
+    "description": "Criteria to determine positive detection. For example, a certain number of positive amplifications per sample, sanger sequencing of amplicons"
+  },
+  "lod_method": {
+    "value": "DOI: 10.1002/edn3.220",
+    "description": "Method used for determining LOD e.g., DOI of a published procedure"
+  },
+  "pcr_assay_lod_techreps": {
+    "value": "8",
+    "description": "The number of technical replicates that the LOD is applied to. See DOI: 10.1002/edn3.220"
+  },
+  "pcr_assay_lod": {
+    "value": "51.0",
+    "description": "Assay's limit of detection (LOD) (the lowest amount of target taxon DNA that can be detected with a defined level of confidence)."
+  },
+  "pcr_assay_lod_unit": {
+    "value": "ng/µL",
+    "description": "Unit for pcr_assay_lod"
+  },
+  "pcr_assay_lod_UL": {
+    "value": null,
+    "description": "Upper 95% confidence limit for LOD for a given number of technical replicates. See DOI: 10.1002/edn3.220. Unit = same as pcr_assay_lod_unit"
+  },
+  "pcr_assay_lod_LL": {
+    "value": null,
+    "description": "Lower 95% confidence limit for LOD for a given number of technical replicates. See DOI: 10.1002/edn3.220. Unit = same as pcr_assay_lod_unit"
+  },
+  "loq_method": {
+    "value": "DOI: 10.1002/edn3.220",
+    "description": "Method used for determining LOQ e.g., DOI of a published procedure"
+  },
+  "pcr_assay_loq_techreps": {
+    "value": "8",
+    "description": "The number of technical replicates that the LOQ is applied to. See DOI: 10.1002/edn3.220"
+  },
+  "pcr_assay_loq": {
+    "value": "184.0",
+    "description": "Assay's limit of quantification (LOQ) (the lowest amount of target taxon DNA that can be quantitatively determined with a stated precision under the stated experimental conditions)."
+  },
+  "pcr_assay_loq_unit": {
+    "value": "ng/µL",
+    "description": "unit for pcr_assay_loq"
+  },
+  "pcr_assay_loq_UL": {
+    "value": null,
+    "description": "Upper 95% confidence limit for LOQ for a given number of technical replicates. See DOI: 10.1002/edn3.220. Unit = same as pcr_assay_loq_unit"
+  },
+  "pcr_assay_loq_LL": {
+    "value": null,
+    "description": "Lower 95% confidence limit for LOQ for a given number of technical replicates. See DOI: 10.1002/edn3.220. Unit = same as pcr_assay_loq_unit"
+  },
+  "std_type": {
+    "value": "synthetic double-stranded DNA",
+    "description": "The type of standard used for standard curves"
+  },
+  "std_source": {
+    "value": "ThermoFisher",
+    "description": "The source of standard used for standard curves"
+  },
+  "std_seq": {
+    "value": "GTCTCTCCCTGTATATCGTCATGACATCTTCAGCCTTCCTCACATTAAAAACCAACAACTCTTTAACCATCAATACTCTCGCAACTTCATGAACTAAATCCCGACCCTTGCCGCATTAACCGCTCT",
+    "description": "DNA sequences of standard"
+  },
+  "thresholdQuantificationCycle": {
+    "value": "0.3",
+    "description": "Threshold for change in fluorescence signal between cycles. No unit."
+  },
+  "baselineValue": {
+    "value": "15",
+    "description": "The number of cycles when fluorescence signal from the target amplification is below background fluorescence not originated from the real target amplification. Unit = cycle"
+  },
+  "automaticThresholdQuantificationCycle": {
+    "value": "1",
+    "description": "Whether the threshold was set by the instrument (1) or manually (0)."
+  },
+  "automaticBaselineValue": {
+    "value": "1",
+    "description": "Whether the baseline value was set by the instrument (1) or manually (0)."
+  },
+  "std_conc": {
+    "value": "2500.0",
+    "description": "Input quantity of qPCR standard DNA"
+  },
+  "std_conc_unit": {
+    "value": null,
+    "description": "Unit for input quantity of qPCR standard DNA"
+  },
+  "quantificationCycle": {
+    "value": "37.9450950622558",
+    "description": "The number of cycles required for the fluorescent signal to cross a given value threshold above the baseline for each technical replicate. Quantification cycle (Cq), threshold cycle (Ct), crossing point (Cp), and take-off point (TOP) refer to the same value from the real-time instrument. Use of quantification cycle (Cq), is preferable according to the RDML (Real-Time PCR Data Markup Language) data standard (http://www.rdml.org). Use \"NA\" (not zero) to indicate no amplification occurred. Unit = Cycle"
+  },
+  "rfu": {
+    "value": "7862.41",
+    "description": "Relative Fluorescence Units (RFU). No unit"
+  },
+  "efficiency": {
+    "value": "95.0",
+    "description": "qPCR amplification efficiency calculated from slope. Unit = %"
+  },
+  "r2": {
+    "value": "0.9867",
+    "description": "R-squared value of a qPCR standard curve. This shall be specific to each pcr_plate_id."
+  },
+  "slope": {
+    "value": "-3.26",
+    "description": "Slope of a qPCR standard curve. This shall be specific to each pcr_plate_id."
+  },
+  "intercept": {
+    "value": "39.37",
+    "description": "Intercept of a qPCR standard curve. This shall be specific to each pcr_plate_id."
+  },
+  "num_detect": {
+    "value": "2",
+    "description": "Number of detection using the eLow Quant approach (described in DOI: 10.1002/edn3.220)"
+  },
+  "estimatedNumberOfCopies_method": {
+    "value": "Ct/Cq with standard curve | Ct/Cq with standard bionomial data",
+    "description": "Method to output estimatedNumberOfCopies"
+  },
+  "estimatedNumberOfCopies": {
+    "value": "35.92426489978709",
+    "description": "Estimated concentration of target molecules. Describe the approach taken to estimate it under the term estaimtedNumberOfCopies_method."
+  },
+  "estimatedNumberOfCopies_unit": {
+    "value": "other:copies/mg of sediment sample",
+    "description": "Unit for estimatedNumberOfCopies"
+  },
+  "estimatedNumberOfCopies_error": {
+    "value": "0.14",
+    "description": "The measure of variability (e.g., standard error) associated with the estimatedNumberOfCopies value, applicable when the estimatedNumberOfCopies represents an average calculated from multiple technical replicates per sample."
+  },
+  "estimatedNumberOfCopies_error_type": {
+    "value": "standard error",
+    "description": "The specific type of variability measure (e.g., standard error, standard deviation) used to describe estimatedNumberOfCopies_error."
+  },
+  "detected_notDetected": {
+    "value": "1",
+    "description": "Detection of the targeted taxon for each biological replicate, based on the specified detection criteria (detailed under the term 'detection_criteria'). Detected = 1, Not detected = 0. For projects employing multiple assays, this term should be specified separately for each assay. The term name should include the assay identifier in the format detected_notDetected_<assay_name> (e.g., detected_notDetected_eSERU5)."
+  },
+  "targeted_detection_method_additional": {
+    "value": null,
+    "description": "Additional information on Targeted assay detection method, that has not been shared in the given record."
+  },
+  "barcoding_pcr_appr": {
+    "value": "two-step PCR",
+    "description": "PCR approach for metabarcoding"
+  },
+  "pcr2_thermocycler": {
+    "value": "Thermo Fisher Scientific, QuantStudio 6",
+    "description": "(If bacroding_pcr_appr = \"two-step PCR\") The manufacturer and model of a thermocycler used in the second step PCR"
+  },
+  "pcr2_amplificationReactionVolume": {
+    "value": "22.0",
+    "description": "The total PCR reaction volume in the second step PCR. Unit = µL"
+  },
+  "pcr2_commercial_mm": {
+    "value": "Luna® Universal qPCR Master Mix, New England Biolabs",
+    "description": "(If bacroding_pcr_appr = \"two-step PCR\") Name, brand, and manufacture of commercial, pre-made master mix  in the second step PCR (if commercial master mix was used)"
+  },
+  "pcr2_custom_mm": {
+    "value": "Each PCR reaction comprised: 1 x Taq Gold buffer (Applied Biosystems [ABI], USA), 2 nM MgCl2 (ABI, USA), 0.4 mg/mL BSA (Fisher Biotec, Australia), 0.25 mM dNTPs (Astral Scientific, Australia), 0.4 μM each of forward and reverse primers (Integrated DNA Technologies, Australia), 0.6 μL of 1/10,000 SYBR Green dye (Life Technologies, USA), 1 U of Taq polymerase Gold (ABI, USA), 2 μL of DNA, and made up to 25 μL with PCR grade water",
+    "description": "(If bacroding_pcr_appr = \"two-step PCR\") composition of custom master mix, including the names, volumes and concentrations of additives (i.e., salts, buffers, enzyme and other components)  in the second step PCR (if custom master mix was used)"
+  },
+  "pcr2_dna_vol": {
+    "value": "2.0",
+    "description": "(If bacroding_pcr_appr = \"two-step PCR\") Volume of DNA added in each reaction in the second step PCR. Unit = µL"
+  },
+  "pcr2_cond": {
+    "value": "initial denaturation:94_3;annealing:50_1;elongation:72_1.5;final elongation:72_10;35",
+    "description": "(If bacroding_pcr_appr = \"two-step PCR\") Description of reaction conditions and components of in the second PCR. The recommended format is ´initial denaturation:degrees_minutes;annealing:degrees_minutes;elongation:degrees_minutes;final elongation:degrees_minutes;total cycles´, where possible."
+  },
+  "pcr2_annealingTemp": {
+    "value": "60.0",
+    "description": "(If bacroding_pcr_appr = \"two-step PCR\") The reaction temperature during the annealing phase of the second step PCR. Unit = degree Celsius"
+  },
+  "pcr2_cycles": {
+    "value": "40",
+    "description": "(If bacroding_pcr_appr = \"two-step PCR\") Number of PCR cycles in the second step PCR. Unit = cycles"
+  },
+  "pcr2_analysis_software": {
+    "value": "BIO-RAD QuantaSoft",
+    "description": "(If bacroding_pcr_appr = \"two-step PCR\") The program used to analyse the PCR runs  in the second step PCR"
+  },
+  "pcr2_plate_id": {
+    "value": "20240802_pcr1",
+    "description": "(If bacroding_pcr_appr = \"two-step PCR\") Plate ID in the second step PCR"
+  },
+  "pcr2_method_additional": {
+    "value": "Blocking primer (TAGTATAGCTACGAAGCCGAGGAGG-c3) (Wilcox et al. 2014, DOI 10.1007/s12686-013-0113-4) was applied to prevent elongation of a closely related species",
+    "description": "(If bacroding_pcr_appr = \"two-step PCR\") Additional information on PCR or PCR-free method, that has not been shared in the given record in the second step PCR"
+  },
+  "sequencing_location": {
+    "value": "University of Maryland Genomics Resource Center",
+    "description": "The location the sequencing run was performed. Indicate the name of the lab or core facility where samples were sequenced"
+  },
+  "platform": {
+    "value": "ILLUMINA",
+    "description": "General sequencing platform used."
+  },
+  "instrument": {
+    "value": "Illumina HiSeq 1500 [OBI_0003386]",
+    "description": "Sequencing instrument (manufacturer and model) used. Where possible the term should be taken from the OBI list of DNA sequencers (https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/OBI_0002750)"
+  },
+  "seq_kit": {
+    "value": "NextSeq 500/550 v2.5",
+    "description": "The name of sequencing kit"
+  },
+  "lib_layout": {
+    "value": "paired end",
+    "description": "Specify whether to expect single, paired, or other configuration of reads"
+  },
+  "adapter_forward": {
+    "value": "AATGATACGGCGACCACCGAGATCTACACGCT",
+    "description": "Forward sequencing adapter. The sequence should be reported in uppercase letters"
+  },
+  "adapter_reverse": {
+    "value": "CAAGCAGAAGACGGCATACGAGAT",
+    "description": "Reverse sequencing adapter. The sequence should be reported in uppercase letters"
+  },
+  "lib_screen": {
+    "value": "The library was size selected using a Pippin-Prep (Sage Science, Beverly, USA), purified using the Qiaquick PCR Purification Kit (Qiagen), quantified using a Qubit (Invitrogen) and diluted to 2 nM before loading it onto a MiSeq Flow Cell",
+    "description": "Specific enrichment or screening methods applied before and/or after creating libraries"
+  },
+  "lib_id": {
+    "value": "S01_MiSeq_run20230922",
+    "description": "An identifier of a library (an amplicon of a sample with unique MIDs)"
+  },
+  "seq_run_id": {
+    "value": "run20230922",
+    "description": "A brief, concise identifier for sequencing run with no spaces or special characters, ensuring machine readability. This ID will be used in file names as 'seq_run_id'."
+  },
+  "lib_conc": {
+    "value": "10.0",
+    "description": "The concentration of the prepared library pool that was loaded onto the sequencing platform for a sequencing run."
+  },
+  "lib_conc_unit": {
+    "value": "pM",
+    "description": "Unit for lib_conc"
+  },
+  "lib_conc_meth": {
+    "value": "Qubit Fluoromete",
+    "description": "Method to estimate lib_conc"
+  },
+  "phix_perc": {
+    "value": "15.0",
+    "description": "% of PhiX added into a library, if applicable. Unit = %"
+  },
+  "mid_forward": {
+    "value": "GTGAATAT",
+    "description": "Forward multiplex Identifiers (MIDs), that was used to specifically tag unique samples in a sequencing run. Sequence should be reported in uppercase letters"
+  },
+  "mid_reverse": {
+    "value": "AACAAGCC",
+    "description": "Reverse multiplex Identifiers (MIDs), that was used to specifically tag unique samples in a sequencing run. Sequence should be reported in uppercase letters"
+  },
+  "filename": {
+    "value": "S01_R1.fastq",
+    "description": "A file name of raw sequencing data. If paired end, fill filename2 for the reverse read"
+  },
+  "filename2": {
+    "value": "S01_R2.fastq",
+    "description": "A raw sequencing data file name of reverse reads if lib_layout = paired end"
+  },
+  "checksum_method": {
+    "value": "MD5",
+    "description": "The specific algorithm or technique used to compute the checksum (checksum_filename, checksum_filename2) for verifying data integrity. Examples include MD5, SHA-256, and CRC-32."
+  },
+  "checksum_filename": {
+    "value": "e61e08bfd3ad5eb5d6e7da9e95b5feed",
+    "description": "The checksum of the forward sequence reads file (filename), used to verify the integrity and identity of the corresponding data file"
+  },
+  "checksum_filename2": {
+    "value": "b3ea95ec13dae594bcb292dcf1b1ac7f",
+    "description": "The checksum of the reverse sequence reads file (filename2), used to verify the integrity and identity of the corresponding data file"
+  },
+  "associatedSequences": {
+    "value": "https://www.ncbi.nlm.nih.gov/sra/SRR26148187 | https://www.ncbi.nlm.nih.gov/biosample/SAMN37516094 | https://www.ncbi.nlm.nih.gov/bioproject/PRJNA887898",
+    "description": "A list (concatenated and separated) of identifiers (publication, global unique identifier, URI) of genetic sequence information associated with the samp_name"
+  },
+  "seq_method_additional": {
+    "value": "PhiX was spiked in at 15%",
+    "description": "Additional information on library preparation and sequencing method, that has not been shared in the given record."
+  },
+  "sop_bioinformatics": {
+    "value": "https://github.com/mahsa-mousavi/eDNAFlow",
+    "description": "Standard operating procedures, references, link to scripts, that were used in quality filtering, assembly and/or annotation of genomes, metagenomes or environmental sequences"
+  },
+  "trim_method": {
+    "value": "cutadapt v4.9",
+    "description": "Method for trimming primer and/or adapter sequences, including version and parameters"
+  },
+  "trim_param": {
+    "value": "ADAPTER;min_overlap=5",
+    "description": "Parameters and cutoffs used to trim if not default"
+  },
+  "demux_tool": {
+    "value": "DADA2 1.26",
+    "description": "Software and the version used to demultiplex sequence reads"
+  },
+  "demux_max_mismatch": {
+    "value": "0",
+    "description": "Maximum mismatch allowed at the index bases for demultiplexing. Unit = base pair"
+  },
+  "merge_tool": {
+    "value": "AdapterRemoval 2.3.3",
+    "description": "Software and the version to merge paired end reads"
+  },
+  "merge_min_overlap": {
+    "value": "12",
+    "description": "Minimum overlaps required to merge paired end reads. Unit = base pair"
+  },
+  "min_len_cutoff": {
+    "value": "120",
+    "description": "Minimum length threshold. Unit = base pair"
+  },
+  "min_len_tool": {
+    "value": "OBITools3",
+    "description": "Software and the version to remove reads shorter than minimum length threshold"
+  },
+  "error_rate_tool": {
+    "value": "FASTQC v0.12.1",
+    "description": "Software to remove reads above error rate threshold"
+  },
+  "error_rate_type": {
+    "value": "Phred score",
+    "description": "The type/unit of error rate for the error rate threshold"
+  },
+  "error_rate_cutoff": {
+    "value": "25.0",
+    "description": "error rate threshold"
+  },
+  "chimera_check_method": {
+    "value": "denovo, uchime v4.1",
+    "description": "Description of chimera check approaches (i.e. denovo, reference-based), including software and the version used"
+  },
+  "chimera_check_param": {
+    "value": "β parameter >=1",
+    "description": "Parameters used to filter chimera sequences if note default"
+  },
+  "otu_clust_tool": {
+    "value": "q2-dada2 2019.1.0",
+    "description": "Software and the version used for OTU/ASV clustering"
+  },
+  "otu_clust_cutoff": {
+    "value": "97.0",
+    "description": "The percentage similarity threshold used for OTU/ASV clustering. For ASV clustering, the cutoff is typically 100% similarity. Unit = %"
+  },
+  "min_reads_cutoff": {
+    "value": "5.0",
+    "description": "minimum read counts thresholds. e.g., 10 reads, 5% relative read abundance, noise (e.g., (relative) read counts) detected in blanks. Answer either numeric value with the unit specified under the terms min_reads_cutoff_unit, \"noise detected in blanks\", or \"other: FREE TEXT DESCRIPTION\"."
+  },
+  "min_reads_cutoff_unit": {
+    "value": "%",
+    "description": "The unit of the min_reads_cutoff. i.e. reads, % relative read abundance"
+  },
+  "min_reads_tool": {
+    "value": "DADA2 1.26",
+    "description": "Software and the version to remove reads below minimum read threshold"
+  },
+  "otu_db": {
+    "value": "NCBI GenBank Release 260.0 | custom",
+    "description": "List of reference database(s) (i.e. sequences not generated as part of the current study) along with version number, that were used to assign taxonomy to OTUs or ASVs. If custom database was used, enter 'custom' here, and provide the information of the database under the term otu_db_custom"
+  },
+  "otu_db_custom": {
+    "value": "Unpublished custom database, containing COI sequences of 209 fish species collected from Western Australia (study area)",
+    "description": "Description of custom reference database(s) (i.e. coverage of taxa, region) if applied to assign taxonomy to OTUs or ASVs"
+  },
+  "tax_assign_cat": {
+    "value": "sequence similarity",
+    "description": "High-level category of taxonomic assignment approach. Examples using sequence similarity: BLAST/MegaBLAST, USEARCH/VSEARCH. Examples using sequence composition: naive Bayes classifier, CLARK, Kraken. Examples using phylogeny: SEPP, EPA-ng, pplacer. Examples using probabilistic: PROTAX, TIPP."
+  },
+  "otu_seq_comp_appr": {
+    "value": "blastn;2.6.0+",
+    "description": "Alignment tool/software used for taxonomic assignment"
+  },
+  "tax_class_id_cutoff": {
+    "value": "90.0",
+    "description": "Minimum percent identity for taxonomic assignment. Unit = %"
+  },
+  "tax_class_query_cutoff": {
+    "value": "98.0",
+    "description": "Minimum percent query coverage for taxonomic assignment. Unit = %"
+  },
+  "tax_class_collapse": {
+    "value": "Taxonomic levels were dropped to the lowest common ancestor (LCA) with the similarity thresholds of 99%, and also based on % identify thresholds (>98% species, 95-98% genus, 90-95% family).",
+    "description": "How was the taxa collapsed to higher taxonomic levels? i.e. lowest common ancestor"
+  },
+  "tax_class_other": {
+    "value": null,
+    "description": "Additional information on parameters and cutoffs used for taxonomic assignment, that have not been shared in the given record."
+  },
+  "screen_contam_method": {
+    "value": "Taxa detected in negative controls were checked, and the read counts were applied as a cutoff to call presence.",
+    "description": "How were contaminations screened and applied in data curation/analyses/interpretation?"
+  },
+  "screen_geograph_method": {
+    "value": "Distribution information was checked using FishBase, and species that did not reside in the study area were removed.",
+    "description": "How were species distribution information screened and applied?"
+  },
+  "screen_nontarget_method": {
+    "value": "Non-targeted species (i.e. domestic animals, humans and non-marine species) were removed from the curated OTU table and downstream data analyses. OTUs that were assigned to species in WoRMS were kept in the curated OTU table.",
+    "description": "How were non-target species screened and applied?"
+  },
+  "screen_other": {
+    "value": null,
+    "description": "Description of other screening criteria and approaches"
+  },
+  "otu_raw_description": {
+    "value": "OTU clustering with 97% similarity",
+    "description": "A description of the data curation and processing steps applied to the raw OTU/ASV table"
+  },
+  "otu_final_description": {
+    "value": "Removal of ASVs that were assigned to non-targeted species. Removal of control samples.",
+    "description": "A description of the data curation and processing steps applied to the final OTU/ASV table"
+  },
+  "bioinfo_method_additional": {
+    "value": "The min_reads_cutoff was 1 read, but singletons were kept if the same sequence was detected in multiple samples. Data was curated using r-package LULU, minimum_mismatch cutoff 90%",
+    "description": "Additional information on bioinformatics, that has not been shared in the given record."
+  },
+  "input_read_count": {
+    "value": "20485",
+    "description": "The total number of raw sequence reads for each sample. Unit = reads"
+  },
+  "output_read_count": {
+    "value": "16847",
+    "description": "The number of filtered sequence reads for each sample, that made it through bioinformatic filtering and used for final/subsequent analyses. Unit = reads"
+  },
+  "output_otu_num": {
+    "value": "86",
+    "description": "Total number of OTUs or ASVs for each sample"
+  },
+  "otu_num_tax_assigned": {
+    "value": "49",
+    "description": "Total number of OTUs or ASVs assigned to taxa based on the study-specific thresholds for each sample"
+  },
+  "seq_id": {
+    "value": "ASV1",
+    "description": "Query sequence ID. Must be unique within the dataset"
+  },
+  "dna_sequence": {
+    "value": "GGTGTTTAAATTTCGGTCTGTAAGAAGTATTGTAATCCCAGCCGCTAGGACTGGAAGGGAAAGAAGGAGAAGGACAGCTGTAATTAGCACGGCTCAGACAAACAAGGGTGTCTGGTATTGGGAAATAGCTGGGGGTTTCATGTTAATAATTGTGGTAATAAAATTGATAGCACCAAGGATTGAAGAGACCCCGGCTAGGTGGAGAGAA",
+    "description": "The DNA sequence"
+  },
+  "kingdom": {
+    "value": "Animalia",
+    "description": "The full scientific name of the kingdom"
+  },
+  "phylum": {
+    "value": "Chordata",
+    "description": "The full scientific name of the phylum or division"
+  },
+  "class": {
+    "value": "Actinopterygii",
+    "description": "The full scientific name of the class"
+  },
+  "order": {
+    "value": "Perciformes",
+    "description": "The full scientific name of the order"
+  },
+  "family": {
+    "value": "Lutjanidae",
+    "description": "The full scientific name of the family"
+  },
+  "genus": {
+    "value": "Lutjanus",
+    "description": "The full scientific name of the genus"
+  },
+  "specificEpithet": {
+    "value": "erythropterus",
+    "description": "The name of the first or species epithet of the scientificName."
+  },
+  "scientificName": {
+    "value": "Lutjanus erythropterus",
+    "description": "The full scientific name of the genus and species"
+  },
+  "scientificNameAuthorship": {
+    "value": "Bloch, 1790",
+    "description": "The authorship information for the scientificName"
+  },
+  "taxonRank": {
+    "value": "genus",
+    "description": "The taxonomic rank of the most specific name in the scientificName"
+  },
+  "taxonID": {
+    "value": "218797.0",
+    "description": "An identifier for the assigned taxon (or taxa in the case of multiple hits). May be a global unique identifier or an identifier specific to the data set."
+  },
+  "taxonID_db": {
+    "value": "NCBI",
+    "description": "The taxonomy database corresponding to taxonID."
+  },
+  "verbatimIdentification": {
+    "value": "Eukaryota; Metazoa; Chordata; Actinopterygii; Perciformes; Lutjanidae; Lutjanus; Lutjanus_erythropterus",
+    "description": "A string representing the taxonomic identification as it appeared in the original record (i.e. the database used such as NCBI). This could be the identification"
+  },
+  "accession_id": {
+    "value": "MG002616.1",
+    "description": "Accession ID of the best matching sequence from a reference database"
+  },
+  "accession_id_ref_db": {
+    "value": "NCBI",
+    "description": "Reference database (i.e. sequences not generated as part of the current study) of the best matching sequence (accesssion_id)"
+  },
+  "percent_match": {
+    "value": "99.8",
+    "description": "The percentage of sequence identity between a query sequence obtained from eDNA and a reference sequence in a database. If multiple species were assigned to one ASV/OTU, a range can be entered separated by  \"-\" (e.g., 98.7-99.2)."
+  },
+  "percent_query_cover": {
+    "value": "100.0",
+    "description": "The percentage coverage of the query sequence that aligns with a reference sequence in a database. If multiple species were assigned to one ASV/OTU, a range can be entered separated by  \"-\" (e.g., 98.7-99.2).  Unit = %"
+  },
+  "confidence_score": {
+    "value": "0.997",
+    "description": "Confidence score for the taxonomic assignment, such as from bootstrapping. If multiple species were assigned to one ASV/OTU, a range can be entered separated by  \"-\" (e.g., 0.996-0.998)"
+  },
+  "identificationRemarks": {
+    "value": "Taxonomic assignment was performed at the most precise taxonomic level common to the hypothetical taxa.",
+    "description": "Comments or notes about the taxonomic assignment."
+  },
+  "samp_weather": {
+    "value": "foggy",
+    "description": "The weather on the sampling day"
+  },
+  "minimumDepthInMeters": {
+    "value": "0.2",
+    "description": "The lesser depth of a range of depth (vertical distance below the local surface) at which a sample was collected. For sediment or soil samples depth is measured from sediment or soil surface, respectively. If there is only one single point of depth (no range), the values in minimumDepthInMeters and maximumDepthInMeters are the same. Unit = meter"
+  },
+  "maximumDepthInMeters": {
+    "value": "0.2",
+    "description": "The greater depth of a range of depth (vertical distance below the local surface) at which a sample was collected. For sediment or soil samples depth is measured from sediment or soil surface, respectively. If there is only one single point of depth (no range), the values in minimumDepthInMeters and maximumDepthInMeters are the same. Unit = meter"
+  },
+  "tot_depth_water_col": {
+    "value": "15.0",
+    "description": "Measurement of total depth of water column. For example, if a sea surface water sample was collected at a sampling site where the water depth was 15m, enter 15 here and 0 under the terms minimumDepthInMeters and maximumDepthInMeters. Unit = meter"
+  },
+  "elev": {
+    "value": "100.0",
+    "description": "Elevation of the sampling site is its height above a fixed reference point, most commonly the mean sea level. Elevation is mainly used when referring to points on the earth's surface, while altitude is used for points above the surface, such as an aircraft in flight or a spacecraft in orbit. i.e. 0m for seawater sample. Unit = meter"
+  },
+  "alt": {
+    "value": "100.0",
+    "description": "Heights of objects such as airplanes, space shuttles, rockets, atmospheric balloons and heights of places such as atmospheric layers and clouds. It is used to measure the height of an object which is above the earth's surface. In this context, the altitude measurement is the vertical distance between the earth's surface above sea level and the sampled position in the air. Unit = meter"
+  },
+  "temp": {
+    "value": "25.0",
+    "description": "Temperature of the sample at the time of sampling in degree Celsius"
+  },
+  "chlorophyll": {
+    "value": "5.0",
+    "description": "Concentration of chlorophyll. Unit = mg/m3"
+  },
+  "light_intensity": {
+    "value": "0.3",
+    "description": "Measurement of light intensity. Unit = lux"
+  },
+  "ph": {
+    "value": "7.2",
+    "description": "Ph measurement of the sample, or liquid portion of sample, or aqueous phase of the fluid. Unit = no unit"
+  },
+  "ph_meth": {
+    "value": "https://www.epa.gov/sites/default/files/2015-12/documents/9040c.pdf",
+    "description": "Reference or method used in determining pH"
+  },
+  "salinity": {
+    "value": "25.0",
+    "description": "The total concentration of all dissolved salts in a liquid or solid sample. While salinity can be measured by a complete chemical analysis, this method is difficult and time consuming. More often, it is instead derived from the conductivity measurement. This is known as practical salinity. These derivations compare the specific conductance of the sample to a salinity standard such as seawater. Unit = practical salinity unit (psu)"
+  },
+  "suspend_part_matter": {
+    "value": "0.5",
+    "description": "Concentration of suspended particulate matter. Unit = mg/L"
+  },
+  "tidal_stage": {
+    "value": "high tide",
+    "description": "Stage of tide"
+  },
+  "turbidity": {
+    "value": "0.3",
+    "description": "Measure of the amount of cloudiness or haziness in water caused by individual particles. Unit = nephelometric turbidity unit (ntu)"
+  },
+  "water_current": {
+    "value": "10.0",
+    "description": "Measurement of magnitude and direction of flow within a fluid. Unit = m/s"
+  },
+  "humidity": {
+    "value": "61.0",
+    "description": "Amount of water vapour in the air, at the time of sampling relative to the maximum amount of water vapor the air can hold at a given temperature and pressure. Also known as relative humidity. Unit = %"
+  },
+  "solar_irradiance": {
+    "value": "1.36 kw/m2/day",
+    "description": "Description and/or the amount of solar energy that arrives at a specific area of a surface at the time of sampling. i.e. fully exposed, partially shaded, cloud cover 20%, 1.36kW/m2/day"
+  },
+  "wind_direction": {
+    "value": "NW",
+    "description": "Wind direction (the direction from which a wind originates) at the time of sampling"
+  },
+  "wind_speed": {
+    "value": "5.14",
+    "description": "Speed of wind measured at the time of sampling. Unit = m/s"
+  },
+  "host_species": {
+    "value": "Lutjanus erythropterus",
+    "description": "The scientific name of host species. i.e. predator species where a gut content sample was dissected from."
+  },
+  "host_life_stage": {
+    "value": "juvenile stage [UBERON_0034919]",
+    "description": "Description of life stage of host. Select from UBERON's life cycle class (http://purl.obolibrary.org/obo/UBERON_0000104)"
+  },
+  "host_tot_mass": {
+    "value": "58.0",
+    "description": "Total mass of the host at collection, the unit depends on host."
+  },
+  "host_tot_mass_unit": {
+    "value": "g",
+    "description": "The unit of host_tot_mass"
+  },
+  "host_height": {
+    "value": "135.0",
+    "description": "The height of subject"
+  },
+  "host_height_unit": {
+    "value": "cm",
+    "description": "The unit of host_height"
+  },
+  "host_length": {
+    "value": "54.0",
+    "description": "The length of subject"
+  },
+  "host_length_unit": {
+    "value": "mm",
+    "description": "The unit of host_length"
+  },
+  "diss_inorg_carb": {
+    "value": "2059.0",
+    "description": "Dissolved inorganic carbon concentration in the sample, typically measured after filtering the sample using a 0.45 micrometre filter"
+  },
+  "diss_inorg_carb_unit": {
+    "value": "mmol/kg",
+    "description": "The unit of diss_inorg_carb"
+  },
+  "diss_inorg_nitro": {
+    "value": "761.0",
+    "description": "Concentration of dissolved inorganic nitrogen"
+  },
+  "diss_inorg_nitro_unit": {
+    "value": "µmol/L",
+    "description": "The unit of diss_inorg_nitro"
+  },
+  "diss_org_carb": {
+    "value": "197.0",
+    "description": "Concentration of dissolved organic carbon in the sample, liquid portion of the sample, or aqueous phase of the fluid"
+  },
+  "diss_org_carb_unit": {
+    "value": "µmol/L",
+    "description": "The unit of diss_org_carb"
+  },
+  "diss_org_nitro": {
+    "value": "0.05",
+    "description": "Dissolved organic nitrogen concentration measured as; total dissolved nitrogen - NH4 - NO3 - NO2"
+  },
+  "diss_org_nitro_unit": {
+    "value": "µmol/L",
+    "description": "The unit of diss_org_nitro"
+  },
+  "diss_oxygen": {
+    "value": "175.0",
+    "description": "Concentration of dissolved oxygen"
+  },
+  "diss_oxygen_unit": {
+    "value": "mmol/kg",
+    "description": "The unit of diss_oxygen"
+  },
+  "tot_diss_nitro": {
+    "value": "40.0",
+    "description": "Total dissolved nitrogen concentration, reported as nitrogen, measured by: total dissolved nitrogen = NH4 + NO3NO2 + dissolved organic nitrogen"
+  },
+  "tot_diss_nitro_unit": {
+    "value": "µg/L",
+    "description": "The unit of tot_diss_nitro"
+  },
+  "tot_inorg_nitro": {
+    "value": "40.0",
+    "description": "Total inorganic nitrogen content"
+  },
+  "tot_inorg_nitro_unit": {
+    "value": "µg/L",
+    "description": "The unit of tot_inorg_nitro"
+  },
+  "tot_nitro": {
+    "value": "50.0",
+    "description": "Total nitrogen concentration of water samples, calculated by: total nitrogen = total dissolved nitrogen + particulate nitrogen. Can also be measured without filtering, reported as nitrogen"
+  },
+  "tot_nitro_unit": {
+    "value": "µmol/L",
+    "description": "The unit of tot_nitro"
+  },
+  "tot_part_carb": {
+    "value": "35.0",
+    "description": "Total particulate carbon content"
+  },
+  "tot_part_carb_unit": {
+    "value": "µmol/L",
+    "description": "The unit of tot_part_carb"
+  },
+  "tot_org_carb": {
+    "value": "0.02",
+    "description": "Total organic carbon content"
+  },
+  "tot_org_carb_unit": {
+    "value": "other:gram Carbon per kg sample material",
+    "description": "The unit of tot_org_carb"
+  },
+  "tot_org_c_meth": {
+    "value": "https://www.epa.gov/sites/default/files/2015-12/documents/9060a.pdf",
+    "description": "Reference or method used in determining total organic carbon"
+  },
+  "tot_nitro_content": {
+    "value": "35.0",
+    "description": "Total nitrogen content of the sample"
+  },
+  "tot_nitro_content_unit": {
+    "value": "other:mg N/kg of soil",
+    "description": "The unit of tot_nitro_content"
+  },
+  "tot_nitro_cont_meth": {
+    "value": "https://currentprotocols.onlinelibrary.wiley.com/doi/abs/10.1002/0471142913.fab0102s00",
+    "description": "Reference or method used in determining the total nitrogen"
+  },
+  "tot_carb": {
+    "value": "1.5",
+    "description": "Total carbon content"
+  },
+  "tot_carb_unit": {
+    "value": "µg/L",
+    "description": "The unit of tot_carb"
+  },
+  "part_org_carb": {
+    "value": "1.92",
+    "description": "Concentration of particulate organic carbon"
+  },
+  "part_org_carb_unit": {
+    "value": "µmol/L",
+    "description": "The unit of part_org_carb"
+  },
+  "part_org_nitro": {
+    "value": "0.3",
+    "description": "Concentration of particulate organic nitrogen"
+  },
+  "part_org_nitro_unit": {
+    "value": "µmol/L",
+    "description": "The unit of part_org_nitro"
+  },
+  "nitrate": {
+    "value": "65.0",
+    "description": "Concentration of nitrate in the sample"
+  },
+  "nitrate_unit": {
+    "value": "µmol/L",
+    "description": "The unit of nitrate"
+  },
+  "nitrite": {
+    "value": "0.5",
+    "description": "Concentration of nitrite in the sample"
+  },
+  "nitrite_unit": {
+    "value": "µmol/L",
+    "description": "The unit of nitrite"
+  },
+  "nitro": {
+    "value": "4.2",
+    "description": "Concentration of nitrogen (total)"
+  },
+  "nitro_unit": {
+    "value": "µmol/L",
+    "description": "The unit of nitro"
+  },
+  "org_carb": {
+    "value": "1.5",
+    "description": "Concentration of organic carbon"
+  },
+  "org_carb_unit": {
+    "value": "µg/L",
+    "description": "The unit of org_carb"
+  },
+  "org_matter": {
+    "value": "1.75",
+    "description": "Concentration of organic matter"
+  },
+  "org_matter_unit": {
+    "value": "other:mg/m3",
+    "description": "The unit of org_matter"
+  },
+  "org_nitro": {
+    "value": "4.0",
+    "description": "Concentration of organic nitrogen"
+  },
+  "org_nitro_unit": {
+    "value": "µmol/L",
+    "description": "The unit of org_nitro"
+  }
+}
