@@ -10,8 +10,12 @@ from data_loading.data_loading import get_term_value, get_term_description
 # Load SentenceBERT model
 # model = SentenceTransformer('all-MiniLM-L6-v2')
 
-# SciBERT: scientific vocabulary. Loaded via sentence-transformers for fast batched encode.
-MODEL_NAME = 'allenai/scibert_scivocab_uncased'
+# Proper sentence-embedding model (contrastive ST). Mean-pooled SciBERT is a language model,
+# not a similarity model — that made near-identical descriptions rank below shared "*id" names.
+MODEL_NAME = 'sentence-transformers/all-mpnet-base-v2'
+
+# Previous SciBERT encoder (kept for reference; weak for description matching)
+# MODEL_NAME = 'allenai/scibert_scivocab_uncased'
 
 # Use custom trained eDNA SciBERT model
 # MODEL_NAME = './ai_matching/eDNA_scibert_model'
@@ -21,13 +25,12 @@ _model = None
 
 BATCH_SIZE = 32
 
-# How much each signal counts in the final semantic score (must sum to 1.0).
-# Descriptions carry meaning; names are a secondary signal. Example values are NOT embedded
-# (they make unrelated ID-like fields look similar).
-WEIGHT_DESCRIPTION = 0.75
-WEIGHT_NAME = 0.25
+# Descriptions dominate. Name tokens are only a light tie-breaker (and ignore generic id/name noise).
+WEIGHT_DESCRIPTION = 0.9
+WEIGHT_NAME = 0.1
 
 # Generic abbreviation expansions for field-name token matching (any metadata standard).
+# Note: do NOT map id -> identifier here; both are treated as stopwords below.
 _NAME_ABBREVS = {
     'samp': 'sample',
     'temp': 'temperature',
@@ -38,7 +41,6 @@ _NAME_ABBREVS = {
     'env': 'environment',
     'vol': 'volume',
     'conc': 'concentration',
-    'id': 'identifier',
     'num': 'number',
     'qty': 'quantity',
     'desc': 'description',
@@ -71,17 +73,23 @@ _NAME_ABBREVS = {
     'ph': 'ph',
 }
 
+# Tokens that appear on almost every key/ID field — sharing them must NOT boost the score.
+_NAME_STOPWORDS = {
+    'id', 'identifier', 'identifiers', 'name', 'names', 'code', 'codes',
+    'value', 'values', 'type', 'types', 'num', 'number', 'no', 'flag',
+    'label', 'labels', 'info', 'data', 'field', 'fields', 'key', 'keys',
+    'the', 'a', 'an', 'of', 'for', 'to', 'and', 'or', 'in', 'on', 'by',
+}
+
 
 def _get_model():
     global _model
     if _model is None:
         print(
-            "Loading SciBERT (the AI model used for meaning). "
-            "First time only: downloads model files from HuggingFace and caches them on disk. "
-            "Later runs reuse the local cache.",
+            "Loading sentence embedding model (all-mpnet-base-v2) for description matching. "
+            "First time only: downloads from HuggingFace and caches on disk.",
             flush=True,
         )
-        # sentence-transformers wraps SciBERT with mean pooling and fast batch encode
         _model = SentenceTransformer(MODEL_NAME)
         print("Model ready.", flush=True)
     return _model
@@ -95,17 +103,20 @@ def humanize_field_name(term):
 
 
 def field_name_tokens(term):
-    """Token set for name similarity, with common metadata abbreviations expanded."""
+    """Content tokens only (abbrevs expanded; generic id/name/code tokens dropped)."""
     tokens = set()
     for raw in humanize_field_name(term).split():
+        if raw in _NAME_STOPWORDS:
+            continue
         tokens.add(raw)
-        if raw in _NAME_ABBREVS:
-            tokens.add(_NAME_ABBREVS[raw])
+        expanded = _NAME_ABBREVS.get(raw)
+        if expanded and expanded not in _NAME_STOPWORDS:
+            tokens.add(expanded)
     return tokens
 
 
 def name_similarity(term_a, term_b):
-    """Dice coefficient on expanded name tokens (0-1)."""
+    """Dice coefficient on content name tokens (0-1). Returns 0 if either side has no content tokens."""
     a = field_name_tokens(term_a)
     b = field_name_tokens(term_b)
     if not a or not b:
@@ -120,15 +131,15 @@ def name_similarity(term_a, term_b):
 
 def description_text(term, entry):
     """
-    Text SciBERT embeds for meaning. Description is primary; field name is context only.
-    Example values are intentionally omitted so shared ID-like values do not hijack matching.
+    Text embedded for meaning: the field description alone.
+    Field names and example values are NOT included (names share noisy tokens like 'id';
+    examples make unrelated ID fields look alike).
     """
     description = (get_term_description(entry) or '').strip()
-    name = humanize_field_name(term)
     if description:
-        # Repeat description so it dominates the pooled embedding vs the short name.
-        return f"{description} {description} Field name: {name}."
-    return f"Field name: {name}."
+        return description
+    # Fallback only when a description is missing
+    return f"Metadata field: {humanize_field_name(term)}"
 
 
 # Kept for any callers that still expect the old combine helper
@@ -213,7 +224,8 @@ def embed_texts(texts, model, label='texts', use_cache=False):
 
 def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data, num_matches=5):
     """
-    Semantic match using description-heavy SciBERT embeddings + field-name token similarity.
+    Semantic match: embed field descriptions with a sentence-transformer, lightly blend
+    contentful field-name token overlap (ignoring generic id/name/code tokens).
     Template embeddings are cached on disk so re-runs against the same standard are fast.
     """
     model = _get_model()
@@ -226,7 +238,7 @@ def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data
 
     print(
         f"Semantic matching: {len(user_terms)} user fields x {len(template_terms)} template fields "
-        f"(score = {int(WEIGHT_DESCRIPTION * 100)}% description + {int(WEIGHT_NAME * 100)}% field-name tokens)",
+        f"(score = {int(WEIGHT_DESCRIPTION * 100)}% description + {int(WEIGHT_NAME * 100)}% name tokens)",
         flush=True,
     )
 
@@ -237,7 +249,7 @@ def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data
     user_emb = embed_texts(user_texts, model, label='user', use_cache=False)
     template_emb = embed_texts(template_texts, model, label='template', use_cache=True)
 
-    print("Scoring (description cosine + name tokens)...", flush=True)
+    print("Scoring (description cosine + content name tokens)...", flush=True)
     # encode(..., normalize_embeddings=True) => cosine = dot product
     desc_sim = torch.mm(user_emb, template_emb.T)
 

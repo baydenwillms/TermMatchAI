@@ -104,7 +104,7 @@ python main.py
 2. Paths to the two JSONs, or ENTER for the defaults above
 3. Browser opens `term_matching_report.html` (summary table + field-by-field candidates)
 
-Semantic matching embeds **descriptions** (example values are not used in the AI score), then blends that with field-name token overlap. Template embeddings are cached under `.cache/embeddings/` so re-runs against the same FAIRe JSON are much faster. The first run still downloads SciBERT once from HuggingFace into your local cache.
+Semantic matching embeds **field descriptions** with a sentence embedding model (not raw SciBERT), then lightly blends contentful field-name tokens (generic words like `id` / `name` / `code` are ignored). Template embeddings are cached under `.cache/embeddings/`. First run may download the model from HuggingFace once.
 
 ### Training the AI Model
 __Currently under development, this is how I was training the model previously. Barely improved results__
