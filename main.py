@@ -9,7 +9,8 @@ from core.fuzzy_matching import fuzzy_match
 # from ai_matching.semantic_matching_spacy import find_semantic_matches_spacy
 from ai_matching.semantic_matching_BERT import find_semantic_matches_scibert
 from core.generate_report import generate_report
-from core.date_checker import get_date_terms
+import webbrowser
+from pathlib import Path
 
 def main():
     # Get user input for number of matches
@@ -42,48 +43,38 @@ def main():
             faire_path=faire_path or FAIRE_STANDARD_PATH,
             user_path=user_path or USER_STANDARD_EXAMPLE_PATH
         )
-    
-    # Get the lists of term names
-    template_terms = list(template_terms_w_data.keys())
-    user_terms = list(user_terms_w_data.keys())
-    
-    # DATE / TIME TERMS SECTION 
-    # Identify DATE terms
-    user_date_terms = get_date_terms(user_terms_w_data)
-    noaa_date_terms = get_date_terms(template_terms_w_data)
-    
-    # Remove DATE terms from consideration for other matching methods
-    remaining_user_terms = {term: data for term, data in user_terms_w_data.items() if term not in user_date_terms}
-    remaining_template_terms = {term: data for term, data in template_terms_w_data.items() if term not in noaa_date_terms}
-    
+
+    remaining_user_terms = dict(user_terms_w_data)
+    remaining_template_terms = dict(template_terms_w_data)
+
     # Exact matching against template terms
     print("Running exact matching...", flush=True)
     exact_matches = exact_match(list(remaining_template_terms.keys()), list(remaining_user_terms.keys()))
-    
+
     # Remove exact matched terms from further consideration
-    remaining_user_terms = {term: data for term, data in remaining_user_terms.items() 
+    remaining_user_terms = {term: data for term, data in remaining_user_terms.items()
                             if term not in exact_matches}
-    
+
     # Normalize terms
     normalized_template_terms = [normalize(term) for term in remaining_template_terms.keys()]
     normalized_user_terms = [normalize(term) for term in remaining_user_terms.keys()]
-    
+
     # Normalized matching against template terms
     print("Running normalized matching...", flush=True)
     normalized_matches = normalized_match(normalized_template_terms, normalized_user_terms)
-    
+
     # Remove normalized matched terms from further consideration
-    remaining_user_terms = {term: data for term, data in remaining_user_terms.items() 
+    remaining_user_terms = {term: data for term, data in remaining_user_terms.items()
                             if normalize(term) not in normalized_matches}
-    
+
     # Fuzzy matching against template terms
+    # fuzzy_match returns {norm_template: (norm_user, score)}; invert for user-side removal
     print("Running fuzzy matching...", flush=True)
     fuzzy_matches = fuzzy_match(normalized_template_terms, [normalize(term) for term in remaining_user_terms])
-    
-    # Remove fuzzy matched terms from further consideration
-    remaining_user_terms = {term: data for term, data in remaining_user_terms.items() 
-                            if normalize(term) not in fuzzy_matches}
-    
+    fuzzy_user_norms = {norm_user for norm_user, _ in fuzzy_matches.values()}
+    remaining_user_terms = {term: data for term, data in remaining_user_terms.items()
+                            if normalize(term) not in fuzzy_user_norms}
+
     # Semantic matching using SciBERT (field name + description + example value)
     print("Running semantic (SciBERT) matching...", flush=True)
     semantic_matches_scibert = find_semantic_matches_scibert(
@@ -92,13 +83,23 @@ def main():
 
     # Identify new terms
     new_terms = list(remaining_user_terms.keys())
-    
+
     # Generate report
     print("Writing report...", flush=True)
-    generate_report(normalized_matches, exact_matches, semantic_matches_scibert, new_terms, 
-                    'term_matching_report.csv', user_terms_w_data, template_terms_w_data,
-                    bert_threshold=0.3, num_matches=num_matches)
-    print("Done. Wrote term_matching_report.csv", flush=True)
+    report_path = generate_report(
+        normalized_matches,
+        exact_matches,
+        semantic_matches_scibert,
+        new_terms,
+        'term_matching_report.html',
+        user_terms_w_data,
+        template_terms_w_data,
+        bert_threshold=0.3,
+        num_matches=num_matches,
+        fuzzy_matches=fuzzy_matches,
+    )
+    print(f"Done. Wrote {report_path}", flush=True)
+    webbrowser.open(Path(report_path).resolve().as_uri())
 
 if __name__ == '__main__':
     main()
