@@ -58,7 +58,7 @@ sudo dnf install git-lfs
 ## Usage
 
 ### What you need
-Two JSON files. Defaults live in `inputs/`. `main.py` will ask for paths (hit ENTER to use the defaults).
+Two JSON files in `inputs/`. `main.py` lists every `*.json` there as a numbered menu — pick a number for the FAIRe/template standard (match **to**), then another for your standard (match **from**).
 
 | File | What it is |
 |------|------------|
@@ -89,7 +89,7 @@ python data_loading/parse_faire_checklist.py
 That rewrites `inputs/FAIRe_standard.json`. Run it again if the checklist gets new terms.
 
 ### Your own standard
-Same JSON shape: `{ "field": { "value": ..., "description": "..." } }`. Write a small parser for your Excel/YAML/whatever, or edit by hand. Drop the file in `inputs/` or pass the path when `main.py` asks.
+Same JSON shape: `{ "field": { "value": ..., "description": "..." } }`. Write a small parser for your Excel/YAML/whatever, or edit by hand. Drop the file in `inputs/` — it will show up in the numbered menu automatically.
 
 The shipped `user_standard_example.json` is a larger fake lab template so you can smoke-test matching:
 - some names match FAIRe exactly (`temp`, `salinity`, `ph`, `country`)
@@ -100,8 +100,14 @@ The shipped `user_standard_example.json` is a larger fake lab template so you ca
 ```bash
 python main.py
 ```
-1. How many FAIRe matches to show per user term (1-5)
-2. Paths to the two JSONs, or ENTER for the defaults above
+1. Pick the FAIRe/template JSON from the numbered list
+2. Pick your standard JSON from the same list
+3. How many FAIRe matches to show per user term (1-5)
+
+Install/refresh deps after pulling (adds `rich` + `pyfiglet` for the CLI banner):
+```bash
+conda env update -f environment.yml
+```
 3. Browser opens `term_matching_report.html` (summary table + field-by-field candidates)
 
 Semantic matching embeds **field descriptions** with a sentence embedding model (not raw SciBERT), then lightly blends contentful field-name tokens (generic words like `id` / `name` / `code` are ignored). Template embeddings are cached under `.cache/embeddings/`. First run may download the model from HuggingFace once.

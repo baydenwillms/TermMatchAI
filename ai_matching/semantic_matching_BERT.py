@@ -82,16 +82,18 @@ _NAME_STOPWORDS = {
 }
 
 
-def _get_model():
+def _get_model(quiet=False):
     global _model
     if _model is None:
-        print(
-            "Loading sentence embedding model (all-mpnet-base-v2) for description matching. "
-            "First time only: downloads from HuggingFace and caches on disk.",
-            flush=True,
-        )
+        if not quiet:
+            print(
+                "Loading sentence embedding model (all-mpnet-base-v2) for description matching. "
+                "First time only: downloads from HuggingFace and caches on disk.",
+                flush=True,
+            )
         _model = SentenceTransformer(MODEL_NAME)
-        print("Model ready.", flush=True)
+        if not quiet:
+            print("Model ready.", flush=True)
     return _model
 
 
@@ -198,17 +200,19 @@ def _texts_cache_path(label, texts):
     return os.path.join(_cache_dir(), h.hexdigest() + '.pt')
 
 
-def embed_texts(texts, model, label='texts', use_cache=False):
+def embed_texts(texts, model, label='texts', use_cache=False, quiet=False):
     """Embed strings with sentence-transformers. Optionally cache by content hash."""
     if not texts:
         return torch.empty((0, 0))
 
     cache_path = _texts_cache_path(label, texts) if use_cache else None
     if cache_path and os.path.isfile(cache_path):
-        print(f"  using cached embeddings ({label}, {len(texts)} texts)", flush=True)
+        if not quiet:
+            print(f"  using cached embeddings ({label}, {len(texts)} texts)", flush=True)
         return torch.load(cache_path, map_location='cpu')
 
-    print(f"  embedding {len(texts)} texts ({label})...", flush=True)
+    if not quiet:
+        print(f"  embedding {len(texts)} texts ({label})...", flush=True)
     emb = model.encode(
         texts,
         batch_size=BATCH_SIZE,
@@ -218,17 +222,20 @@ def embed_texts(texts, model, label='texts', use_cache=False):
     )
     if cache_path:
         torch.save(emb, cache_path)
-        print(f"  cached embeddings -> {cache_path}", flush=True)
+        if not quiet:
+            print(f"  cached embeddings -> {cache_path}", flush=True)
     return emb
 
 
-def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data, num_matches=5):
+def find_semantic_matches_scibert(
+    user_terms_with_data, template_terms_with_data, num_matches=5, quiet=False
+):
     """
     Semantic match: embed field descriptions with a sentence-transformer, lightly blend
     contentful field-name token overlap (ignoring generic id/name/code tokens).
     Template embeddings are cached on disk so re-runs against the same standard are fast.
     """
-    model = _get_model()
+    model = _get_model(quiet=quiet)
 
     user_terms = list(user_terms_with_data.keys())
     template_terms = list(template_terms_with_data.keys())
@@ -236,20 +243,24 @@ def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data
     if not user_terms or not template_terms:
         return {}
 
-    print(
-        f"Semantic matching: {len(user_terms)} user fields x {len(template_terms)} template fields "
-        f"(score = {int(WEIGHT_DESCRIPTION * 100)}% description + {int(WEIGHT_NAME * 100)}% name tokens)",
-        flush=True,
-    )
+    if not quiet:
+        print(
+            f"Semantic matching: {len(user_terms)} user fields x {len(template_terms)} template fields "
+            f"(score = {int(WEIGHT_DESCRIPTION * 100)}% description + {int(WEIGHT_NAME * 100)}% name tokens)",
+            flush=True,
+        )
 
     user_texts = [description_text(t, user_terms_with_data[t]) for t in user_terms]
     template_texts = [description_text(t, template_terms_with_data[t]) for t in template_terms]
 
     # User side is usually small / changes often; template (e.g. FAIRe) is large and stable -> cache
-    user_emb = embed_texts(user_texts, model, label='user', use_cache=False)
-    template_emb = embed_texts(template_texts, model, label='template', use_cache=True)
+    user_emb = embed_texts(user_texts, model, label='user', use_cache=False, quiet=quiet)
+    template_emb = embed_texts(
+        template_texts, model, label='template', use_cache=True, quiet=quiet
+    )
 
-    print("Scoring (description cosine + content name tokens)...", flush=True)
+    if not quiet:
+        print("Scoring (description cosine + content name tokens)...", flush=True)
     # encode(..., normalize_embeddings=True) => cosine = dot product
     desc_sim = torch.mm(user_emb, template_emb.T)
 
@@ -279,5 +290,6 @@ def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data
             for rank, j in enumerate(indices.tolist())
         ]
 
-    print("Semantic matching done.", flush=True)
+    if not quiet:
+        print("Semantic matching done.", flush=True)
     return matches
