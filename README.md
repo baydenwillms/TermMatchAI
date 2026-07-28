@@ -4,13 +4,9 @@ TermMatchAI is a library designed to match terms between two datasets using exac
 
 What is the use case?
 - Data is much less useful if you are unable to compare data between different datasets. __For example:__ my lab measures the general sampling environment with term name of 'habitat', with data like: 'oceanic mesopelagic zone biome', and another lab uses the term name 'env_local_scale' with data like: 'marine photic zone [ENVO:00000209]'. TermMatchAI will tell you that they are the closest match to one another.
-- This project also identifies lists of ID and Date/time related fields for each dataset and groups them together. It also identifies the compound key of the ID fields for each dataset.
+- Matching methods: exact name, normalized name, fuzzy name similarity, then semantic (SciBERT) using field descriptions plus field-name tokens.
 
-Please see `term_matching_report_ACTUAL.csv` for an __example output.__ There is also a nicely formatted output file (if you perform the commands below and Bold column names), see `term_matching_report_NICE_FORMAT.xslx`. To format it in nicely in Excel, Press:
-```
-CTRL + A
-ALT + O + C + A
-```
+After a run, open `term_matching_report.html` in a browser (it should open automatically).
 
 The project uses a custom trained version of [SciBERT](#citations). SciBERT is a SentenceBERT AI model that is trained on scientific vocabulary and data. __Custom training of this model is coming soon.__
 
@@ -95,9 +91,9 @@ That rewrites `inputs/FAIRe_standard.json`. Run it again if the checklist gets n
 ### Your own standard
 Same JSON shape: `{ "field": { "value": ..., "description": "..." } }`. Write a small parser for your Excel/YAML/whatever, or edit by hand. Drop the file in `inputs/` or pass the path when `main.py` asks.
 
-The shipped `user_standard_example.json` is intentionally mixed so you can smoke-test matching:
-- some names match FAIRe exactly (`temp`, `salinity`, `decimalLatitude`)
-- some are close but different (`habitat`, `collection_gear`, `filter_pore_um`)
+The shipped `user_standard_example.json` is a larger fake lab template so you can smoke-test matching:
+- some names match FAIRe exactly (`temp`, `salinity`, `ph`, `country`)
+- many are close but differently named (`sample_id`, `habitat`, `collection_gear`, `filter_pore_um`, ...)
 - one is lab-only junk that should not map cleanly (`lab_internal_batch`)
 
 ### Run matching
@@ -106,7 +102,9 @@ python main.py
 ```
 1. How many FAIRe matches to show per user term (1-5)
 2. Paths to the two JSONs, or ENTER for the defaults above
-3. You get `term_matching_report.csv` in the project root
+3. Browser opens `term_matching_report.html` (summary table + field-by-field candidates)
+
+Semantic matching embeds **descriptions** (example values are not used in the AI score), then blends that with field-name token overlap. Template embeddings are cached under `.cache/embeddings/` so re-runs against the same FAIRe JSON are much faster. The first run still downloads SciBERT once from HuggingFace into your local cache.
 
 ### Training the AI Model
 __Currently under development, this is how I was training the model previously. Barely improved results__

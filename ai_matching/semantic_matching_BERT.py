@@ -1,5 +1,8 @@
 # from sentence_transformers import SentenceTransformer, util
-from transformers import AutoModel, AutoTokenizer
+from sentence_transformers import SentenceTransformer
+import hashlib
+import os
+import re
 import torch
 from data_loading.data_loading import get_term_value, get_term_description
 
@@ -7,41 +10,131 @@ from data_loading.data_loading import get_term_value, get_term_description
 # Load SentenceBERT model
 # model = SentenceTransformer('all-MiniLM-L6-v2')
 
-# New SciBERT model. BERT model pre-trained with Scientific papers, vocabulary
+# SciBERT: scientific vocabulary. Loaded via sentence-transformers for fast batched encode.
 MODEL_NAME = 'allenai/scibert_scivocab_uncased'
 
 # Use custom trained eDNA SciBERT model
 # MODEL_NAME = './ai_matching/eDNA_scibert_model'
 
 # Lazy-loaded so main.py can print prompts before the model download/load
-_tokenizer = None
 _model = None
 
-MAX_LENGTH = 512
-BATCH_SIZE = 16
+BATCH_SIZE = 32
+
+# How much each signal counts in the final semantic score (must sum to 1.0).
+# Descriptions carry meaning; names are a secondary signal. Example values are NOT embedded
+# (they make unrelated ID-like fields look similar).
+WEIGHT_DESCRIPTION = 0.75
+WEIGHT_NAME = 0.25
+
+# Generic abbreviation expansions for field-name token matching (any metadata standard).
+_NAME_ABBREVS = {
+    'samp': 'sample',
+    'temp': 'temperature',
+    'lat': 'latitude',
+    'lon': 'longitude',
+    'long': 'longitude',
+    'lng': 'longitude',
+    'env': 'environment',
+    'vol': 'volume',
+    'conc': 'concentration',
+    'id': 'identifier',
+    'num': 'number',
+    'qty': 'quantity',
+    'desc': 'description',
+    'loc': 'location',
+    'geo': 'geographic',
+    'elev': 'elevation',
+    'alt': 'altitude',
+    'dur': 'duration',
+    'meth': 'method',
+    'mat': 'material',
+    'org': 'organism',
+    'biol': 'biological',
+    'chem': 'chemical',
+    'seq': 'sequence',
+    'nucl': 'nucleic',
+    'ext': 'extraction',
+    'amp': 'amplification',
+    'rep': 'replicate',
+    'cont': 'control',
+    'pos': 'positive',
+    'neg': 'negative',
+    'fwd': 'forward',
+    'rev': 'reverse',
+    'primer': 'primer',
+    'lib': 'library',
+    'run': 'run',
+    'proj': 'project',
+    'inst': 'institution',
+    'depth': 'depth',
+    'ph': 'ph',
+}
 
 
 def _get_model():
-    global _tokenizer, _model
+    global _model
     if _model is None:
-        print("Loading SciBERT model (first run may download weights)...", flush=True)
-        _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-        _model = AutoModel.from_pretrained(MODEL_NAME)
-        _model.eval()
-        print("SciBERT ready.", flush=True)
-    return _model, _tokenizer
+        print(
+            "Loading SciBERT (the AI model used for meaning). "
+            "First time only: downloads model files from HuggingFace and caches them on disk. "
+            "Later runs reuse the local cache.",
+            flush=True,
+        )
+        # sentence-transformers wraps SciBERT with mean pooling and fast batch encode
+        _model = SentenceTransformer(MODEL_NAME)
+        print("Model ready.", flush=True)
+    return _model
+
+
+def humanize_field_name(term):
+    """sample_id / decimalLatitude -> 'sample id' / 'decimal latitude'."""
+    s = re.sub(r'([a-z0-9])([A-Z])', r'\1 \2', str(term))
+    s = s.replace('_', ' ').replace('-', ' ')
+    return re.sub(r'\s+', ' ', s).strip().lower()
+
+
+def field_name_tokens(term):
+    """Token set for name similarity, with common metadata abbreviations expanded."""
+    tokens = set()
+    for raw in humanize_field_name(term).split():
+        tokens.add(raw)
+        if raw in _NAME_ABBREVS:
+            tokens.add(_NAME_ABBREVS[raw])
+    return tokens
+
+
+def name_similarity(term_a, term_b):
+    """Dice coefficient on expanded name tokens (0-1)."""
+    a = field_name_tokens(term_a)
+    b = field_name_tokens(term_b)
+    if not a or not b:
+        return 0.0
+    inter = len(a & b)
+    return (2.0 * inter) / (len(a) + len(b))
 
 
 # Old version of combine_term_and_data, accounts for when data example is 'None' to help avoid matching other terms with 'None'
 # def combine_term_and_data(term, data):
 #     return f"{term}: {data}"
 
-# Build the text SciBERT embeds: field name + description + example value.
-# Description is the main signal for meaning; value helps disambiguate similar fields.
+def description_text(term, entry):
+    """
+    Text SciBERT embeds for meaning. Description is primary; field name is context only.
+    Example values are intentionally omitted so shared ID-like values do not hijack matching.
+    """
+    description = (get_term_description(entry) or '').strip()
+    name = humanize_field_name(term)
+    if description:
+        # Repeat description so it dominates the pooled embedding vs the short name.
+        return f"{description} {description} Field name: {name}."
+    return f"Field name: {name}."
+
+
+# Kept for any callers that still expect the old combine helper
 def combine_term_and_data(term, entry):
     description = get_term_description(entry)
     value = get_term_value(entry)
-
     parts = [str(term)]
     if description:
         parts.append(str(description))
@@ -75,67 +168,55 @@ def combine_term_and_data(term, entry):
 #         matches[term] = (match, score, user_data, matched_data)  # Return 4 elements
 #     return matches
 
-def _mean_pool(last_hidden_state, attention_mask):
-    mask = attention_mask.unsqueeze(-1).expand(last_hidden_state.size()).float()
-    summed = torch.sum(last_hidden_state * mask, dim=1)
-    counts = torch.clamp(mask.sum(dim=1), min=1e-9)
-    return summed / counts
+
+def _cache_dir():
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = os.path.join(root, '.cache', 'embeddings')
+    os.makedirs(path, exist_ok=True)
+    return path
 
 
-def embed_texts(texts, model, tokenizer, batch_size=BATCH_SIZE):
-    """Embed a list of strings in batches. Returns (N, hidden) tensor."""
-    chunks = []
-    total = len(texts)
-    for start in range(0, total, batch_size):
-        batch = texts[start:start + batch_size]
-        inputs = tokenizer(
-            batch,
-            return_tensors='pt',
-            padding=True,
-            truncation=True,
-            max_length=MAX_LENGTH,
-        )
-        with torch.no_grad():
-            outputs = model(**inputs)
-            emb = _mean_pool(outputs.last_hidden_state, inputs['attention_mask'])
-        chunks.append(emb)
-        done = min(start + batch_size, total)
-        print(f"  embedded {done}/{total}", flush=True)
-    return torch.cat(chunks, dim=0)
+def _texts_cache_path(label, texts):
+    h = hashlib.sha256()
+    h.update(MODEL_NAME.encode('utf-8'))
+    h.update(b'\0')
+    h.update(label.encode('utf-8'))
+    for t in texts:
+        h.update(t.encode('utf-8'))
+        h.update(b'\n')
+    return os.path.join(_cache_dir(), h.hexdigest() + '.pt')
 
 
-def get_scibert_embedding(text, model, tokenizer):
-    return embed_texts([text], model, tokenizer, batch_size=1)
+def embed_texts(texts, model, label='texts', use_cache=False):
+    """Embed strings with sentence-transformers. Optionally cache by content hash."""
+    if not texts:
+        return torch.empty((0, 0))
 
+    cache_path = _texts_cache_path(label, texts) if use_cache else None
+    if cache_path and os.path.isfile(cache_path):
+        print(f"  using cached embeddings ({label}, {len(texts)} texts)", flush=True)
+        return torch.load(cache_path, map_location='cpu')
 
-def semantic_match_scibert(term, term_data, template_terms_with_data, model, tokenizer, num_matches=5):
-    # Kept for compatibility; prefer find_semantic_matches_scibert (batched).
-    combined_term = combine_term_and_data(term, term_data)
-    term_embedding = get_scibert_embedding(combined_term, model, tokenizer)
-    template_terms = list(template_terms_with_data.keys())
-    template_texts = [combine_term_and_data(t, template_terms_with_data[t]) for t in template_terms]
-    template_embeddings = embed_texts(template_texts, model, tokenizer)
-    sims = torch.nn.functional.cosine_similarity(
-        term_embedding, template_embeddings
+    print(f"  embedding {len(texts)} texts ({label})...", flush=True)
+    emb = model.encode(
+        texts,
+        batch_size=BATCH_SIZE,
+        convert_to_tensor=True,
+        show_progress_bar=False,
+        normalize_embeddings=True,
     )
-    top = torch.topk(sims, k=min(num_matches, len(template_terms)))
-    return [(template_terms[i], sims[i].item()) for i in top.indices.tolist()]
+    if cache_path:
+        torch.save(emb, cache_path)
+        print(f"  cached embeddings -> {cache_path}", flush=True)
+    return emb
 
-
-# def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data, num_matches=5):
-#     matches = {}
-#     for term, user_data in user_terms_with_data.items():
-#         top_matches = semantic_match_scibert(term, user_data, template_terms_with_data, model, tokenizer, num_matches)
-#         matches[term] = [(match, score, user_data, template_terms_with_data.get(match, '')) for match, score in top_matches]
-#     return matches
 
 def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data, num_matches=5):
     """
-    Semantic match user terms to FAIRe terms.
-    Embeds each side once (batched), then uses a similarity matrix.
-    Old pairwise approach re-ran SciBERT ~user_count * faire_count times and froze on large checklists.
+    Semantic match using description-heavy SciBERT embeddings + field-name token similarity.
+    Template embeddings are cached on disk so re-runs against the same standard are fast.
     """
-    model, tokenizer = _get_model()
+    model = _get_model()
 
     user_terms = list(user_terms_with_data.keys())
     template_terms = list(template_terms_with_data.keys())
@@ -143,22 +224,33 @@ def find_semantic_matches_scibert(user_terms_with_data, template_terms_with_data
     if not user_terms or not template_terms:
         return {}
 
-    print(f"Semantic matching: {len(user_terms)} user terms x {len(template_terms)} FAIRe terms", flush=True)
+    print(
+        f"Semantic matching: {len(user_terms)} user fields x {len(template_terms)} template fields "
+        f"(score = {int(WEIGHT_DESCRIPTION * 100)}% description + {int(WEIGHT_NAME * 100)}% field-name tokens)",
+        flush=True,
+    )
 
-    print("Embedding user terms...", flush=True)
-    user_texts = [combine_term_and_data(t, user_terms_with_data[t]) for t in user_terms]
-    user_emb = embed_texts(user_texts, model, tokenizer)
+    user_texts = [description_text(t, user_terms_with_data[t]) for t in user_terms]
+    template_texts = [description_text(t, template_terms_with_data[t]) for t in template_terms]
 
-    print("Embedding FAIRe terms (once)...", flush=True)
-    template_texts = [combine_term_and_data(t, template_terms_with_data[t]) for t in template_terms]
-    template_emb = embed_texts(template_texts, model, tokenizer)
+    # User side is usually small / changes often; template (e.g. FAIRe) is large and stable -> cache
+    user_emb = embed_texts(user_texts, model, label='user', use_cache=False)
+    template_emb = embed_texts(template_texts, model, label='template', use_cache=True)
 
-    print("Scoring similarities...", flush=True)
-    # Normalize then matrix multiply => cosine similarity for all pairs
-    user_norm = torch.nn.functional.normalize(user_emb, p=2, dim=1)
-    template_norm = torch.nn.functional.normalize(template_emb, p=2, dim=1)
-    # (num_user, num_template)
-    sim_matrix = torch.mm(user_norm, template_norm.T)
+    print("Scoring (description cosine + name tokens)...", flush=True)
+    # encode(..., normalize_embeddings=True) => cosine = dot product
+    desc_sim = torch.mm(user_emb, template_emb.T)
+
+    # Name token similarity matrix (CPU, cheap)
+    name_sims = torch.zeros((len(user_terms), len(template_terms)), dtype=desc_sim.dtype)
+    for i, ut in enumerate(user_terms):
+        for j, tt in enumerate(template_terms):
+            name_sims[i, j] = name_similarity(ut, tt)
+
+    if name_sims.device != desc_sim.device:
+        name_sims = name_sims.to(desc_sim.device)
+
+    sim_matrix = (WEIGHT_DESCRIPTION * desc_sim) + (WEIGHT_NAME * name_sims)
 
     k = min(num_matches, len(template_terms))
     matches = {}

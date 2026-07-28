@@ -4,6 +4,13 @@
 #Ignore token files
 token.json
 
+# Local embedding caches (speeds up re-runs)
+.cache/
+
+# Generated matching reports
+term_matching_report.html
+term_matching_report.csv
+
 #Ignore Anaconda environment.yml config file
 #environment.yml
 

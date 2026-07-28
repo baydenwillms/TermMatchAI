@@ -1,7 +1,123 @@
 {
   "sample_id": {
     "value": "LAB-2024-001-A",
-    "description": "Unique identifier for this environmental sample in our lab."
+    "description": "Unique identifier or name you choose for this environmental sample within your lab. Must be unique per submitter and consistent across related records."
+  },
+  "sample_label": {
+    "value": "Sta1_DCM_repA",
+    "description": "Short lab label for the sample used on tubes and sheets."
+  },
+  "project_code": {
+    "value": "ATL-eDNA-24",
+    "description": "Short machine-readable identifier for the research project this sample belongs to."
+  },
+  "project_title": {
+    "value": "Atlantic eDNA coastal survey 2024",
+    "description": "Human-readable name of the project under which sequencing was organized."
+  },
+  "parent_project": {
+    "value": "ATL-eDNA",
+    "description": "Identifier of an overarching parent project that groups related sub-projects."
+  },
+  "institution_name": {
+    "value": "AOML",
+    "description": "Institution that has custody of the samples or data."
+  },
+  "institution_ror": {
+    "value": "https://ror.org/02z5nhe81",
+    "description": "Persistent identifier for the institution (for example a ROR ID)."
+  },
+  "collected_by": {
+    "value": "A. Rivera",
+    "description": "Name of the person or people who collected the sample."
+  },
+  "collector_orcid": {
+    "value": "https://orcid.org/0000-0002-1825-0097",
+    "description": "ORCID or other persistent ID for the collector."
+  },
+  "contact_email": {
+    "value": "edna@example.org",
+    "description": "Email contact for questions about this dataset."
+  },
+  "collection_date": {
+    "value": "2024-06-12",
+    "description": "Calendar date when the environmental sample was collected from the field."
+  },
+  "collection_datetime": {
+    "value": "2024-06-12T14:30-04:00",
+    "description": "Date and time of sampling in ISO 8601 format including timezone when known."
+  },
+  "collection_time_local": {
+    "value": "14:30",
+    "description": "Local clock time of sampling before conversion to a full ISO timestamp."
+  },
+  "site_latitude": {
+    "value": 26.997,
+    "description": "Geographic latitude of the sampling site in decimal degrees (WGS84)."
+  },
+  "site_longitude": {
+    "value": -79.618,
+    "description": "Geographic longitude of the sampling site in decimal degrees (WGS84)."
+  },
+  "verbatim_lat": {
+    "value": "26 59.82 N",
+    "description": "Latitude as originally recorded before conversion to decimal degrees."
+  },
+  "verbatim_lon": {
+    "value": "79 37.08 W",
+    "description": "Longitude as originally recorded before conversion to decimal degrees."
+  },
+  "location_name": {
+    "value": "USA: Atlantic Ocean, east of Florida",
+    "description": "Geographic origin written as country or sea name followed by region and locality."
+  },
+  "water_body": {
+    "value": "Atlantic Ocean",
+    "description": "Name of the water body where sampling occurred."
+  },
+  "country": {
+    "value": "US",
+    "description": "Country or sea associated with the sampling location."
+  },
+  "habitat": {
+    "value": "oceanic mesopelagic zone biome",
+    "description": "Local-scale environment or habitat entities near the sample that influence it."
+  },
+  "broad_biome": {
+    "value": "marine biome",
+    "description": "Broad-scale environmental context or biome of the sampling site."
+  },
+  "sample_material": {
+    "value": "sea water",
+    "description": "Environmental medium or material the sample is made of (water, soil, sediment, etc.)."
+  },
+  "natural_or_artificial_site": {
+    "value": 0,
+    "description": "Whether the habitat is natural (0) or artificial (1)."
+  },
+  "sample_depth_m": {
+    "value": 49,
+    "description": "Depth below the surface where the sample was taken, in meters."
+  },
+  "min_depth_m": {
+    "value": 45,
+    "description": "Minimum depth of the sampling interval in meters."
+  },
+  "max_depth_m": {
+    "value": 55,
+    "description": "Maximum depth of the sampling interval in meters."
+  },
+  "bottom_depth_m": {
+    "value": 870,
+    "description": "Total depth of the water column or seafloor depth at the station in meters."
+  },
+  "elevation_m": {
+    "value": null,
+    "description": "Elevation of the sampling site above sea level in meters, if applicable."
+  },
+  "water_temperature_C": {
+    "value": 22.1,
+    "description": "In-situ temperature of the sample or water at the moment of sampling, degrees Celsius."
   },
   "temp": {
     "value": 18.5,
@@ -11,41 +127,29 @@
     "value": 35.2,
     "description": "Practical salinity of the water sample in PSU."
   },
-  "decimalLatitude": {
-    "value": 26.997,
-    "description": "Latitude of the sampling site in decimal degrees (WGS84)."
+  "ph": {
+    "value": 8.1,
+    "description": "pH of the water or environmental sample at collection."
   },
-  "site_longitude": {
-    "value": -79.618,
-    "description": "Longitude of where the sample was taken, in decimal degrees."
+  "dissolved_oxygen": {
+    "value": 6.4,
+    "description": "Dissolved oxygen concentration measured at sampling."
   },
-  "collection_date": {
-    "value": "2024-06-12",
-    "description": "Calendar date when the environmental sample was collected."
+  "dissolved_oxygen_unit": {
+    "value": "mg/L",
+    "description": "Unit for the dissolved oxygen measurement."
   },
-  "water_temperature_C": {
-    "value": 22.1,
-    "description": "In-situ water temperature measured at the sampling moment, Celsius."
+  "turbidity": {
+    "value": 0.8,
+    "description": "Turbidity of the water sample at collection."
   },
-  "habitat": {
-    "value": "oceanic mesopelagic zone biome",
-    "description": "Local-scale environment or habitat where the sample was collected."
+  "chlorophyll": {
+    "value": 1.2,
+    "description": "Chlorophyll concentration associated with the sample."
   },
-  "sample_material": {
-    "value": "sea water",
-    "description": "What the sample physically is (water, soil, sediment, etc.)."
-  },
-  "broad_biome": {
-    "value": "marine biome",
-    "description": "Broad environmental context of the sampling site (biome-level)."
-  },
-  "location_name": {
-    "value": "USA: Atlantic Ocean, east of Florida",
-    "description": "Human-readable place name for the sampling location."
-  },
-  "collected_by": {
-    "value": "A. Rivera",
-    "description": "Name of the person who collected the sample."
+  "collection_method": {
+    "value": "CTD rosette cast",
+    "description": "Method or protocol used to collect the environmental sample."
   },
   "collection_gear": {
     "value": "Niskin bottle",
@@ -53,34 +157,198 @@
   },
   "volume_collected_L": {
     "value": 2.0,
-    "description": "Volume of water collected from the environment, in liters."
+    "description": "Amount of original environmental sample collected (volume). Unit given separately."
+  },
+  "volume_collected_unit": {
+    "value": "L",
+    "description": "Unit for the collected sample size or volume."
   },
   "filter_pore_um": {
     "value": 0.22,
-    "description": "Pore size of the filter used during sample filtration, micrometers."
+    "description": "Pore size of the filter used during sample filtration, in micrometers."
   },
-  "sample_depth_m": {
-    "value": 49,
-    "description": "Depth below the surface where the sample was taken, in meters."
+  "prefilter_pore_um": {
+    "value": 200,
+    "description": "Pore size of any prefilter used before the main filtration, micrometers."
+  },
+  "filter_material": {
+    "value": "polyethersulfone",
+    "description": "Material the filter membrane is made of."
+  },
+  "filter_diameter_mm": {
+    "value": 25,
+    "description": "Diameter of the filter used, in millimeters."
+  },
+  "pump_flow_rate": {
+    "value": 0.5,
+    "description": "Flow rate of the pump used during active filtration."
+  },
+  "filtration_notes": {
+    "value": "Pumped through Sterivex 0.22 µm",
+    "description": "Additional notes on how the sample material was processed or filtered before extraction."
   },
   "storage_freezer_C": {
     "value": -80,
-    "description": "Temperature of the freezer where the sample was stored before extraction."
+    "description": "Temperature at which the environmental sample was stored before DNA extraction, Celsius."
   },
-  "ph": {
-    "value": 8.1,
-    "description": "pH of the water sample at collection."
+  "storage_duration": {
+    "value": "P14D",
+    "description": "How long the sample was stored before processing (ISO 8601 duration when possible)."
   },
-  "project_code": {
-    "value": "ATL-eDNA-24",
-    "description": "Short code for the research project this sample belongs to."
+  "storage_location": {
+    "value": "Lab B freezer 2",
+    "description": "Physical location where the sample was stored."
+  },
+  "storage_solution": {
+    "value": "none",
+    "description": "Buffer or preservative solution the sample was stored in, if any."
+  },
+  "biological_replicate": {
+    "value": "A",
+    "description": "Label distinguishing biological replicate samples from the same site or event."
+  },
+  "extraction_date": {
+    "value": "2024-06-28",
+    "description": "Date when nucleic acids were extracted from the sample."
+  },
+  "extraction_volume_ml": {
+    "value": 1.5,
+    "description": "Volume or mass of sample material used for DNA extraction."
+  },
+  "extraction_volume_unit": {
+    "value": "ml",
+    "description": "Unit for the amount of material used in DNA extraction."
+  },
+  "extraction_kit": {
+    "value": "Qiagen DNeasy PowerWater",
+    "description": "Commercial kit used for nucleic acid extraction."
+  },
+  "extraction_protocol": {
+    "value": "https://example.org/protocols/dna-ext",
+    "description": "Link or citation for the nucleic acid extraction method."
+  },
+  "dna_concentration": {
+    "value": 12.4,
+    "description": "Concentration of extracted nucleic acids."
+  },
+  "dna_concentration_unit": {
+    "value": "ng/uL",
+    "description": "Unit for nucleic acid concentration."
+  },
+  "dna_concentration_method": {
+    "value": "Qubit dsDNA HS",
+    "description": "Method used to measure nucleic acid concentration."
+  },
+  "absorbance_260_280": {
+    "value": 1.85,
+    "description": "Ratio of absorbance at 260 nm to 280 nm for DNA purity."
+  },
+  "target_gene": {
+    "value": "16S rRNA",
+    "description": "Gene or genomic region targeted by the assay or primers."
+  },
+  "target_subfragment": {
+    "value": "V4-V5",
+    "description": "Subfragment or variable region of the target gene amplified."
+  },
+  "forward_primer_seq": {
+    "value": "GTGCCAGCMGCCGCGGTAA",
+    "description": "Nucleotide sequence of the forward PCR primer."
+  },
+  "reverse_primer_seq": {
+    "value": "CCGTCAATTCCTTTGAGTTT",
+    "description": "Nucleotide sequence of the reverse PCR primer."
+  },
+  "forward_primer_name": {
+    "value": "515F",
+    "description": "Name of the forward PCR primer."
+  },
+  "reverse_primer_name": {
+    "value": "926R",
+    "description": "Name of the reverse PCR primer."
+  },
+  "amplicon_length_bp": {
+    "value": 410,
+    "description": "Expected length of the PCR amplicon in base pairs."
+  },
+  "annealing_temp_C": {
+    "value": 55,
+    "description": "PCR annealing temperature in degrees Celsius."
+  },
+  "pcr_cycles": {
+    "value": 30,
+    "description": "Number of PCR cycles used for amplification."
+  },
+  "pcr_reaction_volume_uL": {
+    "value": 25,
+    "description": "Total volume of the PCR amplification reaction in microliters."
+  },
+  "pcr_replicate": {
+    "value": 1,
+    "description": "Integer identifying a PCR technical replicate within a sample."
+  },
+  "thermocycler_model": {
+    "value": "Bio-Rad C1000",
+    "description": "Model of thermocycler used for PCR."
+  },
+  "master_mix": {
+    "value": "Qiagen Multiplex PCR Kit",
+    "description": "Commercial master mix used for PCR."
+  },
+  "sequencing_platform": {
+    "value": "Illumina",
+    "description": "Sequencing platform used to generate reads."
+  },
+  "sequencing_instrument": {
+    "value": "MiSeq",
+    "description": "Specific sequencing instrument model."
+  },
+  "library_id": {
+    "value": "LIB-S01-MiSeq-20240630",
+    "description": "Identifier of a sequencing library (amplicon of a sample with unique indexes/MIDs)."
+  },
+  "seq_run_id": {
+    "value": "run20240630",
+    "description": "Identifier for the sequencing run."
+  },
+  "library_layout": {
+    "value": "paired",
+    "description": "Whether sequencing libraries are single-end or paired-end."
+  },
+  "forward_fastq": {
+    "value": "S01_R1.fastq.gz",
+    "description": "Filename of the forward sequencing reads."
+  },
+  "reverse_fastq": {
+    "value": "S01_R2.fastq.gz",
+    "description": "Filename of the reverse sequencing reads."
+  },
+  "assay_type": {
+    "value": "metabarcoding",
+    "description": "Whether the study uses a targeted assay (e.g. qPCR) or community metabarcoding."
+  },
+  "license": {
+    "value": "CC-BY-4.0",
+    "description": "License under which the data are shared."
   },
   "notes_field": {
     "value": "Slight chop; bottle rinsed twice before fill.",
-    "description": "Free-text notes written by the field team during sampling."
+    "description": "Free-text remarks about the sampling event or sample."
   },
   "lab_internal_batch": {
     "value": "EXTRACT-Q2-17",
-    "description": "Our lab's internal batch label for DNA extraction runs. Not part of any public standard."
+    "description": "Internal lab batch label for DNA extraction runs. Not intended as a public standard term."
+  },
+  "weather_at_sampling": {
+    "value": "partly cloudy, light wind",
+    "description": "Weather conditions observed during sampling."
+  },
+  "neg_control_flag": {
+    "value": 0,
+    "description": "Whether this record is a negative control sample (1) or not (0)."
+  },
+  "pos_control_flag": {
+    "value": 0,
+    "description": "Whether this record is a positive control sample (1) or not (0)."
   }
 }

@@ -467,7 +467,7 @@ def generate_report(
     <footer class="note">
       Exact / normalized = name match (shown as 100%).
       Fuzzy = string similarity (0-100).
-      Semantic = SciBERT similarity on field name + description + example value (shown as %).
+      Semantic = mostly description meaning (SciBERT) plus some field-name token overlap; example values are not used in the AI score.
       Semantic threshold used: {bert_threshold:.2f} ({bert_threshold * 100:.0f}%).
     </footer>
   </div>
