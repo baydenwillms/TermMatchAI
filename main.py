@@ -1,5 +1,8 @@
 from pathlib import Path
+import os
 import webbrowser
+
+os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
 
 from data_loading.data_loading import (
     get_terms_with_data,
@@ -17,6 +20,7 @@ from cli_ui import (
     quiet_third_party_logs,
     print_banner,
     list_input_jsons,
+    print_input_json_menu,
     prompt_choose_input_json,
     prompt_num_matches,
     default_index_for,
@@ -30,19 +34,23 @@ def main():
     print_banner()
 
     input_files = list_input_jsons()
+    print_input_json_menu(input_files)
+
     faire_path = prompt_choose_input_json(
-        "Match TO — FAIRe / template standard",
+        "1/2",
+        "Map to",
+        "FAIR eDNA data standard (template)",
         input_files,
         default_index=default_index_for(input_files, Path(FAIRE_STANDARD_PATH).name),
-        show_menu=True,
     )
     user_path = prompt_choose_input_json(
-        "Match FROM — your / other data standard",
+        "2/2",
+        "Map from",
+        "Your data standard",
         input_files,
         default_index=default_index_for(
             input_files, Path(USER_STANDARD_EXAMPLE_PATH).name
         ),
-        show_menu=False,
     )
     num_matches = prompt_num_matches(default=3)
 
@@ -53,7 +61,7 @@ def main():
     )
     step_done(
         f"Loaded {len(user_terms_w_data)} user fields → "
-        f"{len(template_terms_w_data)} FAIRe fields"
+        f"{len(template_terms_w_data)} FAIR eDNA fields"
     )
     console.print()
 

@@ -10,10 +10,10 @@ Expected JSON format (one file per data standard):
 }
 
 Typical pair:
-  inputs/FAIRe_standard.json     — FAIRe eDNA standard (match TO this)
+  inputs/FAIRe_standard.json     — FAIR eDNA data standard (match TO this)
   inputs/user_standard_example.json — your / another lab's standard (match FROM this)
 
-Regenerate FAIRe JSON after checklist updates:
+Regenerate FAIR eDNA JSON after checklist updates:
   python data_loading/parse_faire_checklist.py
 '''
 
@@ -72,7 +72,7 @@ def load_terms_json(path):
 
 def get_terms_with_data(faire_path=None, user_path=None):
     """
-    Load FAIRe (template) + user (incoming) term dictionaries from JSON.
+    Load FAIR eDNA (template) + user (incoming) term dictionaries from JSON.
     Defaults to inputs/FAIRe_standard.json and inputs/user_standard_example.json.
     """
     faire_path = faire_path or FAIRE_STANDARD_PATH
