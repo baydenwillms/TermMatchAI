@@ -490,7 +490,7 @@ def generate_report(
     <img class="icon" src="{html.escape(icon_href)}" alt="" />
     <div class="titles">
       <strong>TermMatchAI</strong>
-      <span>User standard mapped to FAIR eDNA</span>
+      <span>Map fields across data standards</span>
     </div>
   </div>
 
@@ -501,7 +501,7 @@ def generate_report(
 
     <h1>TermMatchAI Report</h1>
     <p class="sub">
-      Click each row to see alternate matches.
+      Click each row to see alternate field mappings.
       You can hover on term names or click for more information.
     </p>
     <p class="counts">
