@@ -1,0 +1,342 @@
+{
+  "samp_name": {
+    "value": "ISDsoil1",
+    "description": "A local identifier or name that for the material sample used for extracting nucleic acids, and subsequent sequencing. It can refer either to the original material collected or to any derived sub-samples. It can have any format, but we suggest that you make it concise, unique and consistent within your lab, and as informative as possible. INSDC requires every sample name from a single Submitter to be unique. Use of a globally unique identifier for the field source_mat_id is recommended in addition to sample_name"
+  },
+  "project_name": {
+    "value": "Forest soil metagenome",
+    "description": "Name of the project within which the sequencing was organized"
+  },
+  "depth": {
+    "value": "10 meter",
+    "description": "The vertical distance below local surface. For sediment or soil samples depth is measured from sediment or soil surface, respectively. Depth can be reported as an interval for subsurface samples"
+  },
+  "elev": {
+    "value": "100 meter",
+    "description": "Elevation of the sampling site is its height above a fixed reference point, most commonly the mean sea level. Elevation is mainly used when referring to points on the earth's surface, while altitude is used for points above the surface, such as an aircraft in flight or a spacecraft in orbit"
+  },
+  "alkalinity": {
+    "value": "50 milligram per liter",
+    "description": "Alkalinity, the ability of a solution to neutralize acids to the equivalence point of carbonate or bicarbonate"
+  },
+  "alkalinity_method": {
+    "value": "titration",
+    "description": "Method used for alkalinity measurement"
+  },
+  "alkyl_diethers": {
+    "value": "0.005 mole per liter",
+    "description": "Concentration of alkyl diethers"
+  },
+  "aminopept_act": {
+    "value": "0.269 mole per liter per hour",
+    "description": "Measurement of aminopeptidase activity"
+  },
+  "ammonium": {
+    "value": "1.5 milligram per liter",
+    "description": "Concentration of ammonium in the sample"
+  },
+  "atmospheric_data": {
+    "value": "wind speed;9 knots",
+    "description": "Measurement of atmospheric data; can include multiple data"
+  },
+  "bacteria_carb_prod": {
+    "value": "2.53 microgram per liter per hour",
+    "description": "Measurement of bacterial carbon production"
+  },
+  "bac_prod": {
+    "value": "5 milligram per cubic meter per day",
+    "description": "Bacterial production in the water column measured by isotope uptake"
+  },
+  "bac_resp": {
+    "value": "300 micromole oxygen per liter per hour",
+    "description": "Measurement of bacterial respiration in the water column"
+  },
+  "biomass": {
+    "value": "total;20 gram",
+    "description": "Amount of biomass; should include the name for the part of biomass measured, e.g. Microbial, total. Can include multiple measurements"
+  },
+  "bishomohopanol": {
+    "value": "14 microgram per liter",
+    "description": "Concentration of bishomohopanol"
+  },
+  "bromide": {
+    "value": "0.05 parts per million",
+    "description": "Concentration of bromide"
+  },
+  "calcium": {
+    "value": "0.2 micromole per liter",
+    "description": "Concentration of calcium in the sample"
+  },
+  "carb_nitro_ratio": {
+    "value": "0.417361111",
+    "description": "Ratio of amount or concentrations of carbon to nitrogen"
+  },
+  "chem_administration": {
+    "value": "agar [CHEBI:2509];2018-05-11T20:00Z",
+    "description": "List of chemical compounds administered to the host or site where sampling occurred, and when (e.g. Antibiotics, n fertilizer, air filter); can include multiple compounds. For chemical entities of biological interest ontology (chebi) (v 163), http://purl.bioontology.org/ontology/chebi"
+  },
+  "chloride": {
+    "value": "5000 milligram per liter",
+    "description": "Concentration of chloride in the sample"
+  },
+  "chlorophyll": {
+    "value": "5 milligram per cubic meter",
+    "description": "Concentration of chlorophyll"
+  },
+  "conduc": {
+    "value": "10 milliSiemens per centimeter",
+    "description": "Electrical conductivity of water"
+  },
+  "density": {
+    "value": "1000 kilogram per cubic meter",
+    "description": "Density of the sample, which is its mass per unit volume (aka volumetric mass density)"
+  },
+  "diether_lipids": {
+    "value": "0.2 nanogram per liter",
+    "description": "Concentration of diether lipids; can include multiple types of diether lipids"
+  },
+  "diss_carb_dioxide": {
+    "value": "5 milligram per liter",
+    "description": "Concentration of dissolved carbon dioxide in the sample or liquid portion of the sample"
+  },
+  "diss_hydrogen": {
+    "value": "0.3 micromole per liter",
+    "description": "Concentration of dissolved hydrogen"
+  },
+  "diss_inorg_carb": {
+    "value": "2059 micromole per kilogram",
+    "description": "Dissolved inorganic carbon concentration in the sample, typically measured after filtering the sample using a 0.45 micrometer filter"
+  },
+  "diss_inorg_nitro": {
+    "value": "761 micromole per liter",
+    "description": "Concentration of dissolved inorganic nitrogen"
+  },
+  "diss_inorg_phosp": {
+    "value": "56.5 micromole per liter",
+    "description": "Concentration of dissolved inorganic phosphorus in the sample"
+  },
+  "diss_org_carb": {
+    "value": "197 micromole per liter",
+    "description": "Concentration of dissolved organic carbon in the sample, liquid portion of the sample, or aqueous phase of the fluid"
+  },
+  "diss_org_nitro": {
+    "value": "0.05 micromole per liter",
+    "description": "Dissolved organic nitrogen concentration measured as; total dissolved nitrogen - NH4 - NO3 - NO2"
+  },
+  "diss_oxygen": {
+    "value": "175 micromole per kilogram",
+    "description": "Concentration of dissolved oxygen"
+  },
+  "down_par": {
+    "value": "28.71 microEinstein per square meter per second",
+    "description": "Visible waveband radiance and irradiance measurements in the water column"
+  },
+  "fluor": {
+    "value": "2.5 volts",
+    "description": "Raw or converted fluorescence of water"
+  },
+  "glucosidase_act": {
+    "value": "5 mol per liter per hour",
+    "description": "Measurement of glucosidase activity"
+  },
+  "light_intensity": {
+    "value": "0.3 lux",
+    "description": "Measurement of light intensity"
+  },
+  "magnesium": {
+    "value": "52.8 micromole per kilogram",
+    "description": "Concentration of magnesium in the sample"
+  },
+  "mean_frict_vel": {
+    "value": "0.5 meter per second",
+    "description": "Measurement of mean friction velocity"
+  },
+  "mean_peak_frict_vel": {
+    "value": "1 meter per second",
+    "description": "Measurement of mean peak friction velocity"
+  },
+  "misc_param": {
+    "value": "Bicarbonate ion concentration;2075 micromole per kilogram",
+    "description": "Any other measurement performed or parameter collected, that is not listed here"
+  },
+  "n_alkanes": {
+    "value": "n-hexadecane;100 milligram per liter",
+    "description": "Concentration of n-alkanes; can include multiple n-alkanes"
+  },
+  "nitrate": {
+    "value": "65 micromole per liter",
+    "description": "Concentration of nitrate in the sample"
+  },
+  "nitrite": {
+    "value": "0.5 micromole per liter",
+    "description": "Concentration of nitrite in the sample"
+  },
+  "nitro": {
+    "value": "4.2 micromole per liter",
+    "description": "Concentration of nitrogen (total)"
+  },
+  "org_carb": {
+    "value": "1.5 microgram per liter",
+    "description": "Concentration of organic carbon"
+  },
+  "org_matter": {
+    "value": "1.75 milligram per cubic meter",
+    "description": "Concentration of organic matter"
+  },
+  "org_nitro": {
+    "value": "4 micromole per liter",
+    "description": "Concentration of organic nitrogen"
+  },
+  "organism_count": {
+    "value": "total prokaryotes;3.5e7 cells per milliliter;qPCR",
+    "description": "Total cell count of any organism (or group of organisms) per gram, volume or area of sample, should include name of organism followed by count. The method that was used for the enumeration (e.g. qPCR, atp, mpn, etc.) Should also be provided. (example: total prokaryotes; 3.5e7 cells per ml; qpcr)"
+  },
+  "oxy_stat_samp": {
+    "value": "aerobic",
+    "description": "Oxygenation status of sample"
+  },
+  "ph": {
+    "value": "7.2",
+    "description": "pH measurement of the sample, or liquid portion of sample, or aqueous phase of the fluid"
+  },
+  "part_org_carb": {
+    "value": "1.92 micromole per liter",
+    "description": "Concentration of particulate organic carbon"
+  },
+  "part_org_nitro": {
+    "value": "0.3 micromole per liter",
+    "description": "Concentration of particulate organic nitrogen"
+  },
+  "perturbation": {
+    "value": "antibiotic addition;R2/2018-05-11T14:30Z/2018-05-11T19:30Z/P1H30M",
+    "description": "Type of perturbation, e.g. chemical administration, physical disturbance, etc., coupled with perturbation regimen including how many times the perturbation was repeated, how long each perturbation lasted, and the start and end time of the entire perturbation period; can include multiple perturbation types"
+  },
+  "petroleum_hydrocarb": {
+    "value": "0.05 micromole per liter",
+    "description": "Concentration of petroleum hydrocarbon"
+  },
+  "phaeopigments": {
+    "value": "2.5 milligram per cubic meter",
+    "description": "Concentration of phaeopigments; can include multiple phaeopigments"
+  },
+  "phosphate": {
+    "value": "0.7 micromole per liter",
+    "description": "Concentration of phosphate"
+  },
+  "phosplipid_fatt_acid": {
+    "value": "2.98 milligram per liter",
+    "description": "Concentration of phospholipid fatty acids; can include multiple values"
+  },
+  "photon_flux": {
+    "value": "3.926 micromole photons per second per square meter",
+    "description": "Measurement of photon flux"
+  },
+  "potassium": {
+    "value": "463 milligram per liter",
+    "description": "Concentration of potassium in the sample"
+  },
+  "pressure": {
+    "value": "50 atmosphere",
+    "description": "Pressure to which the sample is subject to, in atmospheres"
+  },
+  "primary_prod": {
+    "value": "100 milligram per cubic meter per day",
+    "description": "Measurement of primary production, generally measured as isotope uptake"
+  },
+  "redox_potential": {
+    "value": "300 millivolt",
+    "description": "Redox potential, measured relative to a hydrogen cell, indicating oxidation or reduction potential"
+  },
+  "salinity": {
+    "value": "25 practical salinity unit",
+    "description": "The total concentration of all dissolved salts in a liquid or solid sample. While salinity can be measured by a complete chemical analysis, this method is difficult and time consuming. More often, it is instead derived from the conductivity measurement. This is known as practical salinity. These derivations compare the specific conductance of the sample to a salinity standard such as seawater"
+  },
+  "samp_store_dur": {
+    "value": "P1Y6M",
+    "description": "Duration for which the sample was stored. Indicate the duration for which the sample was stored written in ISO 8601 format"
+  },
+  "samp_store_loc": {
+    "value": "Freezer no:5",
+    "description": "Location at which sample was stored, usually name of a specific freezer/room"
+  },
+  "samp_store_temp": {
+    "value": "-80 degree Celsius",
+    "description": "Temperature at which sample was stored, e.g. -80 degree Celsius"
+  },
+  "samp_vol_we_dna_ext": {
+    "value": "1500 milliliter",
+    "description": "Volume (ml) or mass (g) of total collected sample processed for DNA extraction. Note: total sample collected should be entered under the term Sample Size (MIXS:0000001)"
+  },
+  "silicate": {
+    "value": "0.05 micromole per liter",
+    "description": "Concentration of silicate"
+  },
+  "size_frac_low": {
+    "value": "0.2 micrometer",
+    "description": "Refers to the mesh/pore size used to pre-filter/pre-sort the sample. Materials smaller than the size threshold are excluded from the sample"
+  },
+  "size_frac_up": {
+    "value": "20 micrometer",
+    "description": "Mesh or pore size of the device used to retain the sample. Materials larger than the size threshold are excluded from the sample."
+  },
+  "sodium": {
+    "value": "10.5 milligram per liter",
+    "description": "Sodium concentration in the sample"
+  },
+  "soluble_react_phosp": {
+    "value": "0.1 milligram per liter",
+    "description": "Concentration of soluble reactive phosphorus"
+  },
+  "sulfate": {
+    "value": "5 micromole per liter",
+    "description": "Concentration of sulfate in the sample"
+  },
+  "sulfide": {
+    "value": "2 micromole per liter",
+    "description": "Concentration of sulfide in the sample"
+  },
+  "suspend_part_matter": {
+    "value": "0.5 milligram per liter",
+    "description": "Concentration of suspended particulate matter"
+  },
+  "temp": {
+    "value": "25 degree Celsius",
+    "description": "Temperature of the sample at the time of sampling"
+  },
+  "tidal_stage": {
+    "value": "high tide",
+    "description": "Stage of tide"
+  },
+  "tot_depth_water_col": {
+    "value": "500 meter",
+    "description": "Measurement of total depth of water column"
+  },
+  "tot_diss_nitro": {
+    "value": "40 microgram per liter",
+    "description": "Total dissolved nitrogen concentration, reported as nitrogen, measured by: total dissolved nitrogen = NH4 + NO3NO2 + dissolved organic nitrogen"
+  },
+  "tot_inorg_nitro": {
+    "value": "40 microgram per liter",
+    "description": "Total inorganic nitrogen content"
+  },
+  "tot_nitro": {
+    "value": "50 micromole per liter",
+    "description": "Total nitrogen concentration of water samples, calculated by: total nitrogen = total dissolved nitrogen + particulate nitrogen. Can also be measured without filtering, reported as nitrogen"
+  },
+  "tot_part_carb": {
+    "value": "35 micromole per liter",
+    "description": "Total particulate carbon content"
+  },
+  "tot_phosp": {
+    "value": "0.03 milligram per liter",
+    "description": "Total phosphorus concentration in the sample, calculated by: total phosphorus = total dissolved phosphorus + particulate phosphorus"
+  },
+  "turbidity": {
+    "value": "0.3 nephelometric turbidity units",
+    "description": "Measure of the amount of cloudiness or haziness in water caused by individual particles"
+  },
+  "water_current": {
+    "value": "10 cubic meter per second",
+    "description": "Measurement of magnitude and direction of flow within a fluid"
+  }
+}
