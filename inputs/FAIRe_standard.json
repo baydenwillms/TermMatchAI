@@ -53,7 +53,7 @@
   },
   "checkls_ver": {
     "value": "1.2",
-    "description": "The version number of the FAIR eDNA (FAIRe) metadata checklist used to format the data"
+    "description": "The version number of the FAIR eDNA metadata checklist used to format the data"
   },
   "mod_date": {
     "value": "2014-09-09",

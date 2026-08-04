@@ -58,14 +58,14 @@ sudo dnf install git-lfs
 ## Usage
 
 ### What you need
-Two JSON files in `inputs/`. `main.py` lists every `*.json` there as a numbered menu — pick a number for the FAIRe/template standard (match **to**), then another for your standard (match **from**).
+Two JSON files in `inputs/`. `main.py` shows a numbered list — pick the FAIR eDNA data standard (match **to**), then your standard (match **from**).
 
 | File | What it is |
 |------|------------|
-| `inputs/FAIRe_standard.json` | The FAIRe eDNA standard. This is what everything gets mapped **to**. |
+| `inputs/FAIRe_standard.json` | The FAIR eDNA data standard. This is what everything gets mapped **to**. |
 | `inputs/user_standard_example.json` | An example mapping of a fake data standard for trying the tool. Parse your data standard into the JSON format below to compare against the FAIR eDNA data standard. |
 
-The report answers: *how does the user's data standard map onto FAIRe?*
+The report answers: *how does the user's data standard map onto FAIR eDNA?*
 
 Each field in those JSON files looks like:
 ```json
@@ -79,7 +79,7 @@ Each field in those JSON files looks like:
 
 `value` is one example data point. `description` is what the field means (this helps the AI matching a lot).
 
-### Build / refresh the FAIRe JSON
+### Build / refresh the FAIR eDNA JSON
 The source file is `script_dependencies/FAIRe_checklist_v1.0.2.xlsx` (sheet `checklist`: column C = term name, D = description, L = example).
 
 ```bash
@@ -92,7 +92,7 @@ That rewrites `inputs/FAIRe_standard.json`. Run it again if the checklist gets n
 Same JSON shape: `{ "field": { "value": ..., "description": "..." } }`. Write a small parser for your Excel/YAML/whatever, or edit by hand. Drop the file in `inputs/` — it will show up in the numbered menu automatically.
 
 The shipped `user_standard_example.json` is a larger fake lab template so you can smoke-test matching:
-- some names match FAIRe exactly (`temp`, `salinity`, `ph`, `country`)
+- some names match the FAIR eDNA standard exactly (`temp`, `salinity`, `ph`, `country`)
 - many are close but differently named (`sample_id`, `habitat`, `collection_gear`, `filter_pore_um`, ...)
 - one is lab-only junk that should not map cleanly (`lab_internal_batch`)
 
@@ -100,9 +100,9 @@ The shipped `user_standard_example.json` is a larger fake lab template so you ca
 ```bash
 python main.py
 ```
-1. Pick the FAIRe/template JSON from the numbered list
+1. Pick the FAIR eDNA template JSON from the numbered list
 2. Pick your standard JSON from the same list
-3. How many FAIRe matches to show per user term (1-5)
+3. How many FAIR eDNA matches to show per user term (1-5)
 
 Install/refresh deps after pulling (adds `rich` + `pyfiglet` for the CLI banner):
 ```bash

@@ -1,5 +1,5 @@
 """
-Build an HTML mapping report: each user field -> FAIRe candidate(s) with scores.
+Build an HTML mapping report: each user field -> FAIR eDNA candidate(s) with scores.
 """
 
 import html
@@ -34,7 +34,7 @@ def _build_rows(
 ):
     """
     One row per user field.
-    Each row: user term info + method + ordered list of FAIRe candidates (term, score_pct, value, description).
+    Each row: user term info + method + ordered list of FAIR eDNA candidates (term, score_pct, value, description).
     """
     claimed = set()
     rows = []
@@ -242,7 +242,7 @@ def generate_report(
             <div class="alts">
               <div class="alts-label">Other candidates</div>
               <table>
-                <thead><tr><th>#</th><th>FAIRe term</th><th>Score</th></tr></thead>
+                <thead><tr><th>#</th><th>FAIR eDNA term</th><th>Score</th></tr></thead>
                 <tbody>{''.join(alt_rows)}</tbody>
               </table>
             </div>"""
@@ -286,7 +286,7 @@ def generate_report(
                 <p class="muted"><strong>Example:</strong> {user_val}</p>
               </div>
               <div>
-                <div class="label">Best FAIRe match</div>
+                <div class="label">Best FAIR eDNA match</div>
                 <div><strong>{best_term}</strong></div>
                 <p>{best_desc if best else '-'}</p>
                 <p class="muted"><strong>Example:</strong> {best_val if best else '-'}</p>
@@ -301,7 +301,7 @@ def generate_report(
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TermMatchAI | User to FAIRe</title>
+  <title>TermMatchAI | User to FAIR eDNA</title>
   <style>
     :root {{
       --green: #92D050;
@@ -490,7 +490,7 @@ def generate_report(
     <img class="icon" src="{html.escape(icon_href)}" alt="" />
     <div class="titles">
       <strong>TermMatchAI</strong>
-      <span>User standard mapped to FAIRe</span>
+      <span>Map fields across data standards</span>
     </div>
   </div>
 
@@ -499,10 +499,10 @@ def generate_report(
       <img src="{html.escape(logo_href)}" alt="Make eDNA FAIR" />
     </div>
 
-    <h1>Field mapping report</h1>
+    <h1>TermMatchAI Report</h1>
     <p class="sub">
-      Click a row to see alternate FAIRe matches.
-      Hover a field name for a quick tip, or click the name for description + example.
+      Click each row to see alternate field mappings.
+      You can hover on term names or click for more information.
     </p>
     <p class="counts">
       <b>{len(rows)}</b> fields ·
@@ -515,7 +515,7 @@ def generate_report(
 
     <div class="table-head">
       <span>Your field</span>
-      <span>FAIRe match</span>
+      <span>FAIR eDNA match</span>
       <span>Method</span>
       <span>Score</span>
       <span></span>

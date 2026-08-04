@@ -1,5 +1,5 @@
 """
-Parse the FAIRe checklist Excel into TermMatchAI JSON.
+Parse the FAIR eDNA checklist Excel into TermMatchAI JSON.
 
 Checklist layout (stable; new terms may be appended at the bottom):
   Column C — term_name
@@ -52,7 +52,7 @@ def _json_safe(value):
 
 def parse_faire_checklist(checklist_path):
     """
-    Read the FAIRe checklist and return field_name -> {value, description}.
+    Read the FAIR eDNA checklist and return field_name -> {value, description}.
     Skips rows with no term_name. Empty examples become null.
     """
     # Terms live on the 'checklist' sheet (not the README sheet)
@@ -116,11 +116,11 @@ def main():
     output_path = sys.argv[2] if len(sys.argv) > 2 else DEFAULT_OUTPUT_PATH
 
     if not os.path.isfile(checklist_path):
-        raise FileNotFoundError(f"FAIRe checklist not found: {checklist_path}")
+        raise FileNotFoundError(f"FAIR eDNA checklist not found: {checklist_path}")
 
     terms = parse_faire_checklist(checklist_path)
     write_faire_json(terms, output_path)
-    print(f"Wrote {len(terms)} FAIRe terms to {output_path}")
+    print(f"Wrote {len(terms)} FAIR eDNA terms to {output_path}")
 
 
 if __name__ == '__main__':

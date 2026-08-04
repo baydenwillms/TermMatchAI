@@ -253,7 +253,7 @@ def find_semantic_matches_scibert(
     user_texts = [description_text(t, user_terms_with_data[t]) for t in user_terms]
     template_texts = [description_text(t, template_terms_with_data[t]) for t in template_terms]
 
-    # User side is usually small / changes often; template (e.g. FAIRe) is large and stable -> cache
+    # User side is usually small / changes often; template (FAIR eDNA) is large and stable -> cache
     user_emb = embed_texts(user_texts, model, label='user', use_cache=False, quiet=quiet)
     template_emb = embed_texts(
         template_texts, model, label='template', use_cache=True, quiet=quiet

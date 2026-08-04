@@ -1,7 +1,7 @@
 """
 excel_loading.py - Legacy Excel loader (name + example values only).
 
-Prefer the FAIRe checklist parser or a custom parser that writes:
+Prefer the FAIR eDNA checklist parser or a custom parser that writes:
   field_name -> { "value": ..., "description": "..." }
 
 See inputs/ and data_loading/parse_faire_checklist.py.

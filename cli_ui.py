@@ -16,6 +16,7 @@ from typing import List, Optional
 
 import pyfiglet
 from rich.console import Console
+from rich.panel import Panel
 from rich.prompt import IntPrompt
 from rich.table import Table
 
@@ -28,6 +29,7 @@ def quiet_third_party_logs() -> None:
     """Mute transformers / HF / torch chatter that floods the terminal."""
     os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
     os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
+    os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
     os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
 
     for name in (
@@ -47,8 +49,12 @@ def quiet_third_party_logs() -> None:
         pass
 
     warnings.filterwarnings("ignore", message=".*UntypedStorage.*")
+    warnings.filterwarnings("ignore", message=".*symlinks.*")
     warnings.filterwarnings("ignore", category=FutureWarning, module="transformers.*")
     warnings.filterwarnings("ignore", category=UserWarning, module="torch.*")
+    warnings.filterwarnings(
+        "ignore", category=UserWarning, module="huggingface_hub.*"
+    )
 
 
 def print_banner() -> None:
@@ -57,7 +63,7 @@ def print_banner() -> None:
     console.print()
     console.print(banner.rstrip("\n"), style="bold cyan")
     console.print(
-        "Map YOUR data standard onto the FAIRe eDNA standard.\n",
+        "Map YOUR data standard onto the FAIR eDNA data standard.\n",
         style="bold",
     )
 
@@ -70,32 +76,36 @@ def list_input_jsons(inputs_dir: Optional[str] = None) -> List[Path]:
     return sorted(root.glob("*.json"), key=lambda p: p.name.lower())
 
 
-def _print_file_menu(files: List[Path], title: str) -> None:
-    table = Table(
-        title=title,
-        show_header=True,
-        header_style="bold",
-        box=None,
-        pad_edge=False,
-        title_justify="left",
-    )
-    table.add_column("#", style="cyan", justify="right", width=3)
+def print_input_json_menu(files: List[Path]) -> None:
+    """Numbered list of standards in inputs/ (shown once before both picks)."""
+    table = Table(show_header=True, header_style="bold", box=None, pad_edge=False)
+    table.add_column("#", style="bold cyan", justify="right", width=4)
     table.add_column("File", style="white")
     for i, path in enumerate(files, start=1):
         table.add_row(str(i), path.name)
-    console.print(table)
+
+    console.print(
+        Panel(
+            table,
+            title="[bold]Available standards[/bold]",
+            subtitle="[dim]Pick by number in the steps below[/dim]",
+            border_style="bright_black",
+            padding=(0, 1),
+        )
+    )
+    console.print()
 
 
 def prompt_choose_input_json(
-    prompt: str,
+    step: str,
+    headline: str,
+    detail: str,
     files: List[Path],
     default_index: Optional[int] = None,
-    show_menu: bool = True,
 ) -> Path:
     """
-    Show a numbered list of JSON files and return the path the user picks.
+    Ask for a numbered choice from files (menu should already be on screen).
     default_index is 1-based (same numbers shown in the menu).
-    Set show_menu=False when the list was already printed (e.g. second pick).
     """
     if not files:
         raise FileNotFoundError(
@@ -103,15 +113,12 @@ def prompt_choose_input_json(
             "Add a standard JSON there, then re-run."
         )
 
-    if show_menu:
-        _print_file_menu(files, title="JSON files in inputs/")
-        console.print()
-
     default = default_index if default_index is not None else 1
     if not (1 <= default <= len(files)):
         default = 1
 
-    console.print(f"[bold]{prompt}[/bold]")
+    console.print(f"[bold cyan]{step}[/bold cyan]  [bold]{headline}[/bold]")
+    console.print(f"  [dim]{detail}[/dim]")
     while True:
         choice = IntPrompt.ask(
             "  Number",
@@ -120,7 +127,7 @@ def prompt_choose_input_json(
         )
         if 1 <= choice <= len(files):
             chosen = files[choice - 1]
-            console.print(f"  → [green]{chosen.name}[/green]")
+            console.print(f"  [green]✓[/green] [green]{chosen.name}[/green]")
             console.print()
             return chosen
         console.print(
@@ -129,7 +136,7 @@ def prompt_choose_input_json(
 
 
 def prompt_num_matches(default: int = 3) -> int:
-    """How many FAIRe candidates to show per user term."""
+    """How many FAIR eDNA candidates to show per user term."""
     while True:
         n = IntPrompt.ask(
             "Matches to show per term (1-5)",
